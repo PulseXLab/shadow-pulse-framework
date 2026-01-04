@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.98 scan initiated Sun Jan  4 12:50:00 2026 as: /usr/lib/nmap/nmap -p 443,80 -sV -sC -O -T4 -A -Pn -oX results/ksd.or.kr_20260104_123144/nmap_temp_scans/e-safetest.ksd.or.kr.xml e-safetest.ksd.or.kr -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -p 443,80 -sV -sC -O -T4 -A -Pn -oX results/ksd.or.kr_20260104_123144/nmap_temp_scans/e-safetest.ksd.or.kr.xml e-safetest.ksd.or.kr" start="1767498600" startstr="Sun Jan  4 12:50:00 2026" version="7.98" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="2" services="80,443"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1767498601" endtime="1767498708"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="58.102.135.161" addrtype="ipv4"/>
+<hostnames>
+<hostname name="e-safetest.ksd.or.kr" type="user"/>
+</hostnames>
+<ports><port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="51"/><service name="tcpwrapped" method="probed" conf="8"/></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="51"/><service name="tcpwrapped" method="probed" conf="8"/></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="443"/>
+</os>
+<distance value="14"/>
+<tcpsequence index="196" difficulty="Good luck!" values="1D107B,422DCA,674B23,8C6886,18EF73,3E0CEA"/>
+<ipidsequence class="Incremental" values="4559,455A,455B,455C,455D,455E"/>
+<tcptssequence class="none returned (unsupported)"/>
+<trace port="80" proto="tcp">
+<hop ttl="1" ipaddr="192.168.50.1" rtt="1.37"/>
+<hop ttl="2" ipaddr="58.226.47.1" rtt="1.87"/>
+<hop ttl="3" ipaddr="100.92.5.217" rtt="28.60"/>
+<hop ttl="4" ipaddr="100.92.2.137" rtt="2.94"/>
+<hop ttl="5" ipaddr="10.119.1.36" rtt="11.60"/>
+<hop ttl="6" ipaddr="10.222.9.252" rtt="2.05"/>
+<hop ttl="7" ipaddr="10.222.25.100" rtt="8.39"/>
+<hop ttl="8" ipaddr="10.222.19.163" rtt="12.44"/>
+<hop ttl="9" ipaddr="10.222.23.63" rtt="18.76"/>
+<hop ttl="11" ipaddr="211.206.96.110" rtt="8.46"/>
+<hop ttl="12" ipaddr="58.102.135.251" rtt="10.21"/>
+<hop ttl="13" ipaddr="58.102.135.211" rtt="8.50"/>
+<hop ttl="14" ipaddr="58.102.135.161" rtt="8.99"/>
+</trace>
+<times srtt="9440" rttvar="733" to="100000"/>
+</host>
+<runstats><finished time="1767498708" timestr="Sun Jan  4 12:51:48 2026" summary="Nmap done at Sun Jan  4 12:51:48 2026; 1 IP address (1 host up) scanned in 107.73 seconds" elapsed="107.73" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

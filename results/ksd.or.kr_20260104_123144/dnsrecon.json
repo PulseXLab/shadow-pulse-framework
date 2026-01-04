@@ -1,0 +1,82 @@
+[
+    {
+        "arguments": "/usr/bin/dnsrecon -d ksd.or.kr -t brt -j results/ksd.or.kr_20260104_123144/dnsrecon.json",
+        "date": "2026-01-04 12:32:41.645893",
+        "type": "ScanInfo"
+    },
+    {
+        "address": "211.188.38.3",
+        "name": "chat.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "124.137.74.137",
+        "name": "eng.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "210.223.49.133",
+        "name": "file.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "210.223.49.248",
+        "name": "filter.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "210.223.49.190",
+        "name": "imail.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "124.137.74.137",
+        "name": "m.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "210.223.49.146",
+        "name": "messenger.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "220.88.156.150",
+        "name": "mobile.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "210.223.49.129",
+        "name": "ns.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "124.137.74.129",
+        "name": "ns1.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "124.137.74.130",
+        "name": "rc.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "124.137.74.141",
+        "name": "sb.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "210.223.49.138",
+        "name": "vpn.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "124.137.74.137",
+        "name": "www.ksd.or.kr",
+        "type": "A"
+    },
+    {
+        "address": "210.223.49.187",
+        "name": "www2.ksd.or.kr",
+        "type": "A"
+    }
+]

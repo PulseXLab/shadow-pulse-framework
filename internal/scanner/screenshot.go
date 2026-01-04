@@ -21,8 +21,16 @@ func TakeScreenshots(liveHosts []string, outputDir string, useTor bool) {
 		return
 	}
 
-	cmd := fmt.Sprintf("eyewitness -f %s -d %s --web --no-prompt", liveHostsFile, screenshotDir)
+	// Use absolute path for eyewitness directory to avoid potential issues
+	absScreenshotDir, err := filepath.Abs(screenshotDir)
+	if err != nil {
+		utils.PrintError("Failed to get absolute path for screenshot directory: " + err.Error())
+		// Fallback to relative path
+		absScreenshotDir = screenshotDir
+	}
+
+	cmd := fmt.Sprintf("eyewitness -f %s -d %s --web --no-prompt", liveHostsFile, absScreenshotDir)
 	runner.RunCommand(cmd, useTor)
 	
-	utils.PrintGood(fmt.Sprintf("Eyewitness report should be available in %s", screenshotDir))
+	utils.PrintGood(fmt.Sprintf("Eyewitness report should be available in %s", absScreenshotDir))
 }

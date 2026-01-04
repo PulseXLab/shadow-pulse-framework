@@ -6,6 +6,7 @@ import (
 	"net"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -45,7 +46,7 @@ func RunPortScan(hosts []string, outputDir, nmapOptions string, useTor, stealth 
 
 	for i, host := range hosts {
 		if useTor {
-			tor.RenewTorIP()
+			tor.RenewTorIP(outputDir)
 			utils.PrintInfo(fmt.Sprintf("Scanning host %d/%d: %s (via Tor)", i+1, len(hosts), host))
 		} else {
 			utils.PrintInfo(fmt.Sprintf("Scanning host %d/%d: %s", i+1, len(hosts), host))
@@ -106,17 +107,26 @@ func RunPortScan(hosts []string, outputDir, nmapOptions string, useTor, stealth 
 
 		// Stage 2: Nmap
 		utils.PrintInfo("  [Stage 2/2] Running nmap for detailed service scan on discovered ports...")
-		var nmapScanOptions string
+		
+		var finalNmapOptions string
 		if stealth {
 			utils.PrintGood("  -> Stealth mode: Using evasive Nmap options (-sS -T2 -f -D RND:5).")
-			nmapScanOptions = "-sS -T2 -f -D RND:5"
+			finalNmapOptions = "-sS -T2 -f -D RND:5"
 		} else {
-			nmapScanOptions = nmapOptions
+			finalNmapOptions = nmapOptions
 		}
+
+		// Remove any conflicting port-related options from the user-provided flags,
+		// as we now have a definitive list from masscan.
+		rePort := regexp.MustCompile(`-p\s*[\d,-]+`)
+		reTopPorts := regexp.MustCompile(`--top-ports\s+\d+`)
+		finalNmapOptions = rePort.ReplaceAllString(finalNmapOptions, "")
+		finalNmapOptions = reTopPorts.ReplaceAllString(finalNmapOptions, "")
+
 
 		nmapOutputFile := filepath.Join(nmapTempDir, fmt.Sprintf("%s.xml", host))
 		// Note: We use the original 'host' for nmap, which is better for reporting
-		nmapCmd := fmt.Sprintf("nmap -p %s %s %s -oX %s > /dev/null", portsStr, nmapScanOptions, host, nmapOutputFile)
+		nmapCmd := fmt.Sprintf("nmap -p %s %s %s -oX %s > /dev/null", portsStr, finalNmapOptions, host, nmapOutputFile)
 		runner.RunCommand(nmapCmd, useTor)
 	}
 

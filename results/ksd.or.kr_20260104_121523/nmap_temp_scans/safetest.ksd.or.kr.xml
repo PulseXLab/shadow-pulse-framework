@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.98 scan initiated Sun Jan  4 12:24:17 2026 as: /usr/lib/nmap/nmap -p 443,80 -sV -sC -O -T4 -A -Pn -oX results/ksd.or.kr_20260104_121523/nmap_temp_scans/safetest.ksd.or.kr.xml safetest.ksd.or.kr -->
+<nmaprun scanner="nmap" args="/usr/lib/nmap/nmap -p 443,80 -sV -sC -O -T4 -A -Pn -oX results/ksd.or.kr_20260104_121523/nmap_temp_scans/safetest.ksd.or.kr.xml safetest.ksd.or.kr" start="1767497057" startstr="Sun Jan  4 12:24:17 2026" version="7.98" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="2" services="80,443"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1767497058" endtime="1767497232"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="58.102.135.161" addrtype="ipv4"/>
+<hostnames>
+<hostname name="safetest.ksd.or.kr" type="user"/>
+</hostnames>
+<ports><port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="51"/><service name="tcpwrapped" method="probed" conf="8"/><script id="http-server-header" output="KSD"><elem>KSD</elem>
+</script></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="51"/><service name="tcpwrapped" method="probed" conf="8"/><script id="ssl-cert" output="Subject: commonName=e-safetest.ksd.or.kr/organizationName=Korea Securities Depository/stateOrProvinceName=Busan/countryName=KR&#xa;Subject Alternative Name: DNS:e-safetest.ksd.or.kr, DNS:safetest.ksd.or.kr&#xa;Not valid before: 2025-04-14T04:41:01&#xa;Not valid after:  2026-05-16T04:41:00"><table key="subject">
+<elem key="commonName">e-safetest.ksd.or.kr</elem>
+<elem key="countryName">KR</elem>
+<elem key="localityName">Nam-gu</elem>
+<elem key="organizationName">Korea Securities Depository</elem>
+<elem key="stateOrProvinceName">Busan</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">GlobalSign RSA OV SSL CA 2018</elem>
+<elem key="countryName">BE</elem>
+<elem key="organizationName">GlobalSign nv-sa</elem>
+</table>
+<table key="pubkey">
+<elem key="type">rsa</elem>
+<elem key="bits">2048</elem>
+<elem key="modulus">B79E120C802725C24B5B10365B9365185154D9214323505AA6A0F20511B9B173217DB29C3A6CA210495E58B66ABE0B3B6C680DED36BBF6D78BEF74E2C04DC7887773A58FC36ABD5E93146CF82771759FC583F3181CE6E3D926408DC46E3FABB92A206F6A9B8F5CBAAC80BEAE23D0715C61CCFBF4516855581312E9D30BD0A06CB728490154363C7C268528F2891EBE6FF44A705121DA9AFB02E8ED5736E4D5F1B0DFC272F9BD57173E54837A9684A3395ABA11D15242FB0EC0891A8B6DDBA9B78E19EC5BFEA1125036EAFD86EBDC694E3477F0ADA1321BFA980B05114A4EBF5E33C69A7AF98D0FE20ECAABED6ED8A768CFA918C15132A0A98ECF6A9DF31EE399</elem>
+<elem key="exponent">65537</elem>
+</table>
+<table key="extensions">
+<table>
+<elem key="name">X509v3 Key Usage</elem>
+<elem key="value">Digital Signature, Key Encipherment</elem>
+<elem key="critical">true</elem>
+</table>
+<table>
+<elem key="name">X509v3 Basic Constraints</elem>
+<elem key="value">CA:FALSE</elem>
+<elem key="critical">true</elem>
+</table>
+<table>
+<elem key="name">Authority Information Access</elem>
+<elem key="value">CA Issuers - URI:http://secure.globalsign.com/cacert/gsrsaovsslca2018.crt&#xa;OCSP - URI:http://ocsp.globalsign.com/gsrsaovsslca2018</elem>
+</table>
+<table>
+<elem key="name">X509v3 Certificate Policies</elem>
+<elem key="value">Policy: 1.3.6.1.4.1.4146.1.20&#xa;  CPS: https://www.globalsign.com/repository/&#xa;Policy: 2.23.140.1.2.2</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Alternative Name</elem>
+<elem key="value">DNS:e-safetest.ksd.or.kr, DNS:safetest.ksd.or.kr</elem>
+</table>
+<table>
+<elem key="name">X509v3 Extended Key Usage</elem>
+<elem key="value">TLS Web Server Authentication, TLS Web Client Authentication</elem>
+</table>
+<table>
+<elem key="name">X509v3 Authority Key Identifier</elem>
+<elem key="value">F8:EF:7F:F2:CD:78:67:A8:DE:6F:8F:24:8D:88:F1:87:03:02:B3:EB</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Key Identifier</elem>
+<elem key="value">8B:31:97:BA:83:54:67:EC:C2:A3:12:0F:EE:75:82:40:46:F5:1B:46</elem>
+</table>
+<table>
+<elem key="name">CT Precertificate SCTs</elem>
+<elem key="value">Signed Certificate Timestamp:&#xa;    Version   : v1 (0x0)&#xa;    Log ID    : 64:11:C4:6C:A4:12:EC:A7:89:1C:A2:02:2E:00:BC:AB:&#xa;                4F:28:07:D4:1E:35:27:AB:EA:FE:D5:03:C9:7D:CD:F0&#xa;    Timestamp : Apr 14 04:41:12.030 2025 GMT&#xa;    Extensions: none&#xa;    Signature : ecdsa-with-SHA256&#xa;                30:45:02:21:00:80:DD:77:57:81:BC:69:85:97:44:E0:&#xa;                AA:97:70:F8:F3:7B:93:8E:B0:E7:75:14:C4:C8:1D:F3:&#xa;                BB:8F:78:48:29:02:20:68:39:76:25:50:C5:E7:45:95:&#xa;                3B:68:28:36:67:63:E5:04:85:08:10:F4:9B:D6:88:00:&#xa;                CD:E7:23:0E:62:9F:0D&#xa;Signed Certificate Timestamp:&#xa;    Version   : v1 (0x0)&#xa;    Log ID    : CB:38:F7:15:89:7C:84:A1:44:5F:5B:C1:DD:FB:C9:6E:&#xa;                F2:9A:59:CD:47:0A:69:05:85:B0:CB:14:C3:14:58:E7&#xa;    Timestamp : Apr 14 04:41:12.057 2025 GMT&#xa;    Extensions: none&#xa;    Signature : ecdsa-with-SHA256&#xa;                30:46:02:21:00:8B:4A:94:D2:D6:FA:D3:CC:67:51:24:&#xa;                C6:B5:99:CC:99:56:DC:3C:14:CA:8C:B7:43:DD:75:68:&#xa;                55:07:F3:DC:FE:02:21:00:A9:33:E0:A5:2B:42:5A:3E:&#xa;                CF:39:01:79:99:68:68:80:92:84:35:E9:C9:4E:35:54:&#xa;                7F:8C:70:74:73:6F:E3:AB&#xa;Signed Certificate Timestamp:&#xa;    Version   : v1 (0x0)&#xa;    Log ID    : 25:2F:94:C2:2B:29:E9:6E:9F:41:1A:72:07:2B:69:5C:&#xa;                5B:52:FF:97:A9:0D:25:40:BB:FC:DC:51:EC:4D:EE:0B&#xa;    Timestamp : Apr 14 04:41:12.024 2025 GMT&#xa;    Extensions: none&#xa;    Signature : ecdsa-with-SHA256&#xa;                30:45:02:21:00:94:28:D1:6F:D0:E4:62:F8:95:79:24:&#xa;                97:2B:2A:03:78:10:88:EB:D8:7C:1A:32:F4:13:BF:F1:&#xa;                29:19:04:ED:98:02:20:2B:7E:C5:90:05:3F:43:E2:0A:&#xa;                DA:BC:27:92:4A:A5:21:EB:A5:C2:4E:C6:E4:5D:37:E8:&#xa;                14:90:D4:FA:DD:16:BA</elem>
+</table>
+</table>
+<elem key="sig_algo">sha256WithRSAEncryption</elem>
+<table key="validity">
+<elem key="notBefore">2025-04-14T04:41:01</elem>
+<elem key="notAfter">2026-05-16T04:41:00</elem>
+</table>
+<elem key="md5">39bb1c195b05e78ba333540b07a2f28f</elem>
+<elem key="sha1">e242d323ae786ab609418b388aa0d2f6ddecf372</elem>
+<elem key="sha256">9474c18fdbbf776e0e62890d50604af7954b5e2daed26b35b2d9b174d50691c0</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIIGbTCCBVWgAwIBAgIMPYowfV5vjtrzevI3MA0GCSqGSIb3DQEBCwUAMFAxCzAJ&#xa;BgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSYwJAYDVQQDEx1H&#xa;bG9iYWxTaWduIFJTQSBPViBTU0wgQ0EgMjAxODAeFw0yNTA0MTQwNDQxMDFaFw0y&#xa;NjA1MTYwNDQxMDBaMHMxCzAJBgNVBAYTAktSMQ4wDAYDVQQIEwVCdXNhbjEPMA0G&#xa;A1UEBxMGTmFtLWd1MSQwIgYDVQQKExtLb3JlYSBTZWN1cml0aWVzIERlcG9zaXRv&#xa;cnkxHTAbBgNVBAMTFGUtc2FmZXRlc3Qua3NkLm9yLmtyMIIBIjANBgkqhkiG9w0B&#xa;AQEFAAOCAQ8AMIIBCgKCAQEAt54SDIAnJcJLWxA2W5NlGFFU2SFDI1BapqDyBRG5&#xa;sXMhfbKcOmyiEEleWLZqvgs7bGgN7Ta79teL73TiwE3HiHdzpY/Dar1ekxRs+Cdx&#xa;dZ/Fg/MYHObj2SZAjcRuP6u5KiBvapuPXLqsgL6uI9BxXGHM+/RRaFVYExLp0wvQ&#xa;oGy3KEkBVDY8fCaFKPKJHr5v9EpwUSHamvsC6O1XNuTV8bDfwnL5vVcXPlSDepaE&#xa;ozlauhHRUkL7DsCJGott26m3jhnsW/6hElA26v2G69xpTjR38K2hMhv6mAsFEUpO&#xa;v14zxpp6+Y0P4g7Kq+1u2Kdoz6kYwVEyoKmOz2qd8x7jmQIDAQABo4IDIjCCAx4w&#xa;DgYDVR0PAQH/BAQDAgWgMAwGA1UdEwEB/wQCMAAwgY4GCCsGAQUFBwEBBIGBMH8w&#xa;RAYIKwYBBQUHMAKGOGh0dHA6Ly9zZWN1cmUuZ2xvYmFsc2lnbi5jb20vY2FjZXJ0&#xa;L2dzcnNhb3Zzc2xjYTIwMTguY3J0MDcGCCsGAQUFBzABhitodHRwOi8vb2NzcC5n&#xa;bG9iYWxzaWduLmNvbS9nc3JzYW92c3NsY2EyMDE4MFYGA1UdIARPME0wQQYJKwYB&#xa;BAGgMgEUMDQwMgYIKwYBBQUHAgEWJmh0dHBzOi8vd3d3Lmdsb2JhbHNpZ24uY29t&#xa;L3JlcG9zaXRvcnkvMAgGBmeBDAECAjAzBgNVHREELDAqghRlLXNhZmV0ZXN0Lmtz&#xa;ZC5vci5rcoISc2FmZXRlc3Qua3NkLm9yLmtyMB0GA1UdJQQWMBQGCCsGAQUFBwMB&#xa;BggrBgEFBQcDAjAfBgNVHSMEGDAWgBT473/yzXhnqN5vjySNiPGHAwKz6zAdBgNV&#xa;HQ4EFgQUizGXuoNUZ+zCoxIP7nWCQEb1G0YwggF/BgorBgEEAdZ5AgQCBIIBbwSC&#xa;AWsBaQB2AGQRxGykEuyniRyiAi4AvKtPKAfUHjUnq+r+1QPJfc3wAAABljKZ8l4A&#xa;AAQDAEcwRQIhAIDdd1eBvGmFl0Tgqpdw+PN7k46w53UUxMgd87uPeEgpAiBoOXYl&#xa;UMXnRZU7aCg2Z2PlBIUIEPSb1ogAzecjDmKfDQB3AMs49xWJfIShRF9bwd37yW7y&#xa;mlnNRwppBYWwyxTDFFjnAAABljKZ8nkAAAQDAEgwRgIhAItKlNLW+tPMZ1EkxrWZ&#xa;zJlW3DwUyoy3Q911aFUH89z+AiEAqTPgpStCWj7POQF5mWhogJKENenJTjVUf4xw&#xa;dHNv46sAdgAlL5TCKynpbp9BGnIHK2lcW1L/l6kNJUC7/NxR7E3uCwAAAZYymfJY&#xa;AAAEAwBHMEUCIQCUKNFv0ORi+JV5JJcrKgN4EIjr2HwaMvQTv/EpGQTtmAIgK37F&#xa;kAU/Q+IK2rwnkkqlIeulwk7G5F036BSQ1PrdFrowDQYJKoZIhvcNAQELBQADggEB&#xa;AB2xO2atIUCEZB+utGVpiqoyYJO3D1a0NA6aTF1ZRjuNeFR69j/o0Mi/FyIv12h1&#xa;JeSyhRWgtVaWC1NjRbpd989mYyTnPaTXFk84CtX+zcwf7ammMhBY50tUt4ADAlsQ&#xa;MFxX602l5nz32mvIfkh0XSjX2jxt5VjOBx7p8C0SWNVTaET5aOwHCmZ5ozmOPAqx&#xa;Dto2gvc6RL9qRKuBYCuG/ZUb8oTtzSyY/yh4DrYlcA2AJagb68ynpwxYAXk6NJtx&#xa;fZcVL3ueZVNEGcRooqdCC1sBqO87PUFuuD9dk/h+6jZ9Buu6C++obbqItS0PFS+8&#xa;nXlUWfrmVkGlKYnJmgBRfYU=&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script><script id="ssl-date" output="TLS randomness does not represent time"></script></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="443"/>
+</os>
+<distance value="14"/>
+<tcpsequence index="196" difficulty="Good luck!" values="33CFEA,569382,795724,38450,264806,490BC6"/>
+<ipidsequence class="Incremental" values="309C,309D,309E,309F,30A0,30A1"/>
+<tcptssequence class="none returned (unsupported)"/>
+<trace port="443" proto="tcp">
+<hop ttl="1" ipaddr="192.168.50.1" rtt="1.51"/>
+<hop ttl="2" ipaddr="58.226.47.1" rtt="2.33"/>
+<hop ttl="3" ipaddr="100.92.5.217" rtt="3.46"/>
+<hop ttl="4" ipaddr="100.92.2.137" rtt="3.50"/>
+<hop ttl="5" ipaddr="10.119.0.232" rtt="2.48"/>
+<hop ttl="6" ipaddr="10.222.9.240" rtt="2.55"/>
+<hop ttl="7" ipaddr="10.222.35.218" rtt="11.14"/>
+<hop ttl="8" ipaddr="10.222.19.169" rtt="8.95"/>
+<hop ttl="9" ipaddr="10.222.18.141" rtt="11.86"/>
+<hop ttl="11" ipaddr="211.206.96.110" rtt="10.48"/>
+<hop ttl="12" ipaddr="58.102.135.251" rtt="12.45"/>
+<hop ttl="13" ipaddr="58.102.135.211" rtt="10.44"/>
+<hop ttl="14" ipaddr="58.102.135.161" rtt="12.47"/>
+</trace>
+<times srtt="9388" rttvar="1324" to="100000"/>
+</host>
+<runstats><finished time="1767497232" timestr="Sun Jan  4 12:27:12 2026" summary="Nmap done at Sun Jan  4 12:27:12 2026; 1 IP address (1 host up) scanned in 174.41 seconds" elapsed="174.41" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

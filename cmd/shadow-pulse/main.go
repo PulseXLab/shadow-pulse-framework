@@ -88,6 +88,7 @@ func extractHostsFromUrls(urls []string) []string {
 func main() {
 	// --- Flag Parsing ---
 	domain := flag.String("d", "", "The target domain to scan. (Required)")
+	outDir := flag.String("out", "", "Base directory for results (default: ~/shadowPulse_Result)")
 	live := flag.Bool("live", false, "Only run port scans on live web servers found by httpx.")
 	doctor := flag.Bool("doctor", false, "Run system diagnostics and prerequisite checks.")
 	showVersion := flag.Bool("version", false, "Show version and build information.")
@@ -104,6 +105,7 @@ func main() {
 		flag.PrintDefaults()
 		fmt.Fprintf(os.Stderr, "\nExamples:\n")
 		fmt.Fprintf(os.Stderr, "  %s -d example.com\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "  %s -d example.com -out /tmp/scan_results\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, "  %s -d example.com --live --tor --stealth\n", os.Args[0])
 	}
 
@@ -144,12 +146,28 @@ func main() {
 	}
 
 	// --- Setup Output Directory ---
+	baseOutputDir := *outDir
+	if baseOutputDir == "" {
+		homeDir, err := os.UserHomeDir()
+		if err != nil {
+			// Cannot use PrintError yet as logger is not initialized.
+			fmt.Println("Error: Failed to get user home directory: " + err.Error())
+			os.Exit(1)
+		}
+		baseOutputDir = filepath.Join(homeDir, "shadowPulse_Result")
+	}
+
 	timestamp := time.Now().Format("20060102_150405")
-	outputDir := filepath.Join("results", fmt.Sprintf("%s_%s", *domain, timestamp))
+	outputDir := filepath.Join(baseOutputDir, fmt.Sprintf("%s_%s", *domain, timestamp))
 	if err := os.MkdirAll(outputDir, os.ModePerm); err != nil {
-		utils.PrintError(fmt.Sprintf("Failed to create output directory: %v", err))
+		fmt.Printf("Error: Failed to create output directory: %v", err)
 		os.Exit(1)
 	}
+
+	// Initialize logger
+	utils.InitLogger(filepath.Join(outputDir, "app_execute.log"))
+	defer utils.CloseLogger()
+
 	utils.PrintGood(fmt.Sprintf("Results will be saved in: %s", outputDir))
 	
 	// --- Run Phases ---

@@ -61,7 +61,7 @@ func RunSubdomainEnumeration(domain, outputDir string, useTor, stealth bool) []s
 	for toolName, cmd := range commands {
 		if useTor {
 			utils.PrintInfo(fmt.Sprintf("Rotating Tor IP before running %s...", toolName))
-			tor.RenewTorIP()
+			tor.RenewTorIP(outputDir)
 		}
 		runner.RunCommand(cmd, useTor)
 	}

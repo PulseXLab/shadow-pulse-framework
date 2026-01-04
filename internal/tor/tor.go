@@ -2,12 +2,13 @@ package tor
 
 import (
 	"bufio"
-	"encoding/hex" // Added for cookie authentication
+	"encoding/hex"
 	"fmt"
 	"io"
 	"net"
 	"net/http"
-	"os" // Added for cookie authentication
+	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -48,14 +49,15 @@ func GetTorIP() string {
 
 	// Very basic parsing, assumes format {"origin": "x.x.x.x"}
 	ip := string(body)
-	ip = ip[len(`{\"origin\": \"`):]
-	ip = ip[:len(ip)-2]
+	// Add robustness for different json responses
+	ip = strings.Replace(ip, `{"origin": "`, "", 1)
+	ip = strings.Split(ip, "\"")[0]
 	
 	return ip
 }
 
-// RenewTorIP signals Tor to renew its IP address.
-func RenewTorIP() {
+// RenewTorIP signals Tor to renew its IP address and logs the new IP.
+func RenewTorIP(outputDir string) {
 	utils.PrintInfo("Requesting new Tor IP address...")
 	conn, err := net.Dial("tcp", "127.0.0.1:9051")
 	if err != nil {
@@ -102,7 +104,12 @@ func RenewTorIP() {
 	time.Sleep(5 * time.Second) 
 	
 	newIP := GetTorIP()
-	utils.PrintGood("New Tor IP appears to be: " + newIP)
+	if newIP != "unknown" {
+		logLine := fmt.Sprintf("%s - %s", time.Now().Format(time.RFC3339), newIP)
+		logFilePath := filepath.Join(outputDir, "scan_tor_ip.txt")
+		utils.AppendToFile(logFilePath, logLine)
+		utils.PrintGood("New Tor IP appears to be: " + newIP)
+	}
 }
 
 // CheckTorPrerequisites verifies that the required Tor ports are accessible.
