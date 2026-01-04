@@ -12,7 +12,7 @@ all: build
 
 # Build the binary
 build:
-	@echo "Building $(BINARY_NAME) (v$(VERSION))..."
+	@echo "Building $(BINARY_NAME) ($(VERSION))..."
 	@go build -buildvcs=false $(LDFLAGS) -o $(BINARY_NAME) $(MAIN_PATH)
 	@echo "$(BINARY_NAME) built successfully."
 
