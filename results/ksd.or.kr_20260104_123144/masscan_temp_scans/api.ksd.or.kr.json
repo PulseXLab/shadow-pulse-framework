@@ -1,9 +1,0 @@
-[
-{   "ip": "124.137.74.135",   "timestamp": "1767498277", "ports": [ {"port": 80, "proto": "tcp", "status": "open", "reason": "syn-ack", "ttl": 48} ] }
-,
-{   "ip": "124.137.74.135",   "timestamp": "1767498280", "ports": [ {"port": 8443, "proto": "tcp", "status": "open", "reason": "syn-ack", "ttl": 47} ] }
-,
-{   "ip": "124.137.74.135",   "timestamp": "1767498289", "ports": [ {"port": 443, "proto": "tcp", "status": "open", "reason": "syn-ack", "ttl": 244} ] }
-,
-{   "ip": "124.137.74.135",   "timestamp": "1767498296", "ports": [ {"port": 8444, "proto": "tcp", "status": "open", "reason": "syn-ack", "ttl": 47} ] }
-]
