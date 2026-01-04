@@ -33,7 +33,7 @@ func printBanner() {
 |_|    \__,_|_|___/\___(_)_/\_\
 
         Shadow-Pulse Framework (v%s)
-        www.pulseX.kr
+        By www.pulseX.kr
 `, version)
 	fmt.Println(banner)
 }
