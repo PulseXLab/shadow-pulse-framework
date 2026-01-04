@@ -3,6 +3,7 @@ package tor
 import (
 	"bufio"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net"
@@ -47,13 +48,22 @@ func GetTorIP() string {
 		return "unknown"
 	}
 
-	// Very basic parsing, assumes format {"origin": "x.x.x.x"}
-	ip := string(body)
-	// Add robustness for different json responses
-	ip = strings.Replace(ip, `{"origin": "`, "", 1)
-	ip = strings.Split(ip, "\"")[0]
+	// Use proper JSON parsing
+	var ipInfo struct {
+		Origin string `json:"origin"`
+	}
+	if err := json.Unmarshal(body, &ipInfo); err != nil {
+		utils.PrintError("Failed to parse IP JSON response: " + err.Error())
+		return "unknown"
+	}
+
+	// Now, ipInfo.Origin contains the IP address
+	if ipInfo.Origin == "" {
+		utils.PrintError("IP address not found in JSON response.")
+		return "unknown"
+	}
 	
-	return ip
+	return ipInfo.Origin
 }
 
 // RenewTorIP signals Tor to renew its IP address and logs the new IP.

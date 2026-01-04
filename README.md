@@ -80,3 +80,4 @@ go run ./cmd/shadow-pulse -d <domain> [flags]
   ```bash
   go run ./cmd/shadow-pulse -d example.com --nmap-options "-p- -T4" --tor
   ```
+

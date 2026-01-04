@@ -29,7 +29,8 @@ func TakeScreenshots(liveHosts []string, outputDir string, useTor bool) {
 		absScreenshotDir = screenshotDir
 	}
 
-	cmd := fmt.Sprintf("eyewitness -f %s -d %s --web --no-prompt", liveHostsFile, absScreenshotDir)
+	seleniumLogPath := filepath.Join(outputDir, "geckodriver.log")
+	cmd := fmt.Sprintf("eyewitness -f %s -d %s --web --no-prompt --selenium-log-path %s", liveHostsFile, absScreenshotDir, seleniumLogPath)
 	runner.RunCommand(cmd, useTor)
 	
 	utils.PrintGood(fmt.Sprintf("Eyewitness report should be available in %s", absScreenshotDir))

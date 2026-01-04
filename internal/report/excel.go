@@ -54,90 +54,120 @@ type Service struct {
 	Version string `xml:"version,attr"`
 }
 
-// GenerateExcelReport creates a consolidated Excel report from scan results.
 func GenerateExcelReport(outputDir, domain, timestamp, nmapXMLFile string) {
 	utils.PrintInfo("Generating Excel report...")
 
-	if _, err := os.Stat(nmapXMLFile); err != nil {
-		utils.PrintError("Nmap XML output not found. Cannot generate Excel report.")
-		return
-	}
-
-	// --- 1. Parse Nmap XML ---
-	xmlFile, err := os.Open(nmapXMLFile)
-	if err != nil {
-		utils.PrintError("Failed to open Nmap XML file.")
-		return
-	}
-	defer xmlFile.Close()
-
-	byteValue, err := io.ReadAll(xmlFile)
-	if err != nil {
-		utils.PrintError("Failed to read Nmap XML file contents.")
-		return
-	}
-	var nmapRun NmapRun
-	if err := xml.Unmarshal(byteValue, &nmapRun); err != nil {
-		utils.PrintError("Failed to parse Nmap XML: " + err.Error())
-		return
-	}
-
-	// --- 2. Create Excel File ---
 	f := excelize.NewFile()
 	sheetName := "Recon Report"
 	f.SetSheetName("Sheet1", sheetName)
 
-	// --- 3. Write Headers ---
+	// --- Write Headers ---
 	headers := []string{"Subdomain", "IP Address", "Open Ports", "Screenshot"}
 	for i, header := range headers {
 		cell, _ := excelize.CoordinatesToCellName(i+1, 1)
 		f.SetCellValue(sheetName, cell, header)
 	}
 
-	// --- 4. Write Data Rows ---
 	rowNum := 2
-	for _, host := range nmapRun.Hosts {
-		if host.Status.State != "up" {
-			continue
-		}
 
-		// Get Hostname and IP
-		var hostname, ip string
-		for _, h := range host.Hostnames.Hostname {
-			hostname = h.Name
-			break
-		}
-		for _, addr := range host.Addresses {
-			if addr.AddrType == "ipv4" {
-				ip = addr.Addr
-				break
+	if nmapXMLFile != "" {
+		if _, err := os.Stat(nmapXMLFile); err != nil {
+			utils.PrintError("Nmap XML output not found, but was expected. Skipping Nmap data in report.")
+		} else {
+			// --- 1. Parse Nmap XML ---
+			xmlFile, err := os.Open(nmapXMLFile)
+			if err != nil {
+				utils.PrintError("Failed to open Nmap XML file.")
+				return
+			}
+			defer xmlFile.Close()
+
+			byteValue, err := io.ReadAll(xmlFile)
+			if err != nil {
+				utils.PrintError("Failed to read Nmap XML file contents.")
+				return
+			}
+			var nmapRun NmapRun
+			if err := xml.Unmarshal(byteValue, &nmapRun); err != nil {
+				utils.PrintError("Failed to parse Nmap XML: " + err.Error())
+				// Continue without nmap data
+			} else {
+				// --- 4. Write Data Rows from Nmap ---
+				for _, host := range nmapRun.Hosts {
+					if host.Status.State != "up" {
+						continue
+					}
+
+					// Get Hostname and IP
+					var hostname, ip string
+					for _, h := range host.Hostnames.Hostname {
+						hostname = h.Name
+						break
+					}
+					for _, addr := range host.Addresses {
+						if addr.AddrType == "ipv4" {
+							ip = addr.Addr
+							break
+						}
+					}
+					if hostname == "" {
+						hostname = ip
+					}
+
+					// Get Ports
+					var portsStr []string
+					for _, port := range host.Ports.Ports {
+						if port.State.State == "open" {
+							portsStr = append(portsStr, fmt.Sprintf("%s/%s %s", port.PortID, port.Protocol, port.Service.Name))
+						}
+					}
+
+					// Find Screenshot
+					screenshotPath := findScreenshot(outputDir, hostname)
+
+					// Write to cells
+					f.SetCellValue(sheetName, fmt.Sprintf("A%d", rowNum), hostname)
+					f.SetCellValue(sheetName, fmt.Sprintf("B%d", rowNum), ip)
+					f.SetCellValue(sheetName, fmt.Sprintf("C%d", rowNum), strings.Join(portsStr, "\n"))
+
+					if screenshotPath != "" {
+						f.SetCellValue(sheetName, fmt.Sprintf("D%d", rowNum), "View Screenshot")
+						f.SetCellHyperLink(sheetName, fmt.Sprintf("D%d", rowNum), "file://"+screenshotPath, "External")
+					}
+					rowNum++
+				}
 			}
 		}
-		if hostname == "" {
-			hostname = ip
-		}
+	} else {
+		// --- Handle case where no Nmap scan was run ---
+		utils.PrintInfo("No Nmap data to process. Reporting on subdomains and screenshots only.")
+		subdomainsFile := filepath.Join(outputDir, "final_subdomains.txt")
+		if _, err := os.Stat(subdomainsFile); err != nil {
+			utils.PrintError("final_subdomains.txt not found. Cannot add subdomain data to report.")
+		} else {
+			content, err := os.ReadFile(subdomainsFile)
+			if err != nil {
+				utils.PrintError("Failed to read final_subdomains.txt: " + err.Error())
+			} else {
+				subdomains := strings.Split(strings.TrimSpace(string(content)), "\n")
+				for _, sub := range subdomains {
+					if sub == "" {
+						continue
+					}
+					screenshotPath := findScreenshot(outputDir, sub)
+					f.SetCellValue(sheetName, fmt.Sprintf("A%d", rowNum), sub)
+					// IP and Ports are unknown without Nmap
+					f.SetCellValue(sheetName, fmt.Sprintf("B%d", rowNum), "N/A")
+					f.SetCellValue(sheetName, fmt.Sprintf("C%d", rowNum), "N/A")
 
-		// Get Ports
-		var portsStr []string
-		for _, port := range host.Ports.Ports {
-			if port.State.State == "open" {
-				portsStr = append(portsStr, fmt.Sprintf("%s/%s %s", port.PortID, port.Protocol, port.Service.Name))
+					if screenshotPath != "" {
+						f.SetCellValue(sheetName, fmt.Sprintf("D%d", rowNum), "View Screenshot")
+						f.SetCellHyperLink(sheetName, fmt.Sprintf("D%d", rowNum), "file://"+screenshotPath, "External")
+					}
+					rowNum++
+				}
 			}
 		}
-		
-		// Find Screenshot
-		screenshotPath := findScreenshot(outputDir, hostname)
-
-		// Write to cells
-		f.SetCellValue(sheetName, fmt.Sprintf("A%d", rowNum), hostname)
-		f.SetCellValue(sheetName, fmt.Sprintf("B%d", rowNum), ip)
-		f.SetCellValue(sheetName, fmt.Sprintf("C%d", rowNum), strings.Join(portsStr, "\n"))
-
-		if screenshotPath != "" {
-			f.SetCellValue(sheetName, fmt.Sprintf("D%d", rowNum), "View Screenshot")
-			f.SetCellHyperLink(sheetName, fmt.Sprintf("D%d", rowNum), "file://"+screenshotPath, "External")
-		}
-		rowNum++
 	}
 
 	// --- 5. Save File ---

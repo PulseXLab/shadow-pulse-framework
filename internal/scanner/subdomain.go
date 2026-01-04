@@ -48,7 +48,7 @@ func RunSubdomainEnumeration(domain, outputDir string, useTor, stealth bool) []s
 			if _, err := os.Stat(wordlistPath); err == nil {
 				utils.PrintGood("Wordlist found, adding gobuster to the scan.")
 				gobusterOutputFile := filepath.Join(outputDir, "gobuster.txt")
-				commands["gobuster"] = fmt.Sprintf("gobuster dns -d %s -w %s --quiet | grep '^Found:' | awk '{print $2}' > %s", domain, wordlistPath, gobusterOutputFile)
+				commands["gobuster"] = fmt.Sprintf("gobuster dns --domain %s -w %s --quiet | grep '^Found:' | awk '{print $2}' > %s", domain, wordlistPath, gobusterOutputFile)
 			} else {
 				utils.PrintError("Gobuster is installed, but the required wordlist was not found at " + wordlistPath)
 				utils.PrintError("On Debian/Kali, you can install it by running: sudo apt-get update && sudo apt-get install -y seclists")

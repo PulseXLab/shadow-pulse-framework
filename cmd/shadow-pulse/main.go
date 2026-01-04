@@ -95,6 +95,7 @@ func main() {
 	nmapOptions := flag.String("nmap-options", defaultNmapOptions, "Nmap options to use.")
 	useTor := flag.Bool("tor", false, "Enable to route traffic through Tor (proxychains4).")
 	useStealth := flag.Bool("stealth", false, "Enable stealth mode for IDS/WAF evasion.")
+	noPortsScan := flag.Bool("no-ports-scan", false, "Skip the port scanning phase.")
 	
 	// Custom usage message
 	flag.Usage = func() {
@@ -107,6 +108,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "  %s -d example.com\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, "  %s -d example.com -out /tmp/scan_results\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, "  %s -d example.com --live --tor --stealth\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "  %s -d example.com --no-ports-scan\n", os.Args[0])
 	}
 
 	flag.Parse()
@@ -133,6 +135,7 @@ func main() {
 
 	// --- Main Execution ---
 	timings := make(map[string]time.Duration)
+	var startTime time.Time
 	
 	if *useTor {
 		utils.PrintGood("Tor mode enabled.")
@@ -171,21 +174,30 @@ func main() {
 	utils.PrintGood(fmt.Sprintf("Results will be saved in: %s", outputDir))
 	
 	// --- Run Phases ---
-	startTime := time.Now()
+	startTime = time.Now()
 	scanner.CheckDependencies()
 	timings["Dependency Check"] = time.Since(startTime)
 
+	if *useTor {
+		tor.RenewTorIP(outputDir)
+	}
 	startTime = time.Now()
 	allSubdomains := scanner.RunSubdomainEnumeration(*domain, outputDir, *useTor, *useStealth)
 	timings["Subdomain Enumeration"] = time.Since(startTime)
 
 	var nmapResultsFile string
 	if len(allSubdomains) > 0 {
+		if *useTor {
+			tor.RenewTorIP(outputDir)
+		}
 		startTime = time.Now()
 		liveWebServers := scanner.FindLiveWebServers(allSubdomains, outputDir, *useTor)
 		timings["Find Live Web Servers (httpx)"] = time.Since(startTime)
 		
 		if len(liveWebServers) > 0 {
+			if *useTor {
+				tor.RenewTorIP(outputDir)
+			}
 			startTime = time.Now()
 			scanner.TakeScreenshots(liveWebServers, outputDir, *useTor)
 			timings["Take Screenshots"] = time.Since(startTime)
@@ -200,10 +212,17 @@ func main() {
 			hostsForPortScan = allSubdomains
 		}
 
-		startTime = time.Now()
-		nmapResultsFile = scanner.RunPortScan(hostsForPortScan, outputDir, *nmapOptions, *useTor, *useStealth)
-		timings["Port Scanning"] = time.Since(startTime)
-		
+		if !*noPortsScan {
+			if *useTor {
+				tor.RenewTorIP(outputDir)
+			}
+			startTime = time.Now()
+			nmapResultsFile = scanner.RunPortScan(hostsForPortScan, outputDir, *nmapOptions, *useTor, *useStealth)
+			timings["Port Scanning"] = time.Since(startTime)
+		} else {
+			utils.PrintInfo("Skipping port scanning phase as requested.")
+		}
+
 		startTime = time.Now()
 		report.GenerateExcelReport(outputDir, *domain, timestamp, nmapResultsFile)
 		timings["Generate Excel Report"] = time.Since(startTime)
