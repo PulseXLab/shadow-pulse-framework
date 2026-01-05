@@ -14,13 +14,15 @@ A comprehensive, stealth-oriented reconnaissance framework designed to automate 
 - **Live Host Discovery**: Uses `httpx` to quickly identify which discovered subdomains are running live web servers.
 - **Automated Port Scanning**: Runs `nmap` on discovered hosts to find open ports and identify services.
 - **Visual Reconnaissance**: Automatically takes screenshots of live web services using `eyewitness`.
+- **Dependency Scanning**: Scans and visualizes project dependencies using `go mod graph` and `go list`.
+- **Health Check (`doctor`)**: Comes with a `doctor` command to verify that all external tool dependencies are correctly installed and configured.
 - **Consolidated Reporting**: Generates a professional Excel (`.xlsx`) report summarizing all findings, including subdomains, IPs, open ports, and hyperlinks to local screenshots.
 - **Performance Statistics**: Ends with a summary of how much time was spent in each phase of the scan, helping to identify bottlenecks.
 - **Clean UI**: Suppresses noisy banners from underlying tools and provides a clean progress-bar interface.
 
 ## 🛠️ Dependencies
 
-The framework orchestrates several popular open-source tools. You must install them for the framework to function correctly.
+The framework orchestrates several popular open-source tools. You must install them for the framework to function correctly. You can easily check if all dependencies are installed by running `go run ./cmd/shadow-pulse doctor`.
 
 ### Core Framework
 - **Go**: Version 1.18 or higher.
@@ -50,11 +52,19 @@ For the `--tor` and IP rotation features, you must have the Tor service running.
 
 ## 🚀 Usage
 
+The framework provides multiple commands. The primary command is `scan`, which runs the full reconnaissance workflow.
+
 ```
-go run ./cmd/shadow-pulse -d <domain> [flags]
+go run ./cmd/shadow-pulse <command> [flags]
 ```
 
-### Options
+### Commands
+| Command | Description |
+|---|---|
+| `scan` | **(Default)** Run the full reconnaissance scan against a domain. |
+| `doctor`| Check if all required external dependencies are installed correctly. |
+
+### Options for `scan` command
 | Flag | Description |
 |---|---|
 | `-d`, `--domain` | **(Required)** The target domain to scan. |
@@ -64,20 +74,23 @@ go run ./cmd/shadow-pulse -d <domain> [flags]
 | `-h`, `--help` | Show the detailed help message. |
 
 ### Examples
+- **Check Dependencies:**
+  ```bash
+  go run ./cmd/shadow-pulse doctor
+  ```
 - **Standard Scan:**
   ```bash
-  go run ./cmd/shadow-pulse -d example.com
+  go run ./cmd/shadow-pulse scan -d example.com
   ```
 - **Scan through Tor with IP Rotation:**
   ```bash
-  go run ./cmd/shadow-pulse -d example.com --tor
+  go run ./cmd/shadow-pulse scan -d example.com --tor
   ```
 - **Stealth Scan (Passive Enum, Evasive Nmap):**
   ```bash
-  go run ./cmd/shadow-pulse -d example.com --stealth
+  go run ./cmd/shadow-pulse scan -d example.com --stealth
   ```
 - **Full-Featured Scan with Custom Nmap Options:**
   ```bash
-  go run ./cmd/shadow-pulse -d example.com --nmap-options "-p- -T4" --tor
+  go run ./cmd/shadow-pulse scan -d example.com --nmap-options "-p- -T4" --tor
   ```
-
