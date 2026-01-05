@@ -94,3 +94,4 @@ go run ./cmd/shadow-pulse <command> [flags]
   ```bash
   go run ./cmd/shadow-pulse scan -d example.com --nmap-options "-p- -T4" --tor
   ```
+
