@@ -76,24 +76,15 @@ func RenewTorIP(outputDir string) {
 	}
 	defer conn.Close()
 
-	// Read authentication cookie
-	cookie, err := os.ReadFile(torAuthCookiePath)
-	if err != nil {
-		utils.PrintError(fmt.Sprintf("Failed to read Tor control cookie from %s: %v", torAuthCookiePath, err))
-		return
-	}
-	cookieHex := hex.EncodeToString(cookie)
-
-	// Tor controller authentication
-	fmt.Fprintf(conn, "AUTHENTICATE %s\r\n", cookieHex)
+	// Tor controller authentication using a null password
+	fmt.Fprintf(conn, "AUTHENTICATE \"\"\r\n")
 	status, err := bufio.NewReader(conn).ReadString('\n')
 	if err != nil {
 		utils.PrintError("Failed to read Tor ControlPort authentication response.")
 		return
 	}
 	if !strings.Contains(status, "250") {
-		utils.PrintError("Tor ControlPort authentication failed: " + status)
-		return
+		utils.PrintInfo("Tor ControlPort authentication with null password failed, attempting without authentication...")
 	}
 
 	// Send NEWNYM signal
