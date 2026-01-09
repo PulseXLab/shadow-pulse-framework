@@ -44,11 +44,11 @@ func RunSubdomainEnumeration(domain, outputDir string, useTor, stealth bool) []s
 		commands["crtsh"] = fmt.Sprintf(`curl -s 'https://crt.sh/?q=%%.%s&output=json' | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u > %s`, domain, filepath.Join(outputDir, "crtsh.txt"))
 		
 		if runner.LookPath("gobuster") {
-			wordlistPath := "/usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt"
+			wordlistPath := "/usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt"
 			if _, err := os.Stat(wordlistPath); err == nil {
 				utils.PrintGood("Wordlist found, adding gobuster to the scan.")
 				gobusterOutputFile := filepath.Join(outputDir, "gobuster.txt")
-				commands["gobuster"] = fmt.Sprintf("gobuster dns --domain %s -w %s --quiet | grep '^Found:' | awk '{print $2}' > %s", domain, wordlistPath, gobusterOutputFile)
+				commands["gobuster"] = fmt.Sprintf("gobuster dns --domain %s -w %s --quiet |awk '{print $2}' > %s", domain, wordlistPath, gobusterOutputFile)
 			} else {
 				utils.PrintError("Gobuster is installed, but the required wordlist was not found at " + wordlistPath)
 				utils.PrintError("On Debian/Kali, you can install it by running: sudo apt-get update && sudo apt-get install -y seclists")

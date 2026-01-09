@@ -3,7 +3,7 @@
 ![GitHub banner](https://user-images.githubusercontent.com/12345/123456789-abcdef.png) 
 <!-- Replace with a real banner later -->
 
-A comprehensive, stealth-oriented reconnaissance framework designed to automate security workflows. This tool was crafted by Pulse.X and her partner, designed to be both powerful for professionals and a symbol of their collaboration.
+A comprehensive, stealth-oriented reconnaissance framework designed to automate security workflows. This tool was crafted by Pulse.X and our partner, designed to be both powerful for professionals and a symbol of their collaboration.
 
 ## 🌟 Features
 
