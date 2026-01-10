@@ -69,7 +69,7 @@ func GenerateExcelReport(outputDir, domain, timestamp, nmapXMLFile string) {
 
 	// Clean up and save
 	f.DeleteSheet("Sheet1")
-	reportFilename := filepath.Join(outputDir, fmt.Sprintf("recon_report_%s_%s.xlsx", domain, timestamp))
+	reportFilename := filepath.Join(outputDir, "Report", fmt.Sprintf("recon_report_%s_%s.xlsx", domain, timestamp))
 	if err := f.SaveAs(reportFilename); err != nil {
 		utils.PrintError("Failed to save Excel report: " + err.Error())
 		return
