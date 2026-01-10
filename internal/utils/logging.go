@@ -79,6 +79,13 @@ func PrintError(message string) {
 	logToFile(formatted)
 }
 
+// PrintDebug prints a debug message.
+func PrintDebug(message string) {
+	formatted := fmt.Sprintf("%s[DEBUG] %s - %s%s", ColorYellow, formatTime(), message, ColorReset)
+	fmt.Println(formatted)
+	logToFile(formatted)
+}
+
 // AppendToFile opens a file in append mode and writes content to it.
 func AppendToFile(filePath, content string) {
 	f, err := os.OpenFile(filePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)

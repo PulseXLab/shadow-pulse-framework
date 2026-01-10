@@ -33,7 +33,11 @@ func TakeScreenshots(outputDir string, useTor bool, useStealth bool) {
 			cmd = fmt.Sprintf("eyewitness -f %s -d %s --web --no-prompt", liveHostsFile, screenshotDir)
 		}
 		// We pass useTor=false because we are NOT using proxychains. Eyewitness handles the proxy.
-		runner.RunCommand(cmd, false)
+		if err := runner.RunCommand(cmd, false); err != nil {
+			utils.PrintError(fmt.Sprintf("Eyewitness execution failed: %v", err))
+			// Decide if we should return or continue
+			// For now, let's just log and continue with the next URL in stealth mode
+		}
 		utils.PrintGood(fmt.Sprintf("Screenshot process complete. Reports are in %s", screenshotDir))
 		return
 	}
@@ -76,7 +80,11 @@ func TakeScreenshots(outputDir string, useTor bool, useStealth bool) {
 		cmd := fmt.Sprintf("eyewitness -f %s -d %s --web --no-prompt --proxy-type 'socks5' --proxy-ip '127.0.0.1' --proxy-port '9050'", singleURLFile, screenshotDir)
 		
 		// We pass useTor=false because we are NOT using proxychains.
-		runner.RunCommand(cmd, false) 
+		if err := runner.RunCommand(cmd, false); err != nil {
+			utils.PrintError(fmt.Sprintf("Eyewitness execution failed: %v", err))
+			// Decide if we should return or continue
+			// For now, let's just log and continue with the next URL in stealth mode
+		} 
 	}
 	// Clean up the temporary file
 	os.Remove(singleURLFile)
