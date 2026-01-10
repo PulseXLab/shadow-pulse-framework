@@ -8,12 +8,12 @@ A comprehensive, stealth-oriented reconnaissance framework designed to automate 
 ## 🌟 Features
 
 - **Comprehensive Subdomain Enumeration**: Uses a combination of passive sources (`subfinder`, `crt.sh`) and active brute-forcing (`gobuster`, `dnsrecon`, `dnsenum`) to discover subdomains.
-- **Stealth Mode (`--stealth`)**: Evade IDS/WAF detection by using passive-only subdomain discovery and employing advanced, low-and-slow Nmap scanning techniques (`-sS -T2 -f -D RND:5`).
+- **Stealth Mode (`--stealth`)**: Evade IDS/WAF detection by using passive-only subdomain discovery and employing advanced, low-and-slow Nmap scanning techniques (`-sS -T2 -f -D RND:5`). When combined with `--tor`, it also requests a new Tor IP before *each* screenshot, further obscuring the origin of the scan.
 - **Tor Integration (`--tor`)**: Route all traffic through the Tor network for anonymity.
 - **Automatic IP Rotation**: When using Tor, the framework automatically renews the Tor IP address at set intervals and after each host scan during the port scanning phase. IP changes are logged for traceability.
 - **Live Host Discovery**: Uses `httpx` to quickly identify which discovered subdomains are running live web servers.
 - **Automated Port Scanning**: Runs `nmap` on discovered hosts to find open ports and identify services.
-- **Visual Reconnaissance**: Automatically takes screenshots of live web services using `goneshot`.
+- **Visual Reconnaissance**: Automatically takes screenshots of live web services using `wkhtmltoimage`.
 - **Dependency Scanning**: Scans and visualizes project dependencies using `go mod graph` and `go list`.
 - **Health Check (`doctor`)**: Comes with a `doctor` command to verify that all external tool dependencies are correctly installed and configured.
 - **Consolidated Reporting**: Generates a professional Excel (`.xlsx`) report summarizing all findings, including subdomains, IPs, open ports, and hyperlinks to local screenshots.
@@ -26,7 +26,7 @@ This framework is actively maintained. Here are some of the latest fixes and imp
 
 - **More Robust Tor IP Renewal**: The Tor IP renewal logic has been enhanced. It no longer relies on a specific authentication method, making it more compatible with various `torrc` configurations (including `CookieAuthentication 0` or null passwords).
 - **Improved Subdomain List Accuracy**: Fixed a bug where IP addresses could occasionally be included in the final subdomain list (`final_subdomains.txt`). The parsing logic is now more robust and correctly filters out non-domain entries.
-- **Reliable Screenshot Generation**: Corrected a data flow issue and updated the tool to `goneshot`, ensuring visual reconnaissance is performed reliably on all discovered live web servers.
+- **Reliable Screenshot Generation**: Corrected a data flow issue and updated the tool to `wkhtmltoimage`, ensuring visual reconnaissance is performed reliably on all discovered live web servers.
 
 ## 🛠️ Dependencies
 
@@ -43,7 +43,7 @@ The framework orchestrates several popular open-source tools. You must install t
 - **nmap**: `sudo apt install nmap`
 - **dnsrecon**: `pip3 install dnsrecon-python`
 - **dnsenum**: `sudo apt install dnsenum`
-- **goneshot**: `go install github.com/dorjan-couton/goneshot@latest`
+- **wkhtmltoimage**: `sudo apt install wkhtmltoimage`
 - **proxychains4**: `sudo apt install proxychains4` (Required for `--tor`)
 
 ### Tor Setup
