@@ -91,15 +91,31 @@ func RunCommand(commandString string, useTor bool) error {
 
 	wg.Wait() // Wait for scanner goroutines to finish
 
+	// Separate and print stderr output for debugging, regardless of error
+	var stderrLines []string
+	var stdoutLines []string
+	for _, line := range outputLines {
+		if strings.HasPrefix(line, "[STDERR] ") {
+			stderrLines = append(stderrLines, strings.TrimPrefix(line, "[STDERR] "))
+		} else {
+			stdoutLines = append(stdoutLines, line)
+		}
+	}
+
+	if len(stderrLines) > 0 {
+		utils.PrintDebug("Command produced the following output on stderr:\n" + strings.Join(stderrLines, "\n"))
+	}
+
 	if err != nil {
 		utils.PrintError("Command failed: " + originalCommand)
-		// Print captured output for debugging
-		if len(outputLines) > 0 {
-			utils.PrintError("Captured output:\n" + strings.Join(outputLines, "\n"))
+		// Print captured stdout output for debugging if it exists
+		if len(stdoutLines) > 0 {
+			utils.PrintError("Captured stdout output:\n" + strings.Join(stdoutLines, "\n"))
 		}
 		utils.PrintError("Error: " + err.Error())
 		return err
 	}
+
 
 	// Optionally, print output on success if needed for some tools,
 	// but for now, we'll keep it quiet on success.
