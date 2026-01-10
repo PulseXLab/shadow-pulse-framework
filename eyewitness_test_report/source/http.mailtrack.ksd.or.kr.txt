@@ -1,8 +1,0 @@
-<html><!-- <head>
-<script type="text/javascript">
-documentd.oncontextmenu = new Function('return false');
-documentd.ondragstart = new Function('return false');
-documentd.onselectstart = new Function('return false');
-</script>
-</head> --><head></head><body oncontextmenu="return false" ondragstart="return false" onselectstart="return false"><h1>It works!</h1>
-</body></html>
