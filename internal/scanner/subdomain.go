@@ -100,9 +100,13 @@ func combineAndCleanSubdomains(outputDir string) []string {
 		defer file.Close()
 		scanner := bufio.NewScanner(file)
 		for scanner.Scan() {
-			subdomain := scanner.Text()
-			if isValidSubdomain(subdomain) {
-				subdomainSet[strings.TrimSpace(subdomain)] = struct{}{}
+			// Handle lines that might contain both domain and IP, like "sub.domain.com 1.2.3.4"
+			fields := strings.Fields(scanner.Text())
+			if len(fields) > 0 {
+				potentialSubdomain := fields[0]
+				if isValidSubdomain(potentialSubdomain) {
+					subdomainSet[potentialSubdomain] = struct{}{}
+				}
 			}
 		}
 	}
@@ -113,8 +117,13 @@ func combineAndCleanSubdomains(outputDir string) []string {
 		var entries []DnsreconEntry
 		if json.Unmarshal(data, &entries) == nil {
 			for _, entry := range entries {
-				if isValidSubdomain(entry.Name) {
-					subdomainSet[strings.TrimSpace(entry.Name)] = struct{}{}
+				// The name field might also have extra data
+				fields := strings.Fields(entry.Name)
+				if len(fields) > 0 {
+					potentialSubdomain := fields[0]
+					if isValidSubdomain(potentialSubdomain) {
+						subdomainSet[potentialSubdomain] = struct{}{}
+					}
 				}
 			}
 		}
@@ -128,8 +137,13 @@ func combineAndCleanSubdomains(outputDir string) []string {
 		}
 		if xml.Unmarshal(data, &result) == nil {
 			for _, host := range result.Hosts {
-				if isValidSubdomain(host.Hostname) {
-					subdomainSet[strings.TrimSpace(host.Hostname)] = struct{}{}
+				// The hostname field might also have extra data
+				fields := strings.Fields(host.Hostname)
+				if len(fields) > 0 {
+					potentialSubdomain := fields[0]
+					if isValidSubdomain(potentialSubdomain) {
+						subdomainSet[potentialSubdomain] = struct{}{}
+					}
 				}
 			}
 		}
