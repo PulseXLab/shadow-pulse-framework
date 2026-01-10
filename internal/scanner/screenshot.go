@@ -10,24 +10,13 @@ import (
 )
 
 // TakeScreenshots runs eyewitness to capture screenshots of live web services.
-func TakeScreenshots(liveHosts []string, outputDir string, useTor bool) {
+func TakeScreenshots(outputDir string, useTor bool) {
 	utils.PrintInfo("Taking screenshots with eyewitness...")
-
-	if len(liveHosts) == 0 {
-		utils.PrintInfo("No live web hosts found, skipping screenshots.")
-		return
-	}
-
+	
 	liveHostsFile := filepath.Join(outputDir, "live_web_hosts.txt")
-	file, err := os.Create(liveHostsFile)
-	if err != nil {
-		utils.PrintError("Failed to create live_web_hosts.txt: " + err.Error())
+	if _, err := os.Stat(liveHostsFile); err != nil {
+		utils.PrintInfo("live_web_hosts.txt not found (no live web servers discovered by httpx), skipping screenshots.")
 		return
-	}
-	defer file.Close()
-
-	for _, host := range liveHosts {
-		fmt.Fprintln(file, host)
 	}
 
 	screenshotDir := filepath.Join(outputDir, "eyewitness_report")
@@ -43,6 +32,6 @@ func TakeScreenshots(liveHosts []string, outputDir string, useTor bool) {
 	seleniumLogPath := filepath.Join(outputDir, "geckodriver.log")
 	cmd := fmt.Sprintf("eyewitness -f %s -d %s --web --no-prompt --selenium-log-path %s", liveHostsFile, absScreenshotDir, seleniumLogPath)
 	runner.RunCommand(cmd, useTor)
-
+	
 	utils.PrintGood(fmt.Sprintf("Eyewitness report should be available in %s", absScreenshotDir))
 }
