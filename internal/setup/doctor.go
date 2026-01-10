@@ -179,20 +179,6 @@ func checkTor(osInfo OSInfo) []Check {
 	}
 	checks = append(checks, checkSocks, checkControl)
 
-	// 3. Check for cookie file (if control port is open)
-	if checkControl.Success {
-		cookiePath := "/var/run/tor/control.authcookie"
-		checkCookie := Check{Description: "Tor control cookie exists"}
-		if _, err := os.Stat(cookiePath); err == nil {
-			checkCookie.Success = true
-		} else {
-			checkCookie.Success = false
-			checkCookie.Message = fmt.Sprintf("ControlPort is open, but cookie file is missing at %s.", cookiePath)
-			checkCookie.Resolution = "Check torrc for 'CookieAuthentication 1' and 'CookieAuthFile' directives. Also check '/var/run/tor' permissions."
-		}
-		checks = append(checks, checkCookie)
-	}
-
 	return checks
 }
 
