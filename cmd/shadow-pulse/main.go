@@ -199,7 +199,7 @@ func main() {
 				tor.RenewTorIP(outputDir)
 			}
 			startTime = time.Now()
-			scanner.TakeScreenshots(liveWebServers, outputDir, *useTor)
+			scanner.TakeScreenshots(outputDir, *useTor)
 			timings["Take Screenshots"] = time.Since(startTime)
 		}
 		
