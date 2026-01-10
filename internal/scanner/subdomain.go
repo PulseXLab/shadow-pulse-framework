@@ -3,7 +3,6 @@ package scanner
 import (
 	"bufio"
 	"encoding/json"
-	"encoding/xml"
 	"fmt"
 	"net"
 	"os"
