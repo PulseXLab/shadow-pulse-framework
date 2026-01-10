@@ -113,3 +113,4 @@ The framework uses a subcommand-based interface.
   ```bash
   ./shadow-pulse scan -d example.com -out /tmp/results --nmap-options "-p- -T4" --tor
   ```
+
