@@ -1,0 +1,15 @@
+dacc.ksd.or.kr
+e-safe.ksd.or.kr
+e-safetest.ksd.or.kr
+evote.ksd.or.kr
+ksd.or.kr
+otp.ksd.or.kr
+revote.ksd.or.kr
+safe.ksd.or.kr
+safeplus.ksd.or.kr
+safetest.ksd.or.kr
+tevote.ksd.or.kr
+www.evote.ksd.or.kr
+www.ksd.or.kr
+www.revote.ksd.or.kr
+www.tevote.ksd.or.kr

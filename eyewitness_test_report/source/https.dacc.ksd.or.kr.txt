@@ -1,0 +1,25 @@
+<html lang="ko"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge"> 
+	<meta http-equiv="Expires" content="-1">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="No-Cache"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no">
+	<link href="all.css" type="text/css" rel="stylesheet">
+	<title>페이지를 표시할 수 없습니다.</title>
+</head>
+<body class="h0">
+	<div class="errorbox404">
+     	<div class="box_404">
+			<div class="img_check" title="페이지를 표시할 수 없습니다"></div>		
+			<p class="txt_noti"><span class="txt_blue">Web서비스 제공이 종료</span>되었습니다.</p>
+			<p class="fs18">직접등록계좌 Web서비스 제공이 종료되었습니다.<br>서비스 계속 이용은 대면 서비스를 이용해주시기 바랍니다.</p>		
+		</div>
+			<p class="mt20 fs18">직접등록계좌 개설 및 서비스 문의</p>	
+			<p class="fs18">ㅇ Tel) 1577-6600 / e-mail) accountbook@ksd.or.kr</p>	
+			<p class="fs18">ㅇ 운영시간: 월~ 금(공휴일 제외) 09:00~18:.00</p>
+	</div>
+
+
+</body></html>

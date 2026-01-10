@@ -1,0 +1,1417 @@
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="icon" href="/resource/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/resource/images/favicon.ico" type="image/x-icon">
+<link href="/resource/css/reset.css" rel="stylesheet" type="text/css">
+<link href="/resource/css/common.css" rel="stylesheet" type="text/css">
+<script src="/resource/js/jquery-1.7.1.min.js"></script>
+<script src="/resource/js/jquery-ui.js"></script>
+<script src="/resource/js/common_ui.js"></script>
+<script src="/resource/js/rpCommon.js"></script>
+<title>e-SAFE</title>
+
+<!-- [CS][CSR 2021-BCM-0010 2022.5.1]e-SAFE사용자관리공통JS -->
+<script src="/resource/js/bcmCommon.js"></script>
+<!-- [CE][CSR 2021-BCM-0010] -->
+
+<!--<script>-->
+<script>
+	pageNum	 = "";
+	
+	function _onLoad() {
+
+		<!-- openPopupNew('notice', 'id_pwd_aboli','580','780','중요공지'); -->
+		openPopupNew('notice', 'newmessenger_inform','650','980','중요공지');
+		
+		if (_getSystem() == "DEV") {
+			$('#tBand2').show();
+		} else if (_getSystem() == "TEST") {
+			$('#tBand1').show();
+		} else if (_getSystem() == "UTEST") {
+			$('#tBand3').show();
+		}
+		
+		setFamily();
+	}
+	function main_contact(){
+		//alert('접속하기')
+		var sysName = _getSystem() ;
+		if (sysName == "DEV") {
+			window.open('/app/eSAFEDEV2019.exe');
+		} else if (sysName == "TEST") {
+			window.open('/app/eSAFEINTT2019.exe');
+		} else if (sysName == "UTEST") {
+			window.open('/app/eSAFETEST2019.exe');
+		}  else if (sysName == "REAL") {
+			window.open('/app/eSAFE2019_KSD.exe');
+		}
+		return;
+	}
+		
+	setTimeout(function() {
+		_onLoad( ) ;
+	} , 200);
+</script>
+</head>
+<body class="">
+	<div class="wrap main">
+		<div id="tBand1" class="band1" style="display:none"></div>
+		<div id="tBand2" class="band2" style="display:none"></div>
+		<div id="tBand3" class="band3" style="display:none"></div>
+		<div id="tBand4" class="band4" style="display:none"></div>
+		<div class="visual">
+            <div class="visual_area v1 on" style="">
+                <span class="unit earth"></span>
+                <div class="visual_inner">
+                    <p class="unit txt">
+                        종이증권에서 전자증권으로 금융환경 선진화를 한발 앞당길 전자증권제도 도입
+                        편리하고 안전한 금융투자 인프라와 세계적인 품질의 서비스를 제공하여 자본시장 발전을 적극 지원하고, 증권을 전자화 함으로 발행과 유통의 효율성 등 증권에 관한 모든 권리 제고에 기여합니다
+                    </p>
+
+                    <span class="unit paper1"></span>
+                    <span class="unit paper2"></span>
+                    <span class="unit paper3"></span>
+                    <span class="unit paper4"></span>
+                    <span class="unit dot d1"></span>
+                    <span class="unit dot d2"></span>
+                    <span class="unit dot d3"></span>
+                    <span class="unit dot d4"></span>
+                    <span class="unit dot d5"></span>
+                    <span class="unit dot d6"></span>
+                </div>
+            </div>
+            <div class="visual_area v2">
+                <span class="unit city"></span>
+                <div class="visual_inner">
+                    <p class="unit txt">
+                        세계 일류 종합증권서비스 변화하는 금융환경의 흐름에 늘 앞장서겠습니다.
+                        고객의 신뢰를 바탕으로  편리하고 안전한  인프라를 제공하여 자본시장 발전에 기여
+                    </p>
+                    <span class="unit dot d1"></span>
+                    <span class="unit dot d2"></span>
+                    <span class="unit dot d3"></span>
+                    <span class="unit dot d4"></span>
+                    <span class="unit dot d5"></span>
+                    <span class="unit dot d6"></span>
+                    <span class="unit dot d7"></span>
+                </div>
+            </div>
+        </div>
+        <div class="inner">
+
+
+<div id="head">
+	<div class="skip_nav">
+		<a href="#container">본문 바로가기</a>
+	</div>
+
+	<div class="lnb_wrap">
+        <div class="lnb">
+            <h1><a href="javascript:goPage('home')" title="e-SAFE 한국예탁결제원 홈으로">e-SAFE 한국예탁결제원</a></h1>
+            <ul>
+                <li>
+                    <a href="javascript:void(false)" style="transition: height 0.2s;"><span>e-SAFE 안내</span></a>
+                    <dlv class="sub" style="height: 0px;">
+                        <ul>
+                            <li><a href="javascript:goPage('safe1')">초보자 이용가이드</a></li>
+	                        <li><a href="javascript:goPage('safe2')">e-SAFE 이용안내</a></li>
+	                        <li><a href="javascript:goPage('safe3')">e-SAFE 이용신청서 안내</a></li>
+	                        <li><a href="javascript:goPage('safe4')">이용자 유의사항</a></li>
+	                        <li><a href="javascript:goPage('safe5')">e-SAFE 사용자매뉴얼</a></li>
+	                        <li><a href="javascript:goPage('safe6')">e-SAFE 수동설치 안내</a></li>
+	                        <li><a href="javascript:goPage('safe7')">FAQ</a></li>
+                        </ul>
+                    </dlv>
+                </li>
+                <li>
+                    <a href="javascript:void(false)" style="transition: height 0.2s;"><span>회원정보 관리</span></a>
+                    <dlv class="sub" style="height: 0px;">
+                        <ul>
+                            <li><a href="javascript:goPage('cert1')">회원가입</a></li>
+	                        <li><a href="javascript:goPage('cert2')">아이디 찾기</a></li>
+	                        <li><a href="javascript:goPage('cert3')">비밀번호 찾기</a></li>
+	                        <li><a href="javascript:goPage('cert4')">비밀번호 변경</a></li>
+	                        <li><a href="javascript:goPage('cert5')">OTP Pin번호 분실 안내</a></li>
+	                        <li><a href="javascript:goPage('cert6')">회원탈퇴</a></li>
+                        </ul>
+                    </dlv>
+                </li>
+                <li>
+                    <a href="javascript:void(false)" style="transition: height 0.2s;"><span>인증센터</span></a>
+                    <dlv class="sub" style="height: 0px;">
+                        <ul>
+                            <li><a href="javascript:goPage('sign1')">공동인증서 안내</a></li>
+	                        <li><a href="javascript:goPage('sign2')">e-SAFE 공동인증서 안내</a></li>
+	                        <li><a href="javascript:goPage('sign3')">법인범용공동인증서 안내</a></li>
+	                        <li><a href="javascript:goPage('sign4')">e-SAFE 공동인증서 잠금해제</a></li>
+													<li><a href="javascript:goPage('sign5')">e-SAFE 타기관인증서등록</a></li>
+	                        <li><a href="javascript:goPage('sign6')">보안프로그램설치</a></li>	                        
+                        </ul>
+                    </dlv>
+                </li>
+            </ul>
+
+        </div>
+
+        <a href="#" class="btn_direct" onclick="contact();"> <strong>e-SAFE</strong>
+						바로접속 <span>GO</span>
+					</a>
+				</div>
+			</div>
+            <!-- //head -->
+
+            <div id="container">
+            	<div class="inner">
+                    <div class="main_visual">
+                        <ul>
+                            <li class="visual1">
+                                <div class="txt_area">
+                                    <strong>처음이세요?</strong>
+                                    <!--<span>신규이용자에게 도움을 드립니다.</span>-->
+                                </div>
+                                <ul class="list">
+                                    <li><a href="javascript:goPage('info1')">초보자 이용가이드</a></li><li>
+                                    </li><li><a href="javascript:goPage('join')">회원가입</a></li>
+                                    <li><a href="javascript:goPage('info2')">e-SAFE 이용신청서 안내</a></li>
+                                    <li><a href="javascript:openLayer($('#messenger'))">KSD Smart 메신저 설치</a></li>
+                                </ul>
+                            </li>
+                            <!-- // 처음이세요? -->
+
+                            <li class="visual2">
+                                <div class="txt_area">
+                                    <strong>도움이 필요하세요?</strong>
+                                    <!--<span>e-SAFE 이용에 필요한 도움을 드립니다.</span>-->
+                                </div>
+                                <ul class="list">
+                                    <li><a href="javascript:goPage('cert2')">아이디찾기</a><span style="color:#fff"> / </span><a href="javascript:goPage('cert3')">비밀번호찾기</a></li>
+                                    <li><a href="javascript:goPage('sign1')">공동인증서 안내</a></li>
+                                    <li><a href="javascript:goPage('safe6')">e-SAFE 수동설치 안내</a></li>
+                                    <li><a href="javascript:goPage('safe5')">e-SAFE 사용자매뉴얼</a></li>
+                                </ul>
+                            </li>
+                            <!-- // 도움이 필요하세요? -->
+                        </ul>
+                    </div>
+                    <!-- // -->
+                </div>
+            </div>
+            <!-- //container -->
+        </div>
+
+        <div id="foot">
+			<div class="inner">
+				<div class="link_area">
+				    <ul class="">
+				        <li><a href="javascript:goPage('join')">회원가입</a></li>
+				        <li><a href="javascript:goPage('safe7')">FAQ</a></li>
+			            <li><a href="https://www.ksd.or.kr/ko/service-center/form" target="_blank" title="양식서식 새창열림">양식/서식</a></li>
+			            <li><a href="javascript:openLayer($('#ksd'))" title="KSD 본·지원 안내 팝업열림">KSD 본·지원 안내</a></li>
+			            <li><a href="javascript:goPage('contact','_blank')" title="오시는길 새창열림">오시는길</a></li>
+			            <li><a href="javascript:openLayer($('#messenger'))" title="KSD Smart 메신저 설치 팝업열림">KSD Smart 메신저 설치</a></li>
+			        </ul>
+			    </div>
+
+			    <div class="info_area">
+			        <div class="left">
+			        	<div class="left">
+			          	<img src="/resource/images/common/img_footer_ci2.gif" alt="KSD로고" class="f_logo">
+			          	</div>
+			           	<div class="help right" title="고객센터 연락처">
+					        <div id="btnEsec" style="display:none; height:40px; line-height:58px" title="전자증권 개발지원 바로가기"><a href="https://e-securities.ksd.or.kr" target="_blank" style="font-size:19px; font-weight:bold; color:#000">전자증권 개발지원 바로가기</a></div>
+			   				<div id="grpEsec"><span>고객상담센터</span><strong>1577-6600</strong></div>
+					        <p>평일 09:00~18:00 (토,일,공휴일은 휴무)</p>
+					    </div>
+			        </div>
+
+		          <div class="right">
+		          	<ul class="link">
+		                <!-- 직접 호출이 아닌 KSD 홈페이지를 통해 표시되도록 변경(2024-05-17 작업의뢰)
+		                     <li><a href="javascript:openLayer($('#privacy'))" title="개인정보 처리방침 팝업열림"><b>개인정보 처리방침</b></a></li> 
+		                		 <li><a href="javascript:openLayer($('#info'))" title="신용정보 활용체제 팝업열림">신용정보 활용체제</a></li>
+		                -->
+		                <li><a href="javascript:openPopupOld('https://www.ksd.or.kr/ko/service-center/privacy/privacy-policy')" title="개인정보 처리방침 팝업열림"><b>개인정보 처리방침</b></a></li>
+		                <li><a href="javascript:openPopupOld('https://www.ksd.or.kr/ko/service-center/privacy/credit-policy')" title="신용정보 활용체제 팝업열림">신용정보 활용체제</a></li>
+		                
+		                <!-- [CS]CSR 2022-BCM-0004] 이용약관 개정(22.04.1)
+		                <li><a href="javascript:openLayer($('#terms'))" title="이용자약관 팝업열림">이용자약관</a></li>-->
+		                <li><a href="javascript:openLayerUserClause()" title="예탁결제정보통신망 이용약관 팝업열림">예탁결제정보통신망 이용약관</a></li>
+		                <!-- [CE]CSR 2022-BCM-0004] -->
+		                
+		                <!-- [CS]CSR 2022-BCM-0010] 금융거래약관 개정(22.06.1)
+		                <li><a href="javascript:openLayer($('#electrade'))" title="전자금융거래 이용약관 팝업열림">전자금융거래 이용약관</a></li>-->
+		                <li><a href="javascript:openLayerElecTrClause()" title="전자금융거래 이용약관 팝업열림">전자금융거래 이용약관</a></li>
+		                <!-- [CE]CSR 2022-BCM-0010] -->
+		            </ul>
+	            <div class="address">
+	            	<div>
+	            		<p>부산광역시 남구 문현금융로 40 부산국제금융센터 (우편번호) 48400<br>COPYRIGHT (c) 2019. KOREA SECURITIES DEPOSITORY. ALL RIGHTS RESERVED</p>
+	            	</div>
+	            	<div id="grp_familySite" class="family_site">
+						<button id="btn_familySite" type="button" class="">
+						<span>관련사이트</span>
+						<i id="tbx_familySiteIcon">열기</i>
+						</button>
+						<ul id="gen_footRefSite" class="list_family">
+							<li><a href="http://www.ksd.or.kr" target="_blank" title="새창열림">한국예탁결제원</a></li>
+							<li><a href="https://evote.ksd.or.kr" target="_blank" title="새창열림">전자투표 K - eVote</a></li>
+							<li><a href="http://seibro.or.kr" target="_blank" title="새창열림">SEIBro 증권정보포털</a></li>
+							<li><a href="https://www.crowdnet.or.kr" target="_blank" title="새창열림">크라우드넷</a></li>
+							<li><a href="http://museum.ksd.or.kr" target="_blank" title="새창열림">증권박물관</a></li>
+						</ul>
+					</div>
+	              </div>
+	              <!-- address -->
+          	</div>
+      	</div>
+	</div>
+	<div id="___iframeSiren__div" style="width: 0px; height: 0px; visibility: hidden;">
+	<iframe frameborder="0" src="" id="__iframeSiren__" name="__iframeSiren__" scrolling="no" style="width:0; height:0"></iframe>
+	</div>
+</div>
+        <!-- //foot -->
+    </div>
+
+    <!-- //이용자약관 -->
+<!-- //[CSR 2022-BCM-0004] 22.04.1 개정 전 이용자약관 -->
+<div class="pop_wrap" id="terms">
+	<div class="pop">
+		<div class="tit_pop_wrap">
+			<!--<h2>이용자약관</h2>-->
+			<h2>이용자약관(2022.4.1. 개정 전)</h2>
+			<a href="javascript:" class="btn_pop_close" title="닫기"></a>
+		</div>
+		<div class="pop_content type3" style="width: 880px">
+			<div class="tit_wrap">
+				<h3>이용자약관</h3>
+			</div>
+			<div class="terms_wrap" style="height: 573px;">
+				<p class="dep1 mt0">제1조 (목적)</p>
+				<p class="pt0">
+					본 약관은 한국예탁결제원(이하 “예탁결제원”)이
+					전자적업무처리를위한시스템(이하 “예탁결제정보통신망”)을 통하여 일반회원에게 제공하는 서비스의 이용과 관련한 제반사항을
+					규정함을 목적으로 합니다.
+				</p>
+				<p class="dep1">제2조 (용어의 정의) 본 약관에서 사용하는 용어의 정의는 다음과 같습니다.</p>
+				<ol class="pl12">
+					<li>일반회원 : 일반회원(이하 “회원”)이라 함은 본 약관에 동의하여 시스템 이용계약을 체결한 자를
+						말합니다.</li>
+					<li>아이디 : 회원의 식별과 시스템 이용을 위해서 회원이 선정한 문자나 숫 자 혹은 그 조합을 말합니다.</li>
+					<li>비밀번호 : 회원과 아이디가 일치하는지 확인하고, 회원의 통신상 비밀보호를 위하여 회원이 선정한 문자와
+						숫자의 조합을 말합니다.</li>
+					<li>회원탈퇴 : 회원의 의사표시로 시스템 이용계약이 종료된 상태를 말합니다.</li>
+				</ol>
+				<p class="dep1">제3조 (약관의 효력 및 변경)</p>
+				<ol class="pl12">
+					<li>본 약관은 예탁결제원이 그 내용을 시스템을 통해 게시하고, 회원이 이에 동의함으로써 효력이 발생합니다.</li>
+					<li>예탁결제원은 합리적인 사유가 발생할 경우 약관규제에 관한 법률, 개인정보보호법, 정보통신망이용촉진 및
+						정보보호등에관한법률 등 관계법령을 위반하지 않는 범위 내에서 본 약관을 변경할 수 있습니다.</li>
+					<li>예탁결제원이 본 약관을 변경할 경우 적용일자, 변경사유, 변경 전·후의 내용을 변경약관 적용일 7일전부터
+						적용일 전일까지 시스템을 통해 공지합니다. 단, 변경내용이 회원에게 불리할 경우에는 적용일 30일 전부터 적용일
+						전일까지 공지합니다.</li>
+					<li>제2항, 제3항에 의하여 변경된 약관은 변경이전에 가입한 회원에게도 동일하게 적용됩니다. 만약 적용일
+						이후에도 시스템을 계속하여 이용할 경우 변경 약관에 동의한 것으로 간주합니다. 다만, 변경약관에 이의가 있는 회원은
+						언제든지 회원탈퇴를 요청할 수 있습니다.</li>
+				</ol>
+				<p class="dep1">제4조 (이용계약의 성립)</p>
+				<ol class="pl12">
+					<li>회원이 되고자 하는 자(이하 “신청자”)는 본 약관에 동의하고, 시스템 등록절차에 따라 회원가입신청서에
+						필수입력사항을 기재하여 회원가입신청을 합니다.</li>
+					<li>이용계약은 회원가입신청에 대한 예탁결제원의 승낙이 신청자에게 도달한 때에 성립합니다.</li>
+					<li>예탁결제원은 신청자의 회원가입신청이 다음 각 호에 해당하는 경우 이를 승낙하지 아니할 수 있습니다.</li>
+					<ul>
+						<li>• 타인의 주민번호 또는 기타 정보로 가입을 신청한 경우</li>
+						<li>• 회원가입신청서의 필수입력사항에 허위기재, 기재누락 또는 오기가 있는 경우</li>
+						<li>• 범죄목적으로 가입을 신청한 경우</li>
+						<li>• 기타 예탁결제원이 정한 회원가입신청요건이 미비된 경우</li>
+					</ul>
+				</ol>
+				<p class="dep1">제5조 (회원탈퇴 및 회원자격상실)</p>
+				<ol class="pl12">
+					<li>회원은 언제든지 이용계약을 해지하여 회원탈퇴를 요청할 수 있으며, 예탁결제원은 요청 받은 즉시 회원등록
+						말소를 위한 절차를 이행합니다.</li>
+					<li>예탁결제원은 다음 각 호에 해당하는 경우 회원의 자격을 제한, 정지 또는 상실시킬 수 있습니다.</li>
+					<li>제4조 제3항 각호의 사유가 있음이 발견된 때</li>
+					<li>다른 회원의 시스템 이용을 방해하거나 그 정보를 도용하였을 때</li>
+					<li>기타 관련법령 등을 기준으로 사회질서 및 미풍양속에 반할 우려가 있다고 명백히 인정될 경우</li>
+				</ol>
+				<p class="dep1">제6조 (시스템 이용의 중지 등) 예탁결제원은 다음 각 호에 해당하는 경우 시스템 이용을
+					제한 또는 중지 할 수 있습니다.</p>
+				<ol class="pl12">
+					<li>시스템 관련 시설의 보수, 점검 등이 필요한 경우</li>
+					<li>기타 불가항력적인 상황이 발생한 경우</li>
+				</ol>
+				<p class="dep1">제7조 (회원정보 사용에 대한 동의)</p>
+				<ol class="pl12">
+					<li>회원의 정보는 개인정보보호법에 의해 보호됩니다.</li>
+					<li>회원의 정보는 다음과 같이 사용, 관리, 보호됩니다.</li>
+					<li>개인정보의 사용 : 예탁결제원은 제10조 제2항 단서에서 정하는 경우 외에는 시스템 이용과 관련해서
+						수집된 회원의 신상정보를 본인의 승낙 없이 제3자에게 누설, 배포하지 않습니다.</li>
+					<li>개인정보의 관리 : 회원은 개인정보의 보호 및 관리를 위하여 ‘정보변경’에 접속하여 수시로 개인정보를
+						수정, 삭제할 수 있습니다.</li>
+					<li>개인정보의 보호 : 회원의 정보는 오직 회원만이 열람, 수정, 삭제 할 수 있으며 이는 전적으로 회원의
+						아이디와 비밀번호, 이메일주소에 의해 관리됩니다.</li>
+					<li>회원이 본 약관에 따라 회원가입을 한 경우 회원가입신청서에 기재된 회원정보를 예탁결제원이 수집, 이용하는
+						것에 동의한 것으로 간주합니다.</li>
+				</ol>
+				<p class="dep1">제8조 (서비스 내용)</p>
+				<ol class="pl12">
+					<li>예탁결제원이 시스템을 통하여 제공하는 서비스는 다음 각 호와 같으며, 서비스 내용이 추가, 변경 또는
+						삭제될 경우 시스템을 통해 적절한 방법으로 공지합니다.</li>
+					<li>공지사항 등 게시판을 이용하여 회원의 의견을 게시</li>
+					<li>기타 수시로 실시하는 설문조사나 이벤트참여 등</li>
+					<li>예탁결제원은 자체적으로 생산한 자료나 다른 기관의 협조의뢰를 받은 공익성이 있는 홍보물을 시스템에
+						게시하거나 이메일로 서비스할 수 있습니다.</li>
+				</ol>
+				<p class="dep1">제9조 (게시물의 저작권 등)</p>
+				<ol class="pl12">
+					<li>게시물에 대한 권리와 책임은 게시자에게 있으며, 누구든지 게시자의 동의 없이 이를 영리목적으로 사용할 수
+						없습니다.</li>
+					<li>예탁결제원은 게시된 내용을 사전 통지없이 편집, 이동할 수 있는 권리를 보유하며, 게시된 내용이 다음
+						각호에 해당한다고 판단되는 경우 사전 통지없이 삭제할 수 있습니다.</li>
+					<li>다른 회원 또는 제3자의 명예를 손상시키는 내용인 경우</li>
+					<li>다른 회원 또는 제3자의 저작권 등 권리를 침해하는 경우</li>
+					<li>상업적 광고물 기타 게시판의 성격에 부합하지 않는 게시물인 경우</li>
+				</ol>
+				<p class="dep1">제10조 (예탁결제원의 의무)</p>
+				<ol class="pl12">
+					<li>예탁결제원은 법령과 본 약관이 금지하거나 공서양속에 반하는 행위를 하지 않으며, 본 약관이 정하는 바에
+						따라 지속적이고 안정적으로 시스템을 이용할 수 있도록 노력합니다.</li>
+					<li>예탁결제원은 시스템 이용과 관련해서 수집된 회원의 정보를 본인의 승낙 없이 제3자에게 누설, 배포하지
+						않습니다. 다만 다음 각 호에 해당하는 경우에는 예외로 합니다.</li>
+					<li>전기통신기본법에 의한 국가기관의 요구가 있는 경우</li>
+					<li>범죄에 대한 수사상의 목적으로 수사기관이 적법하고 정당하게 요청한 경우</li>
+					<li>정보통신윤리위원회의 요청이 있는 경우</li>
+					<li>기타 관계법령에서 정한 절차에 따른 요청이 있는 경우</li>
+					<li>회원이 홈페이지에 제공한 개인정보를 스스로 공개한 경우</li>
+					<li>예탁결제원은 회원이 시스템을 이용함에 있어 예탁결제원의 고의 또는 중대한 과실로 인하여 입은 손해를
+						배상할 책임이 있습니다.</li>
+				</ol>
+				<p class="dep1">제11조 (회원의 의무)</p>
+				<ol class="pl12">
+					<li>예탁결제원이 관계법령에 의하여 책임을 지는 경우를 제외하고, 회원의 아이디 및 비밀번호에 관한 관리책임은
+						각 회원에게 있습니다.</li>
+					<li>회원은 자신의 아이디 및 비밀번호를 타인에게 누설하여서는 안되며, 타인이 부정사용하고 있는 사실을 발견한
+						경우 즉시 예탁결제원에 신고하여야 합니다.</li>
+					<li>회원은 예탁결제원의 사전 승낙 없이 서비스를 이용하여 어떠한 영리행위도 할 수 없습니다.</li>
+					<li>회원은 시스템 이용 종료 시 로그아웃을 하여 타인의 부정사용을 예방하여야 합니다.</li>
+					<li>회원은 자신의 귀책사유로 예탁결제원이나 타인이 손해를 입은 경우 이를 배상할 책임이 있습니다.</li>
+				</ol>
+				<p class="dep1">제12조 (면책조항)</p>
+				<ol class="pl12">
+					<li>예탁결제원은 회원이나 제3자에 의하여 표출된 의견을 승인 또는 반대하거나 수정하지 않으며, 회원 또는
+						제3자가 시스템에 게시한 정보, 자료 등의 신뢰성, 정확성 등에 관하여 책임을 지지 않습니다.</li>
+					<li>예탁결제원은 회원이 시스템을 통해 제공되는 정보에 의존하여 입은 손해에 대하여 어떠한 경우에도 책임을
+						지지 않습니다.</li>
+					<li>예탁결제원은 시스템 이용과 관련하여 회원에게 발생한 손해 중 회원의 귀책사유에 의한 손해에 대하여 책임을
+						부담하지 아니합니다.</li>
+				</ol>
+				<p class="dep1">제13조 (양도금지)</p>
+				<p class="pt0">
+					회원은 시스템의 이용권한, 기타 이용계약상 지위를 타인에게 양도, 	증여할 수 없습니다.
+				</p>
+				<p class="dep1">제14조 (준거법 및 재판관할)</p>
+				<p class="pt0">
+					예탁결제원과 회원 사이에 발생한 시스템이용에 관한 분쟁에
+					대하여는 대한민국법을 적용하며, 분쟁으로 인한 소는 민사소송법상 관할법원에 제기합니다.
+				</p>
+				<p class="dep1">제15조 (약관 외 준칙)</p>
+				<p class="pt0">
+					 본 약관에 명시되지 않은 사항은 전기통신기본법, 전기통신사업법,
+					정보통신윤리위원회심의규정, 정보통신 윤리강령, 프로그램보호법 및 기타 관련 법령의 규정에 의합니다.
+				</p>
+				<p class="dep1">부 칙</p>
+				<p class="pt0 pb12">(시행일) 본 약관은 2011년 9월 30일부터 시행됩니다.</p>
+			</div>
+			<div class="btn_wrap">
+				<a href="javascript:" class="btn_big gray">닫기</a>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<!-- //[CS[CSR 2022-BCM-0004] 22.04.1 개정 약관 추가 -->
+<div class="pop_wrap" id="terms_after_20220401">
+	<div class="pop">
+		<div class="tit_pop_wrap">
+			<!--<h2>이용자약관</h2>-->
+			<h2>예탁결제정보통신망 이용약관(2022.4.1. 개정)</h2>
+			<a href="javascript:" class="btn_pop_close" title="닫기"></a>
+		</div>
+		<div class="pop_content type3" style="width: 880px">
+			<div class="tit_wrap">
+				<!--<h3>이용자약관</h3>-->
+				<h3>예탁결제정보통신망 이용약관</h3>
+			</div>
+			<div class="terms_wrap" style="height: 573px;">
+				<p class="dep1 mt0">제1조 (목적) 
+					<a class="pt0" style="font-weight:normal">
+						이 약관은 한국예탁결제원(이하 “예탁결제원”)이 전자적 업무 처리를 위한 시스템(이하 “예탁결제정보통신망”)을 통하여 일반회원에게 제공하는 서비스 관련 사항을 규정함을 목적으로 합니다.
+					</a>
+				</p>
+				
+				<p class="dep1">제2 (용어의 정의) 
+					<a class="pt0" style="font-weight:normal">
+						이 약관에서 사용하는 용어의 정의는 다음과 같습니다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">1. 일반회원(이하 “회원”)“이란 이 약관에 동의하여 예탁결제정보통신망 이용계약을 체결한 자를 말합니다.</dt>
+						<dt style="margin-bottom:8px">2. 아이디“란 회원의 식별과 예탁결제정보통신망 이용을 위해서 회원이 선정한 문자나 숫자 혹은 그 조합을 말합니다.</dt>
+						<dt style="margin-bottom:8px">3. 비밀번호“란 회원과 아이디가 일치하는지 확인하고, 회원의 통신상 비밀보호를 위하여 회원이 선정한 문자와 숫자의 조합을 말합니다.</dt>
+						<dt style="margin-bottom:8px">4. 회원탈퇴“란 회원의 의사표시로 예탁결제정보통신망 이용계약이 종료된 상태를 말합니다.</dt>
+					</dl>
+				<p></p>
+				
+				<p class="dep1">제3조 (약관의 효력 및 변경) 
+					<a class="pt0" style="font-weight:normal">
+						이 약관에서 사용하는 용어의 정의는 다음과 같습니다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">① 이 약관은 예탁결제원이 그 내용을 예탁결제정보통신망을 통해 게시하고, 회원이 이에 동의함으로써 효력이 발생합니다.</dt>
+						<dt style="margin-bottom:8px">② 예탁결제원은 필요한 경우「약관의 규제에 관한 법률」,「개인정보 보호법」,「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 등 </dt>
+							<dt style="margin-bottom:8px;margin-left:18px">관계법령을 위반하지 않는 범위 내에서 이 약관을 변경할 수 있습니다.</dt>
+						<dt style="margin-bottom:8px">③ 예탁결제원이 이 약관을 변경할 경우 그 내용을 변경약관 적용일 7일 전부터 적용일까지 예탁결제정보통신망을 통해 게시합니다. </dt>
+							<dt style="margin-bottom:8px;margin-left:18px">단, 변경내용이 회원에게 불리할 경우에는 적용일 30일 전부터 적용일까지 예탁결제정보통신망을 통해 게시하고 제14조제1항에서</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">정하는 방법으로 회원에게 통지합니다.</dt>
+						<dt style="margin-bottom:8px">④ 제2항, 제3항에 의하여 변경된 약관은 변경 이전에 가입한 회원에게도 동일하게 적용됩니다. 만약 적용일 이후에도</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">예탁결제정보통신망을 계속하여 이용할 경우 변경 약관에 동의한 것으로 간주됩니다. 다만, 변경 약관에 이의가 있는 회원은</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">언제든지 회원 탈퇴를 요청할 수 있습니다.</dt>
+					</dl>
+				<p></p>
+												
+				<p class="dep1">제4조 (약관 외 준칙) 
+					<a class="pt0" style="font-weight:normal">
+						이 약관에서 정하지 아니한 사항이나 이 약관의 해석에 관하여는「약관의 규제에 관한 법률」,「개인정보 보호법」 등 관계 법규, 예탁결제원의 관련 규정에 따릅니다.
+					</a>
+				</p>
+				
+				<p class="dep1">제5조 (이용계약의 성립) 
+					<a class="pt0" style="font-weight:normal">
+						① 회원이 되고자 하는 자(이하 “신청자”)는 이 약관에 동의하고, 회원등록절차에 따라 회원가입신청서를 제출함으로써 회원가입신청을 합니다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 이용계약은 회원가입신청에 대한 예탁결제원의 승낙이 신청자에게 도달한 때에 성립합니다.</dt>
+						<dt style="margin-bottom:8px">③ 예탁결제원은 신청자의 회원가입신청이 다음 각 호에 해당하는 경우 이를 승낙하지 아니할 수 있습니다.</dt>
+							<dd style="margin-bottom:8px">
+								<ol>
+									<li>다른 사람의 명의를 사용하여 신청한 경우</li>
+									<li>회원가입 신청서의 내용을 허위로 기재하였거나 누락하여 신청한 경우</li>
+									<li>범죄 목적으로 가입을 신청하는 것이 의심되는 경우</li>
+									<li>기타 예탁결제원이 정한 회원가입신청요건이 미비된 경우</li>
+								</ol>
+							</dd><dd>
+					</dd></dl>
+				<p></p>
+				
+				<p class="dep1">제6조 (회원탈퇴 및 자격상실) 
+					<a class="pt0" style="font-weight:normal">
+						① 회원은 언제든지 이용계약을 해지하여 회원탈퇴를 요청할 수 있으며, 예탁결제원은 요청받은 때에는 지체 없이 회원등록말소를 위한 절차를 이행합니다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 예탁결제원은 다음 각호에 해당하는 경우 회원의 자격을 제한, 정지 또는 상실시킬 수 있습니다.</dt>
+							<dd style="margin-bottom:8px">
+								<ol>
+									<li>제5조 제3항 각호의 사유가 있음이 발견된 때</li>
+									<li>다른 회원의 예탁결제정보통신망 이용을 방해하거나 그 정보를 도용하였을 때</li>
+									<li>6개월 동안 예탁결제정보통신망 이용 실적이 없는 경우</li>
+									<li>회원이 이 약관상 의무를 위반한 경우</li>
+									<li>그 밖에 예탁결제원이 필요하다고 인정하는 경우</li>
+								</ol>					
+							</dd>
+					</dl>
+				<p></p>
+				
+				<p class="dep1">제7조 (시스템 이용의 중지 등) 
+					<a class="pt0" style="font-weight:normal">
+						① 예탁결제원은 컴퓨터 등 정보통신설비의 보수점검ㆍ교체 및 고장, 통신의 두절 또는 운영상 상당한 이유가 있는 경우 서비스의 전부 또는 일부를 제한하거나 중지할 수 있습니다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 전항에 따라 서비스를 제한 또는 중지하는 경우에는 제14조에서 정한 방법으로 사전 공지합니다. 다만, 예탁결제원의 과실이 없는</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">천재지변 등의 사유로 불가피한 경우 사후 공지할 수 있습니다.</dt>
+					</dl>
+				<p></p>
+				
+				<p class="dep1">제8조 (서비스 내용) 
+					<a class="pt0" style="font-weight:normal">
+						① 예탁결제원이 제공하는 서비스는 다음 각 호와 같으며, 관계 법규에 따라 서비스의 내용이 추가·변경·제한될 수 있으며, 이 경우 예탁결제정보통신망을 통해 공지합니다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px"></dt>
+							<dd style="margin-bottom:8px">
+								<ol>
+									<li>전자금융거래 이용약관에 따른 전자금융거래 참가 신청 등 </li>
+									<li>공지사항 등 게시판을 이용하여 회원의 의견을 게시</li>
+								  <li>기타 수시로 실시하는 설문조사나 이벤트 참여 등</li>
+								</ol>					
+							</dd>
+						<dt style="margin-bottom:8px">② 예탁결제원은 자체적으로 생산한 자료나 다른 기관의 협조의뢰를 받은 공익성이 있는 홍보물을 예탁결제정보통신망에 게시하거나</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">이메일로 서비스할 수 있습니다.</dt>
+					</dl>
+				<p></p>
+								
+				<p class="dep1">제9조 (게시물의 저작권 등) 
+					<a class="pt0" style="font-weight:normal">
+						① 게시물에 대한 권리와 책임은 게시자에게 있으며, 누구든지 게시자의 동의 없이 이를 영리 목적으로 사용할 수 없습니다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 예탁결제원은 게시된 내용을 사전 통지없이 편집, 이동할 수 있는 권리를 보유하며, 게시된 내용이 다음 각호에 해당한다고 판단되는</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">경우 사전 통지없이 삭제할 수 있습니다.</dt>
+							<dd style="margin-bottom:8px">
+								<ol>
+									<li>다른 회원 또는 제3자의 명예를 손상시키는 내용인 경우</li>
+									<li>다른 회원 또는 제3자의 저작권 등 권리를 침해하는 경우</li>
+									<li>상업적 광고물 기타 게시판의 성격에 부합하지 않는 게시물인 경우</li>
+								</ol>					
+							</dd>
+						<dt style="margin-bottom:8px">③ 예탁결제원이 작성한 게시물에 대한 저작권은 예탁결제원에 귀속합니다.</dt>
+					</dl>
+				<p></p>
+								
+				<p class="dep1">제10조 (예탁결제원의 의무) 
+					<a class="pt0" style="font-weight:normal">
+						① 예탁결제원은 이 약관이 정하는 바에 따라 지속적이고 안정적으로 예탁결제정보통신망을 이용할 수 있도록 노력합니다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 예탁결제원은 예탁결제정보통신망 이용과 관련해서 수집된 회원의 정보를 본인의 승낙 없이 제3자에게 누설, 배포하지 않습니다.</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">다만 다음 각 호에 해당하는 경우에는 예외로 합니다.</dt>
+							<dd style="margin-bottom:8px">
+								<ol>
+									<li>관계 법령에 의하여 수사상의 목적으로 관계기관으로부터 요구가 있는 경우</li>
+									<li>방송통신심의위원회의 요청이 있는 경우</li>
+									<li>그밖에 관계 법령에서 정한 절차에 따른 요청이 있는 경우</li>
+									<li>회원이 예탁결제정보통신망에 제공한 개인정보를 스스로 공개한 경우</li>
+								</ol>					
+							</dd>
+						<dt style="margin-bottom:8px">③ 예탁결제원은 회원이 예탁결제정보통신망을 이용함에 있어 예탁결제원의 고의 또는 중대한 과실로 인하여 입은 손해를 배상할</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">책임이 있습니다.</dt>
+					</dl>
+				<p></p>
+								
+				<p class="dep1">제11조 (회원의 의무) 
+					<a class="pt0" style="font-weight:normal">
+						① 예탁결제원이 관계 법령에 의하여 책임을 지는 경우를 제외하고, 회원의 아이디 및 비밀번호에 관한 관리책임은 각 회원에게 있습니다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 회원은 자신의 아이디 및 비밀번호를 타인에게 누설하여서는 안되며, 타인이 부정사용하고 있는 사실을 발견한 경우 즉시</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">예탁결제원에 신고하여야 합니다.</dt>
+						<dt style="margin-bottom:8px">③ 회원은 예탁결제원의 사전 승낙 없이 서비스를 이용하여 어떠한 영리행위도 할 수 없습니다.</dt>
+						<dt style="margin-bottom:8px">④ 회원은 예탁결제정보통신망 이용 종료 시 로그아웃을 하여 타인의 부정사용을 예방하여야 합니다.</dt>
+						<dt style="margin-bottom:8px">⑤ 회원은 자신의 귀책사유로 예탁결제원이나 타인이 손해를 입은 경우 이를 배상할 책임이 있습니다.</dt>
+					</dl>
+				<p></p>
+								
+				<p class="dep1">제12조 (양도금지) 
+					<a class="pt0" style="font-weight:normal">
+						회원은 예탁결제정보통신망의 이용권한, 기타 이용계약상 지위를 타인에게 양도, 증여할 수 없습니다.
+					</a>
+				</p>
+				
+				<p class="dep1">제13조 (면책조항) 
+					<a class="pt0" style="font-weight:normal">
+						① 예탁결제원은 회원이나 제3자에 의하여 표출된 의견을 승인 또는 반대하거나 수정하지 않으며, 
+						회원 또는 제3자가 예탁결제정보통신망에 게시한 정보, 자료 등의 신뢰성, 정확성 등에 관하여 책임을 지지 않습니다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 예탁결제원은 회원이 예탁결제정보통신망을 통해 제공되는 정보, 자료 등에 의존하여 입은 손실이나 손해에 대하여 어떠한 경우에도</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">책임을 지지 않습니다.</dt>
+						<dt style="margin-bottom:8px">③ 예탁결제원은 회원 또는 그 밖에 이해관계 있는 자에게 발생한 손해가 다음 각 호의 어느 하나에 해당하는 경우에는 고의 또는</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">과실이 없는 한 그 손해에 대하여 책임을 지지 않습니다.</dt>
+							<dd style="margin-bottom:8px">
+								<ol>
+									<li>예탁결제원이 회원이 제공한 정보의 진정성을 신뢰하고, 그에 따라 서비스를 제공함으로써 발생한 손해</li>
+									<li>회원이 이 약관에 따른 의무를 이행하지 않아 발생한 손해</li>
+									<li>예탁결제원이 제7조에 따라 서비스의 이용 및 제공을 제한함에 따라 발생한 손해</li>
+									<li>천재지변이나 그 밖의 불가항력 등 예탁결제원의 책임 없는 사유로 인하여 발생한 손해</li>
+								</ol>					
+							</dd>
+					</dl>
+				<p></p>			
+				
+				<p class="dep1">제14조 (회원에 대한 통지) 
+					<a class="pt0" style="font-weight:normal">
+						① 예탁결제원이 회원에게 통지를 하는 경우에는 전자우편, 전화 또는 문자메시지의 방법으로 통지할 수 있습니다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 예탁결제원이 다수의 회원에게 통지를 하는 경우에는 제1항의 방법을 갈음하여 예탁결제정보통신망에 게시하는 방법으로 할 수</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">있습니다. 다만, 회원에게 중대한 영향을 미치는 사항에 대하여는 제1항에 따라 통지합니다.</dt>
+					</dl>
+				<p></p>
+								
+				<p class="dep1">제15조 (준거법 및 재판관할) 
+					<a class="pt0" style="font-weight:normal">
+						예탁결제원과 회원 사이에 발생한 예탁결제정보통신망 이용에 관한 분쟁에 대하여는 대한민국 법을 적용하며, 
+						이 약관에 관계된 소송의 관할법원은 예탁결제원 부산 본사 소재지를 관할하는 법원에 제기하여야 합니다.
+					</a>
+				</p>
+				
+				<br>
+				<center><p class="dep1">부 칙</p></center>
+				<br><br>
+				
+				<dl>
+					<dt style="margin-bottom:8px">① 이 약관은 2022년 4월 1일부터 시행합니다.</dt>
+					<dt style="margin-bottom:8px">② (경과조치) 이 약관 시행일 이전에 처리된 사항은 이 약관에 의하여 처리된 것으로 봅니다.</dt>
+				</dl>
+			</div>
+			<div class="btn_wrap">
+				<a href="javascript:" class="btn_big gray">닫기</a>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- //[CE[CSR 2022-BCM-0004] 22.04.1 개정 이용자약관 -->
+
+
+<!-- //[CS][CSR 2022-BCM-0010] 전자금융거래 이용약관 개정(22.6.1) 이전 -->
+<div class="pop_wrap" id="electrade">
+	<div class="pop">
+		<div class="tit_pop_wrap">
+			<h2>전자금융거래 이용약관</h2>
+			<a href="javascript:" class="btn_pop_close" title="닫기"></a>
+		</div>
+		<div class="pop_content type3" style="width: 880px">
+			<div class="tit_wrap">
+				<h3>전자금융거래 이용약관</h3>
+			</div>
+			<div class="terms_wrap" style="height: 573px;">
+				<p class="dep1 mt0">제1조(목적)</p>
+				<p class="pt0">
+					이 약관은 한국예탁결제원(이하 “예탁결제원”이라 한다)이 전자적 장치를
+					통하여 제공하는 업무처리시스템을 이용한 전자금융거래에 관한 기본적인 사항을 정함으로써, 예탁결제원과 이용자 상호간의
+					권리, 의무관계를 합리적으로 정함을 목적으로 한다.
+				</p>
+				<p class="dep1">제2조(정의)</p>
+				<ol class="pl12">
+					<li>이 약관에서 사용하는 용어의 정의는 다음과 같다.</li>
+					<li>“전자금융거래”라 함은 예탁결제원이 전자적 장치를 통하여 제공하는
+						업무처리시스템(이하“예탁결제정보통신망”이라 한다)을 통해 이용자가 예탁결제원의 종사자와 직접 대면하거나 의사소통을 하지
+						아니하고 자동화된 방식으로 이를 이용하는 거래를 말한다.</li>
+					<li>“이용자”라 함은 예탁결제원에 업무참가 신청을 한 후 승인을 받고(이하 “전자금융거래계약”이라 한다),
+						예탁결제원의 업무규정에 따라 전자금융거래를 이용하는 자를 말한다.</li>
+					<li>“전자적 장치”라 함은 전자금융거래에 이용되는 장치로서 예탁결제원이 제공하거나 이용자가 준비한 개인용
+						컴퓨터, 전용회선, 소프트웨어 등을 말한다.</li>
+					<li>“전자문서”라 함은 전자거래기본법 제2조 제1호의 규정에 따라 작성, 송신,수신 또는 저장된 정보를
+						말한다.</li>
+					<li>“접속매체”라 함은 전자금융거래에 있어서 이용자가 거래지시를 하거나 거래내용의 진실성과 정확성을 확보하기
+						위하여 사용되는 다음 각 목의 어느 하나에 해당하는 수단 또는 정보를 말한다.
+						<ol type="a">
+							<li>전자식 카드</li>
+							<li>전자서명법 제15조에 따라 예탁결제원이 대행 발급한 공동인증서</li>
+							<li>예탁결제원에 등록된 일회용비밀번호 생성기(OTP)</li>
+							<li>가목 내지 다목의 수단이나 정보를 사용하는데 필요한 비밀번호</li>
+						</ol>
+					</li>
+					<li>“거래지시 등”이라 함은 이용자가 전자금융거래 약관에 따라 예탁결제원에 전자금융거래의 처리를 요구하는
+						것을 말한다.</li>
+					<li>“오류”라 함은 이용자의 고의 또는 과실 없이 전자금융거래가 전자금융거래계약, 이용자의 거래지시 또는
+						예탁결제원의 거래지시에 따라 이행되지 아니한 경우를 말한다.</li>
+					<li>이 약관에서 별도로 정하지 아니한 용어의 정의는 전자금융거래법 및 전자금융거래법 시행령, 금융감독위원회의
+						전자금융감독규정 및 전자금융감독규정 시행세칙에서 정하는 바에 따른다.</li>
+				</ol>
+				<p class="dep1">제3조(약관의 적용범위)</p>
+				<p class="pt0">본 약관은 시스템을 통해 처리되는 예탁결제원 업무 중
+					전자금융거래법상 전자금융거래에 해당하는 업무에 적용된다.</p>
+				<p class="dep1">제4조(전자금융거래계약의 체결 및 해지)</p>
+				<ol class="pl12">
+					<li>이용자가 전자금융거래를 하고자 하는 경우에는 사전에 예탁결제원의 업무 규정에 따라 전자금융거래계약을
+						체결하여야 한다.</li>
+					<li>예탁결제원은 제1항의 규정에 의한 전자금융거래계약을 체결함에 있어 이용자에게 약관을 명시하여야 하며,
+						이용자의 요청이 있는 경우 다음 각 호의 어느 하나에 해당하는 방법으로 이용자에게 약관을 교부하여야 한다.
+						<ol type="a">
+							<li>직접교부</li>
+							<li>전자문서의 전송(전자우편을 이용한 전송을 포함한다)</li>
+							<li>모사전송</li>
+							<li>우편</li>
+						</ol>
+					</li>
+					<li>예탁결제원은 제1항의 규정에 의한 전자금융거래계약을 체결함에 있어 이용자가 약관의 내용에 대한 설명을
+						요청하는 경우 다음 각 호의 어느 하나에 해당하는 방법으로 이용자에게 약관의 중요내용을 설명하여야 한다.
+						<ol type="a">
+							<li>약관의 중요내용을 이용자에게 직접 설명</li>
+							<li>약관의 중요내용에 대한 설명을 전자적 장치를 통하여 이용자가 알기 쉽게 표시하고 이용자로부터 해당
+								내용을 충분히 인지하였다는 의사표시를 전자적 장치를 통하여 수령</li>
+						</ol>
+					</li>
+				</ol>
+				
+				<p>• 전자금융거래계약을 해지하고자 할 때에는 이용자 본인이 서면 또는 해당 전자적 장치 사용 등
+					해당서비스별로 정하는 방법에 따라 예탁결제원에 해지신청을 하여야 한다.</p>
+				<p class="dep1">제5조(삭제 2008.3.6)</p>
+				<p class="dep1">제6조(삭제 2008.3.6)</p>
+				<p class="dep1">제7조(접속매체의 발급 및 등록)</p>
+				<ol class="pl12">
+					<li>예탁결제원이 접속매체를 발급하는 때에는 본인임을 확인한 후에 발급한다.</li>
+					<li>제1항의 규정에도 불구하고 예탁결제원은 접속매체의 갱신 또는 대체발급 등을 위하여 이용자의 동의를 얻는
+						경우로서 다음 각 호에 해당하는 경우에는 이용자의 신청이나 본인확인이 없는 때에도 발급할 수 있다.</li>
+					<li>갱신 또는 대체발급 예정일전 6월 이내에 사용된 적이 없는 접속매체에 대하여 이용자로부터 갱신 또는
+						대체발급에 대한 서면(전자서명법 제2조 제3호의 규정에 따른 전자서명(이하 “전자서명”이라 한다)이 있는
+						전자문서를 포함한다) 동의를 얻는 경우</li>
+					<li>갱신 또는 대체발급 예정일전 6월 이내에 사용된 적이 있는 접속매체의 경우에는 그 예정일부터 1월 이전에
+						이용자에게 발급 예정사실을 알린 후 20일 이내에 이용자로부터 이의제기가 없는 경우</li>
+					<li>이용자는 전자금융거래계약을 체결하고 거래비밀번호 등을 전자적 장치를 통하여 직접 등록할 경우에는 계약일
+						포함 3영업일 이내에 등록하여야 한다.</li>
+				</ol>
+				<p class="dep1">제8조(접속매체의 발급 제한)</p>
+				<p class="pt0">예탁결제원은 이용자의 업무 성격 및 접속매체 관리 능력 등을
+					고려하여 접속매체의 발급을 제한할 수 있다.</p>
+				<p class="dep1">제9조(접속매체의 사용 등)</p>
+				<ol class="pl12">
+					<li>이용자는 이 약관의 적용대상인 전자금융거래에 있어 전자서명법 제15조에 따라 예탁결제원이 대행 발급한
+						공동인증서 또는 예탁결제원에서 수령한 접속매체를 사용하여야 한다.</li>
+					<li>이용자는 접속매체를 수령한 후 제7조 제3항에 따라 비밀번호를 등록하고 수시로 비밀번호를 변경하여야
+						한다.</li>
+					<li>이용자가 비밀번호를 모르는 경우에는 예탁결제원에 직접 방문 후 재설정할 수 있다. 다만, 부득이 이용자
+						본인이 방문할 수 없을 때에는 대리인의 예탁결제원 소정의 양식에 따른 위임장 제출로 본인의 방문에 갈음할 수 있다.</li>
+					<li>이용자는 접속매체를 제3자에게 양도, 양수하여서는 아니된다.</li>
+					<li>이용자는 접속매체의 비밀번호를 제3자에게 누설하여서는 아니 되며, 접속매체의 분실, 도용을 방지하기
+						위하여 충분한 주의를 기울여야 한다.</li>
+				</ol>
+				<p class="dep1">제10조(이용시간 등)</p>
+				<ol class="pl12">
+					<li>이용자는 예탁결제원이 정한 이용시간 이내에서 전자금융거래를 이용할 수 있다.</li>
+					<li>예탁결제원은 제1항의 규정에 의한 이용시간을 영업점 또는 전자적 장치에 게시하며, 이를 변경하고자 하는
+						경우 영업점 또는 전자적 장치에 변경 예정일 14일 전부터 1월 이상 비치 또는 게시한다. 다만, 시스템 장애복구,
+						프로그램의 긴급한 보수, 외부요인 등으로 인하여 이용시간이 변경된 경우에는 그러하지 아니하다.</li>
+					<li>전산시스템 유지 및 보수로 인하여 전자금융거래 이용이 불가능할 경우 예탁결제원은 동 사실을 7일 전에
+						영업점 또는 전자적 장치에 게시한다.</li>
+				</ol>
+				<p class="dep1">제11조(삭제 2009.12.31)</p>
+				<p class="dep1">제12조(거래의 성립)</p>
+				<p class="pt0">이용자가 전자금융거래를 이용함에 있어 거래의 성립 시기는 해당
+					업무에 대한 예탁결제원의 업무규정에 따른다.</p>
+				<p class="dep1">제13조(거래내용의 확인)</p>
+				<ol class="pl12">
+					<li>예탁결제원은 이용자가 전자금융거래에 사용하는 전자적 장치(예탁결제원과 이용자 사이에 미리 약정한 전자적
+						장치가 있는 경우에는 그 전자적 장치를 포함한다)를 통하여 거래내용을 확인할 수 있도록 한다. 이 경우 전자적 장치의
+						운영 장애, 그 밖의 사유로 거래내용을 확인하게 할 수 없는 때에는 예탁결제원은 인터넷 등을 이용하여 즉시 그 사유를
+						알리고, 그 사유가 종료된 때부터 이용자가 거래내용을 확인할 수 있도록 한다.</li>
+					<li>이용자는 거래지시와 제1항의 규정에 의한 거래내용이 일치하는지 여부를 확인하여야 한다.</li>
+					<li>이용자는 거래내용을 서면(전자문서를 제외한다. 이하 이조에서 같다.)으로 제공하여 줄 것을 예탁결제원에
+						요청할 수 있으며, 예탁결제원은 그 요청을 받은 날로부터 2주 이내에 거래내용에 관한 서면을 교부한다.</li>
+					<li>예탁결제원은 제3항의 규정에 의하여 이용자로부터 거래내용을 서면으로 제공할 것을 요청받은 경우 전자적
+						장치의 운영 장애, 그 밖의 사유로 거래내용을 제공할 수 없는 때에는 그 이용자에게 즉시 이를 알린다. 이 경우
+						거래내용에 관한 서면의 교부기간을 산정함에 있어서 전자적 장치의 운영 장애, 그 밖의 사유로 거래내용을 제공할 수 없는
+						기간은 이를 산입하지 아니한다.</li>
+				</ol>
+				<p class="dep1">제14조(거래의 제한)</p>
+				<ol class="pl12">
+					<li>다음 각 호의 1에 해당하는 경우에는 전자금융거래를 제한할 수 있다.</li>
+					<li>거래관련 비밀번호를 잘못 입력하였거나, 전자금융거래에 필요한 비밀번호를 이용자가 모르는 경우</li>
+					<li>공동인증서 유효기간이 만료되었거나 공동인증서 효력이 정지되어 재발급 받아야 하는 경우</li>
+					<li>전자금융거래에 필요한 전자적 장치 등에 장애가 발생한 때</li>
+					<li>천재지변의 사유로 인하여 이용자의 거래지시 처리가 불가능한 경우</li>
+					<li>전자금융거래법 및 관련법령 위반 등으로 거래제공이 부적합할 경우</li>
+					<li>제1항의 규정에 의하여 전자금융거래를 제한한 경우에는 이용자의 거래 시도가 있을 때 해당 전자적 장치를
+						통하여 그 사유를 알려야 한다.</li>
+				</ol>
+				<p class="dep1">제15조(오류의 정정)</p>
+				<ol class="pl12">
+					<li>이용자는 전자금융거래에 오류가 있음을 안 때에는 예탁결제원에게 이에 대한 정정을 요구할 수 있다.</li>
+					<li>예탁결제원은 제1항의 규정에 의한 오류의 정정요구를 받은 때에는 이를 즉시 조사하여 처리하며 정정요구를
+						받은 날부터 2주 이내에 그 결과를 이용자에게 통보한다.</li>
+					<li>예탁결제원이 전자금융거래에 오류가 있음을 안 때에는 이를 즉시 조사하여 처리하며, 오류가 있음을 안
+						날로부터 2주 이내에 그 결과를 이용자에게 통보한다.</li>
+				</ol>
+				<p class="dep1">제16조(예탁결제원의 책임)</p>
+				<ol class="pl12">
+					<li>예탁결제원은 접속매체의 위조나 변조로 발생한 사고, 계약체결 또는 거래지시의 전자적 전송이나 처리과정에서
+						발생한 사고로 인하여 이용자에게 손해가 발생한 경우 그 손해를 배상한다.</li>
+					<li>제1항의 규정에도 불구하고 다음 각 호의 어느 하나에 해당하는 사유로 인하여 이용자에게 발생한 손해에
+						대하여는 예탁결제원이 그 책임의 전부 또는 일부를 부담하지 아니한다.
+						<ol type="a">
+							<li>이용자가 접속매체를 제3자에게 대여하거나 사용을 위임하거나 양도 또는 담보 목적으로 제공한 경우</li>
+							<li>제3자가 권한 없이 이용자의 접속매체를 이용하여 전자금융거래를 할 수 있음을 알았거나 쉽게 알 수
+								있었음에도 불구하고 이용자가 자신의 접속매체를 누설 또는 노출하거나 방치한 경우</li>
+							<li>법인(중소기업기본법 제2조제2항에 의한 소기업을 제외한다)인 이용자에게 손해가 발생한 경우로
+								예탁결제원이 사고를 방지하기 위하여 보안절차를 수립하고 이를 철저히 준수하는 등 합리적으로 요구되는 주의의무를 다한
+								경우</li>
+							<li>천재지변, 전쟁, 테러 또는 예탁결제원의 귀책사유 없이 발생한 정전, 화재, 건물의 훼손 등
+								불가항력으로 인한 경우</li>
+						</ol>
+						<br>
+					</li>
+					<li>예탁결제원은 이용자로부터 접속매체의 분실이나 도난 등의 통지를 받은 때에는 그 때부터 제3자가 그
+						접속매체를 사용하여 이용자에게 발생한 손해를 배상한다.</li>
+					<li>예탁결제원은 제1항 내지 제3항의 규정에도 불구하고 다른 법령에 이용자에게 유리하게 적용될 수 있는
+						규정이 있는 경우 그 법령을 우선 적용한다.</li>
+				</ol>
+				<p class="dep1">제17조(전자금융거래 장애시의 처리)</p>
+				<p class="pt0"> 예탁결제원은 천재지변, 정전, 화재, 건물훼손,
+					전산장애 등의 사유로 이용자의 거래지시를 처리할 수 없거나 처리가 지연될 경우 동 사실과 사유 등을 이용자에게 지체 없이
+					통보하며, 정상적인 전자금융거래가 이루어질 수 있도록 신속하게 조치한다.
+				</p>
+				<p class="dep1">제18조(신고사항의 변경 및 사고신고)</p>
+				<ol class="pl12">
+					<li>이용자가 예탁결제원에 신고한 주소(전자우편주소를 포함한다), 전화번호, 각종 비밀번호 등을 변경하고자
+						하는 경우에는 예탁결제원에 신고하여야 한다.</li>
+					<li>이용자는 접속매체 등 전자금융거래에 있어 비밀을 요하는 사항이 도난, 분실, 위조, 변조 또는
+						누설되었음을 알았을 때에는 지체 없이 예탁결제원에 신고하여야 한다.</li>
+				</ol>
+				<p class="dep1">제19조(약관의 변경 등)</p>
+				<ol class="pl12">
+					<li>예탁결제원은 약관을 변경하고자 하는 경우 시행일 1월 전에 변경되는 약관을 전자금융거래를 수행하는 전자적
+						장치(해당 전자적 장치에 게시하기 어려운 경우에는 이용자가 접근하기 용이한 전자적 장치로서 예탁결제원이 지정하는
+						대체장치를 포함한다. 이하 이조에서 같다)에 게시하고 이용자에게 통지하여야 한다. 다만, 약관 변경 내용이 이용자에게
+						불리할 경우에는 전자적 장치에 게시하고 이용자에게 통지하는 외에 2개 이상의 전국적으로 보급되는 일간신문에 공고한다.</li>
+					<li>제1항의 규정에도 불구하고 예탁결제원이 법령의 개정으로 인하여 긴급하게 약관을 변경하는 때에는 변경된
+						약관을 전자적 장치에 1월 이상 게시하고 이용자에게 통지하는 외에 2개 이상의 전국적으로 보급되는 일간신문에 공고한다.</li>
+					<li>이용자는 제1항 및 제2항의 규정에 따라 약관의 변경내용이 게시되거나 통지된 후부터 변경되는 약관의
+						시행일 전의 영업일까지 전자금융거래계약을 해지할 수 있다.</li>
+					<li>예탁결제원은 제3항의 규정에 의한 기간 동안 이용자가 약관의 변경내용에 대하여 이의를 제기하지 아니하는
+						경우에는 약관의 변경을 승인한 것으로 본다.</li>
+					<li>예탁결제원은 이용자가 약관의 교부를 요청하는 경우 이에 응하여야 하며, 전자금융거래를 수행하는 전자적
+						장치에 게시하여 이용자가 약관을 조회하고 다운로드 할 수 있도록 한다.</li>
+				</ol>
+				<p class="dep1">제20조(이용자정보에 대한 비밀보장)</p>
+				<p class="pt0">
+				   예탁결제원은 관계법령에서 정한 경우를 제외하고는
+					전자금융거래를 수행함에 있어 알게 된 다음 각 호의 어느 하나에 해당하는 이용자정보를 이용자의 동의를 얻지 아니하고
+					타인에게 제공하거나 업무상 목적 외에 사용하지 아니한다.
+				</p>
+				<ol>
+					<li>이용자의 인적사항</li>
+					<li>이용자의 계좌, 접속매체 및 전자금융거래의 내용과 실적에 관한 정보 또는 자료</li>
+				</ol>
+				<p class="dep1">제21조(이용자의 의무)</p>
+				<ol class="pl12">
+					<li>이용자는 법령 및 예탁결제원의 다른 규정에서 특별히 정한 경우를 제외하고는 전자적 장치를 통하여 지득한
+						정보를 외부에 누설하여서는 아니된다.</li>
+					<li>이용자는 예탁결제원의 사전 승인없이 예탁결제원이 제공하는 정보를 이용 또는 가공하여 판매ㆍ대여 기타
+						상업적 목적으로 이용할 수 없다.</li>
+					<li>이용자는 예탁결제원 또는 예탁결제원이 지정한 자가 전자적 장치 점검 기타 장애복구 등을 위한 방문 시
+						관계자의 협조 등 필요한 조치를 취하여야 한다.</li>
+					<li>이용자는 전자금융거래계약에 따른 예탁결제원에 제공한 이용자의 정보 등이 사실과 다르거나 오기·오산·누락
+						기타 이와 유사한 것이 있는 경우 그 사실을 지체없이 예탁결제원에 통보하거나 전자적 장치를 통하여 이를 변경하여야
+						한다.</li>
+					<li>이용자가 제1항 내지 제4항의 규정에 위반하여 예탁결제원 또는 다른 이용자에게 손해를 입힌 경우에는 이를
+						배상하여야 한다.</li>
+				</ol>
+				<p class="dep1">제22조(손해배상)</p>
+				<p class="pt0">
+ 					이용자는 이 약관을 위반하거나 고의 또는 과실로 손해를 발생시킨 경우
+					예탁결제원에 이를 배상하여야 한다.
+				</p>
+				<p class="dep1">제23조(분쟁처리 및 분쟁조정)</p>
+				<ol class="pl12">
+					<li>이용자는 전자금융거래의 처리에 관하여 이의가 있을 때에는 예탁결제원에 손해배상 등 분쟁처리를 요구하거나
+						금융감독원의 금융분쟁조정위원회 또는 한국소비자보호원의 소비자분쟁조정위원회 등을 통하여 분쟁조정을 신청할 수 있다.</li>
+					<li>예탁결제원은 손해배상 등 분쟁처리를 위한 분쟁처리책임자 및 담당자를 지정하며, 그 연락처(전화번호,
+						모사전송번호, 전자우편주소 등을 말한다)를 인터넷 등을 통하여 이용자에게 알린다.</li>
+					<li>제1항의 규정에 의하여 이용자가 예탁결제원에 손해배상 등 분쟁처리를 신청한 경우 예탁결제원은 15일
+						이내에 이에 대한 조사 또는 처리결과를 이용자에게 통보한다.</li>
+				</ol>
+				<p class="dep1">제24조(약관적용의 우선순위 등)</p>
+				<ol class="pl12">
+					<li>전자금융거래에 관해서는 이 약관을 우선 적용하며, 이 약관에서 정하지 않은 사항은 예탁결제원의 업무규정,
+						예탁결제원의 ‘전자적업무처리를위한시스템운영등에관한규정’ 및 ‘전자금융거래법’ 등 관계법령이 정하는 바에 따른다.</li>
+					<li>예탁결제원과 이용자 간에 개별적으로 합의한 사항이 이 약관에서 정한 사항과 다를 때에는 그 합의사항을 이
+						약관에 우선하여 적용한다.</li>
+				</ol>
+				<p class="dep1">제25조(조사 협조 등)</p>
+				<p class="pt0">
+					 이용자는 제16조 제1항의 규정에 의한 사고로 인한 손해배상 등
+					분쟁처리와 관련한 예탁결제원의 사고조사와 관계당국의 수사 또는 조사절차에 협조하여야 한다.
+				</p>
+				<p class="dep1">제24조(약관적용의 우선순위 등)</p>
+				<p class="dep1">부 칙(2010.1.1)	</p>
+				<ol class="pl12">
+					<li>이 약관은 2010년 1월 1일부터 시행한다.</li>
+					<li>(경과조치) 이 약관 시행일 이전에 처리된 사항은 이 약관에 의하여 처리된 것으로 본다.</li>
+				</ol>
+				<p class="dep1 pb12">&lt;별표&gt;(삭제2009.12.31)</p>
+			</div>
+			<div class="btn_wrap">
+				<a href="javascript:" class="btn_big gray">닫기</a>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- //[CE][CSR 2022-BCM-0010] -->
+
+<!-- //[CS][CSR 2022-BCM-0010, 2022-BCM-0011] 전자금융거래 이용약관 개정(22.6.1.) 이후 -->
+<div class="pop_wrap" id="electrade_after_20220601">
+	<div class="pop">
+		<div class="tit_pop_wrap">
+			<!-- <h2>전자금융거래 이용약관</h2> -->
+			<h2>전자금융거래 이용약관(2022.6.1. 개정)</h2>
+			<a href="javascript:" class="btn_pop_close" title="닫기"></a>
+		</div>
+		<div class="pop_content type3" style="width: 880px">
+			<div class="tit_wrap">
+				<h3>전자금융거래 이용약관</h3>
+			</div>
+			<div class="terms_wrap" style="height: 573px;">
+				<p class="dep1 mt0">제1조(목적) 
+					<a class="pt0" style="font-weight:normal">
+						이 약관은 한국예탁결제원(이하 “예탁결제원”이라 한다)과 이용자간 전자금융거래에 관한 기본적인 사항을 정함으로써, 
+						거래의 신속하고 효율적인 처리를 도모하고 거래당사자 상호간의 이해관계를 합리적으로 조정하는 것을 목적으로 한다.
+					</a>
+				</p>
+				
+				<p class="dep1">제2조(정의) 
+					<a class="pt0" style="font-weight:normal">
+						① 이 약관에서 사용하는 용어의 정의는 다음과 같다.
+					</a>					
+					</p><dl>
+						<dd style="margin-bottom:8px">
+							<ol>
+								<li>“전자금융거래”란 예탁결제원이 전자적 장치를 통하여 제공하는 금융상품 및 서비스를 이용자가 전자적 장치를 통하여 비대면·자동화된 방식으로 직접 이용하는 거래를 말한다.</li>
+								<li>“이용자”란 전자금융거래를 위하여 예탁결제원과 체결한 계약(이하 "전자금융거래계약"이라 한다)에 따라 전자금융거래를 이용하는 자를 말한다.</li>
+								<li>“전자적 장치”란 컴퓨터, 전용회선, 소프트웨어 그 밖에 전자적 방법으로 전자금융거래정보를 전송하거나 처리하는데 이용되는 장치를 말한다.</li>
+								<li>"전자문서"란 「전자문서 및 전자거래기본법」 제2조제1호의 규정에 따라 작성ㆍ변환되거나 송신ㆍ수신 또는 저장된 정보를 말한다.</li>
+								<li>“접근매체”란 전자금융거래에 있어서 이용자가 거래지시를 하거나 거래내용의 진실성과 정확성을 확보하기 위하여 사용되는 다음 각 목의 어느 하나에 해당하는 수단 또는 정보를 말한다.
+									<dl>
+										<dt>가. (삭제 2022.6.1.)</dt>
+										<dt>나. 「전자서명법」제2조제6호에 따른 인증서(서명자의 실지명의를 확인할 수 있는 것으로 한정한다)로서 예탁결제원을 통해</dt>
+											<dt style="margin-left:18px">발급하거나 그 밖에 예탁결제원이 인정하는 인증서</dt>	
+										<dt>다. 예탁결제원에 등록된 일회용 비밀번호 생성기(OTP) 또는 이에 준하는 것</dt>
+										<dt>라. 나목 또는 다목의 수단이나 정보를 사용하는데 필요한 비밀번호</dt>
+									</dl>
+								</li>
+							</ol>							
+							<ol start="6" style="margin-top:8px">
+								<li>“거래지시”란 이용자가 전자금융거래계약에 의하여 예탁결제원에 전자금융거래의 처리를 지시하는 것을 말한다.</li>
+								<li>“오류”란 이용자의 고의 또는 과실 없이 전자금융거래가 약관, 전자금융거래계약 또는 이용자가 거래지시한 대로 이행되지 아니한 경우를 말한다.</li>
+								<li>“예탁결제정보통신망”이란 예탁결제원이 이용자와의 전자금융거래를 위하여 전자적 장치를 통하여 제공하는 업무시스템을 말한다.</li>
+							</ol>
+						</dd>						
+						<dt style="margin-bottom:8px">② 이 약관에서 별도로 정하지 아니한 용어는「전자금융거래법」및 관계법령 등에서 정하는 바에 따른다.</dt>
+					</dl>				
+				<p></p>			
+				
+				<p class="dep1">제3조(적용되는 거래) 
+					<a class="pt0" style="font-weight:normal">
+						이 약관은 예탁결제원과 이용자 사이에 예탁결제정보통신망을 통해 이루어지는 전자금융거래에 적용된다.
+					</a>
+				</p>
+					
+				<p class="dep1">제4조(전자금융거래계약의 체결 및 해지) 
+					<a class="pt0" style="font-weight:normal">
+						① 이용자가 전자금융거래를 하고자 하는 경우에는 “예탁결제정보통신망을 통한 업무처리”를 정한 예탁결제원의 개별 업무규정(이하 “업무규정”이라 한다)에 따라 전자금융거래계약을 체결하여야 한다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② (삭제 2022.6.1.)</dt>
+						<dt style="margin-bottom:8px">③ (삭제 2022.6.1.)</dt>
+						<dt style="margin-bottom:8px">④ 전자금융거래계약을 해지하고자 할 때에는 이용자 본인이 서면으로 예탁결제원에 해지신청을 하여야 한다.</dt> 
+					</dl>
+				<p></p>
+				
+				<p class="dep1">제5조(삭제 2008.3.6)</p>
+				
+				<p class="dep1">제6조(삭제 2008.3.6)</p>
+				
+				<p class="dep1">제7조(접근매체의 발급 및 등록) 
+					<a class="pt0" style="font-weight:normal">
+						① 예탁결제원이 접근매체를 발급(재발급을 포함한다)할 때에는 이용자의 신청이 있는 경우에 한하여 본인임을 확인한 후에 발급하여야 한다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② (삭제 2022.6.1.)</dt>
+						<dt style="margin-bottom:8px">③ (삭제 2022.6.1.)</dt>
+						<dt style="margin-bottom:8px">④ 이용자는 전자금융거래계약을 체결하고 거래비밀번호 등을 전자적 장치를 통하여 직접 등록할 경우에는 계약일 포함 25일 이내에</dt> 
+							<dt style="margin-bottom:8px;margin-left:18px">등록하여야 한다.</dt>
+					</dl>
+				<p></p>
+								
+				<p class="dep1">제8조(접근매체의 발급 제한) 
+					<a class="pt0" style="font-weight:normal">
+						예탁결제원은 이용자의 업무 성격 및 접근매체 관리 능력 등을 고려하여 접근매체의 발급을 제한할 수 있다.
+					</a>
+				</p>
+				
+				<p class="dep1">제9조(접속매체의 사용 등) 
+					<a class="pt0" style="font-weight:normal">
+						① 이용자는 이 약관의 적용대상인 전자금융거래에 있어 예탁결제원이 발급 또는 교부한 제2조제1항제5호에 해당하는 접근매체를 사용하여야 한다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 이용자는 접근매체를 수령한 후 제7조제3항에 따라 비밀번호를 등록하고 수시로 비밀번호를 변경하여야 한다.</dt>
+						<dt style="margin-bottom:8px">③ 이용자가 접근매체 비밀번호를 모르는 경우에는 예탁결제원에 직접 방문 후 재설정할 수 있다. 다만, 부득이 이용자 본인이 방문할 수</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">없을 때에는 대리인의 예탁결제원 소정의 양식에 따른 위임장 제출로 본인의 방문에 갈음할 수 있다.</dt>
+						<dt style="margin-bottom:8px">④ 이용자는 접근매체를 제3자에게 양도·양수하여서는 아니된다.</dt>
+						<dt style="margin-bottom:8px">⑤ 이용자는 접근매체의 비밀번호를 제3자에게 누설하여서는 아니 되며, 접근매체의 분실, 도용을 방지하기 위하여 충분한 주의를</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">기울여야 한다.</dt>
+					</dl>				
+				<p></p>
+				
+				<p class="dep1">제10조(이용시간 등) 
+					<a class="pt0" style="font-weight:normal">
+						① 이용자는 예탁결제원이 정한 이용시간 이내에서 전자금융거래를 이용할 수 있다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 이용시간은 예탁결제원의 사정에 따라 달라질 수 있으며, 예탁결제원이 이용시간을 변경하고자 하는 경우에는 그 내용을 영업점,</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">예탁결제정보통신망 또는 전자적 장치를 통하여 변경 1개월 전부터 1개월 간 알려야 한다. 다만, 시스템 장애복구, 프로그램의 긴급한</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">보수, 외부요인 등 불가피한 경우에는 그러하지 아니하다.</dt>
+						<dt style="margin-bottom:8px">③ 전산시스템 유지 및 보수로 인하여 전자금융거래 이용이 불가능할 경우 예탁결제원은 동 사실을 7일 전에 영업점,예탁결제정보통신망</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">또는 전자적 장치에 게시한다.</dt>
+					</dl>
+				<p></p>
+								
+				<p class="dep1">제11조(삭제)</p>
+				
+				<p class="dep1">제12조(거래의 성립) 
+					<a class="pt0" style="font-weight:normal">
+						이용자가 전자금융거래를 이용함에 있어 거래의 성립 시기는 해당 업무에 대한 예탁결제원의 업무규정에 따른다.
+					</a>
+				</p>
+				
+				<p class="dep1">제13조(거래내용의 확인) 
+					<a class="pt0" style="font-weight:normal">
+						① 예탁결제원은 이용자가 예탁결제정보통신망을 통하여 거래내용을 확인할 수 있도록 한다. 이 경우 예탁결제정보통신망의 운영 장애, 
+						그 밖의 사유로 거래내용을 확인하게 할 수 없는 때에는 예탁결제원은 인터넷, 전화, 팩스 등을 이용하여 즉시 그 사유를 알리고, 
+						그 사유가 종료된 때부터 이용자가 거래내용을 확인할 수 있도록 한다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 이용자는 거래지시와 제1항의 규정에 따라 확인한 거래내용이 일치하는지 여부를 확인하여야 한다.</dt>
+						<dt style="margin-bottom:8px">③ 예탁결제원이 이용자에게 제1항에 따른 거래내용 확인 조치를 제공하는 것이 곤란할 경우 이용자는 해당 거래내용을</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">서면(전자문서를 제외한다)으로 제공하여 줄 것을 예탁결제원에 요청할 수 있다. 이때, 예탁결제원은 그 요청을 받은 날로부터</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">2주 이내에 거래내용에 관한 서면을 이용자에게 교부한다.</dt>
+						<dt style="margin-bottom:8px">④ (삭제 2022.6.1.)</dt>
+					</dl>
+				<p></p>
+				
+				<p class="dep1">제14조(거래의 제한) 
+					<a class="pt0" style="font-weight:normal">
+						① 다음 각 호의 어느 하나에 해당하는 경우에는 전자금융거래를 제한할 수 있다.
+					</a>
+					</p><dl>
+						<dd style="margin-bottom:8px">
+							<ol>
+								<li>거래관련 비밀번호를 잘못 입력하였거나, 전자금융거래에 필요한 비밀번호를 이용자가 모르는 경우</li>
+								<li>인증서 유효기간이 만료되었거나 인증서 효력이 정지되어 재발급 받아야 하는 경우</li>
+								<li>전자금융거래에 필요한 예탁결제정보통신망 또는 전자적 장치 등에 장애가 발생한 때</li>
+								<li>천재지변의 사유로 인하여 이용자의 거래지시 처리가 불가능한 경우</li>
+								<li>전자금융거래법 및 관련 법령 위반 등으로 거래제공이 부적합할 경우</li>
+							</ol>					
+						</dd>
+						<dt style="margin-bottom:8px">② 제1항의 규정에 의하여 전자금융거래를 제한한 경우에는 이용자의 거래 지시가 있을 때 예탁결제정보통신망을 통하여</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">그 사유를 알려야 한다.</dt>
+					</dl>
+				<p></p>
+				
+				<p class="dep1">제15조(오류의 정정) 
+					<a class="pt0" style="font-weight:normal">
+						① 이용자는 전자금융거래에 오류가 있음을 안 때에는 예탁결제원에게 이에 대한 정정을 요구할 수 있다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 예탁결제원은 제1항의 규정에 의한 오류의 정정요구를 받은 때에는 이를 즉시 조사하여 처리하며 정정요구를 받은 날부터 2주 이내에</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">오류의 원인과 처리 결과를 제4항의 방법으로 이용자에게 알려야 한다.</dt>
+						<dt style="margin-bottom:8px">③ 예탁결제원이 전자금융거래에 오류가 있음을 안 때에는 이를 즉시 조사하여 처리하며, 오류가 있음을 안 날로부터 2주 이내에</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">오류의 원인과 처리 결과를 제4항의 방법으로 이용자에게 알려야 한다.</dt>
+						<dt style="margin-bottom:8px">④ 예탁결제원은 제2항 및 제3항에 의하여 이용자에게 알릴 때, 서면, 전화 또는 전자우편 등으로 알린다.</dt>
+					</dl>
+				<p></p>				
+				
+				<p class="dep1">제16조(사고·장애 시의 처리) 
+					<a class="pt0" style="font-weight:normal">
+						① 이용자는 접근매체의 도난, 분실, 위조, 변조의 사실을 알았거나 기타 거래절차상 비밀을 요하는 사항이 누설되었음을 알았을 때에는 지체 없이 이를 예탁결제원에 신고하여야 한다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 예탁결제원은 전산장애 및 기타의 사유로 이용자의 거래지시를 처리할 수 없거나 처리가 지연될 경우 동 사실과 사유 등을</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">이용자에게 지체 없이 통보하며, 정상적인 전자금융거래가 이루어질 수 있도록 신속하게 조치한다.</dt>	
+					</dl>
+				<p></p>
+				
+				<p class="dep1">제17조(예탁결제원의 책임) 
+					<a class="pt0" style="font-weight:normal">
+						① 예탁결제원은 다음 각 호의 어느 하나에 해당하는 사고로 인하여 이용자에게 손해가 발생한 경우에는 그 손해를 배상할 책임을 진다.
+					</a>
+					</p><dl>
+						<dd style="margin-bottom:8px">
+							<ol>
+								<li>접근매체의 위조나 변조로 발생한 사고</li>
+								<li>계약체결 또는 거래지시의 전자적 전송이나 처리 과정에서 발생한 사고</li>
+								<li>전자금융거래를 위한 전자적 장치 또는 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 제2조제1항제1호에 따른 정보통신망에 침입하여 
+									거짓이나 그 밖의 부정한 방법으로 획득한 접근매체의 이용으로 발생한 사고</li>							
+							</ol>
+						</dd>
+						<dt style="margin-bottom:8px">② 제1항의 규정에도 불구하고 다음 각 호의 어느 하나에 해당하는 경우 이용자에게 발생한 손해에 대하여는 예탁결제원이</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">그 책임의 전부 또는 일부를 부담하지 아니한다.</dt>	
+							<dd style="margin-bottom:8px">
+								<ol>
+									<li>이용자가 접근매체를 제3자에게 대여하거나 사용을 위임하거나 양도 또는 담보 목적으로 제공한 경우 </li>
+									<li>제3자가 권한 없이 이용자의 접근매체를 이용하여 전자금융거래를 할 수 있음을 알았거나 쉽게 알 수 있었음에도 불구하고 이용자가 자신의 접근매체를 누설 또는 노출하거나 방치한 경우</li>
+									<li>법인(「중소기업기본법」제2조제2항에 의한 소기업을 제외한다)인 이용자에게 손해가 발생한 경우로 
+										예탁결제원이 사고를 방지하기 위하여 보안절차를 수립하고 이를 철저히 준수하는 등 합리적으로 요구되는 주의의무를 다한 경우</li>
+									<li>(삭제 2022.6.1.)</li>
+									<li>예탁결제원이 제7조에 따른 접근매체를 통한 이용자 확인 외에 보안강화를 위하여 전자금융거래 시 요구하는 추가적인 보안조치를 이용자가 정당한 사유 없이 거부하여 사고가 발생한 경우</li>
+									<li>이용자가 제5호에 따른 추가적인 보안조치에 사용되는 매체ㆍ수단 또는 정보에 대하여 다음 각 목의 어느 하나에 해당하는 행위를 하여 사고가 발생한 경우</li>
+										<dl style="margin-top:8px;margin-bottom:8px">										
+											<dt style="margin-bottom:8px">가. 누설ㆍ노출 또는 방치한 행위</dt>
+											<dt style="margin-bottom:8px">나. 제3자에게 대여하거나 그 사용을 위임한 행위 또는 양도나 담보의 목적으로 제공한 행위</dt>
+										</dl>
+									
+								</ol>
+							</dd>
+						<dt style="margin-bottom:8px">③ 예탁결제원은 이용자로부터 접근매체의 분실이나 도난 등의 통지를 받은 때에는 그 때부터 제3자가 그 접근매체를 사용하여</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">이용자에게 발생한 손해를 배상한다.</dt>	
+						<dt style="margin-bottom:8px">④ 예탁결제원은 제1항 내지 제3항의 규정에도 불구하고 다른 법령에 이용자에게 유리하게 적용될 수 있는 규정이 있는 경우</dt>					
+							<dt style="margin-bottom:8px;margin-left:18px">그 법령을 우선 적용한다.</dt>	
+					</dl>
+				<p></p>
+				
+				<p class="dep1">제18조(신고사항의 변경) 
+					<a class="pt0" style="font-weight:normal">
+						이용자가 예탁결제원에 신고한 주소(전자우편주소를 포함한다), 전화번호, 각종 비밀번호 등을 변경하고자 하는 경우에는 예탁결제원에 신고하여야 한다.
+					</a>
+				</p>
+				
+				<p class="dep1">제19조(삭제 2022.6.1.)</p>
+				
+				<p class="dep1">제20조(이용자정보에 대한 비밀보장) 
+					<a class="pt0" style="font-weight:normal">
+						① 예탁결제원은 법령에서 정한 경우를 제외하고는 전자금융거래를 수행함에 있어서 알게 된 이용자의 인적사항 및 
+						계좌, 접근매체 및 전자금융거래의 내용과 실적에 관한 정보 또는 자료를이용자의 동의 없이는 다른 사람에게 제공하거나 누설하거나 업무 목적 외 사용을 하여서는 안 된다.					
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 예탁결제원의 관리 소홀로 인한 이용자 관련 정보 도난 및 유출 시에는 예탁결제원이 책임을 진다.</dt>
+					</dl>
+				<p></p>
+				
+				<p class="dep1">제21조(이용자의 의무) 
+					<a class="pt0" style="font-weight:normal">
+						① 이용자는 법령 및 예탁결제원의 다른 규정에서 특별히 정한 경우를 제외하고는 전자적 장치를 통하여 알게 된 정보를 외부에 누설하여서는 아니된다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 이용자는 예탁결제원의 사전 승인없이 예탁결제원이 제공하는 정보를 이용 또는 가공하여 판매ㆍ대여 및 그밖에 상업적 목적으로</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">이용할 수 없다.</dt>						
+						<dt style="margin-bottom:8px">③ 이용자는 예탁결제원 또는 예탁결제원이 지정한 자가 전자적 장치 점검 기타 장애복구 등을 위한 방문 시 관계자의 협조 등</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">필요한 조치를 취하여야 한다.</dt>						
+						<dt style="margin-bottom:8px">④ 이용자는 전자금융거래계약에 따른 예탁결제원에 제공한 이용자의 정보 등이 사실과 다르거나 오기·오산·누락 및</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">그밖에 이와 유사한 것이 있는 경우 그 사실을 지체 없이 예탁결제원에 통보하거나 전자적 장치를 통하여 이를 변경하여야 한다.</dt>						
+						<dt style="margin-bottom:8px">⑤ 이용자가 제1항 내지 제4항의 규정에 위반하여 예탁결제원 또는 다른 이용자에게 손해를 입힌 경우에는 이를 배상하여야 한다.</dt>
+					</dl>
+				<p></p>
+				
+				<p class="dep1">제22조(손해배상) 
+					<a class="pt0" style="font-weight:normal">
+						이용자는 고의 또는 과실로 이 약관을 위반하는 등 책임있는 사유로 인해 예탁결제원 또는 다른 이용자에게 손해를 발생시킨 경우 그 손해에 대해 손해배상 책임을 진다.
+					</a>
+				</p>
+				
+				<p class="dep1">제23조(분쟁처리 및 분쟁조정) 
+					<a class="pt0" style="font-weight:normal">
+						① 이용자는 전자금융거래의 처리에 관하여 이의가 있을 때에는 예탁결제원에 그 해결을 요구하거나 금융감독원 금융분쟁조정위원회, 
+						한국소비자보호원 소비자분쟁조정위원회 등을 통하여 분쟁조정을 신청할 수 있다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 예탁결제원은 손해배상 등 분쟁처리를 위한 분쟁처리책임자 및 담당자를 지정하며, 그 연락처(전화번호·모사전송번호·전자우편주소</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">등을 말한다)를 관련 인터넷 홈페이지에 게시한다.</dt>
+						<dt style="margin-bottom:8px">③ 제1항의 규정에 의하여 이용자가 예탁결제원에 이의를 제기한 경우 예탁결제원은 15일 이내에 이에 대한 조사 또는 처리결과를 </dt>
+							<dt style="margin-bottom:8px;margin-left:18px">이용자에게 통보한다.</dt>
+						<dt style="margin-bottom:8px">④ 이용자는 제17조제1항의 규정에 의한 사고로 인한 손해배상 등 분쟁처리와 관련한 예탁결제원의 사고조사와 관계당국의 수사 또는</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">조사절차에 협조하여야 한다.</dt>
+					</dl>
+				<p></p>
+												
+				<p class="dep1">제24조(삭제 2022.6.1.)</p>
+				
+				<p class="dep1">제25조(삭제 2022.6.1.)</p>
+								
+				<p class="dep1">제26조(거래기록의 보존 및 파기) 
+					<a class="pt0" style="font-weight:normal">
+						예탁결제원은「전자금융거래법」등 관계법령이 정하는 바에 따라 전자금융거래와 관련한 거래기록을 생성하여 5년의 범위 안에서 보존하고, 
+						보존 기간이 경과하여 금융거래가 종료된 경우에는 5년 이내에 전자금융거래기록을 파기하여야 한다.
+					</a>
+				</p>
+				
+				<p class="dep1">제27조(약관의 명시와 교부 등) 
+					<a class="pt0" style="font-weight:normal">
+						① 예탁결제원은 이용자에게 약관을 명시하여야 하고, 이용자의 요청이 있는 경우 전자문서의 전송(전자우편을 이용한 전송을 포함한다),
+						모사전송, 우편 또는 직접 교부의 방식으로 약관의 사본을 이용자에게 교부한다.
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 예탁결제원은 이용자가 약관의 내용에 대한 설명을 요청하는 경우 이용자에게 약관의 중요내용을 직접 설명하여야 한다.</dt>
+					</dl> 
+				<p></p>
+								
+				<p class="dep1">제28조(약관의 변경 등) 
+					<a class="pt0" style="font-weight:normal">
+						① 예탁결제원이 이 약관을 변경하고자 하는 경우 변경 1개월 전에 그 내용을 해당 전자금융거래를 수행하는 전자적 장치(해당 전자적 장치에 게시하기 어려운 경우에는 
+						이용자가 접근하기 용이한 전자적 장치로서 예탁결제원이 지정하는 대체장치를 포함한다. 이하 이조에서 같다) 및 예탁결제정보통신망에 게시하고 이용자에게 통지하여야 한다. 
+						다만, 이용자가 이의를 제기할 경우 예탁결제원은 이용자에게 적절한 방법으로 약관 변경내용을 통지하였음을 확인해 주어야 한다.						
+					</a>
+					</p><dl>
+						<dt style="margin-bottom:8px">② 제1항의 규정에도 불구하고 예탁결제원이 법령의 개정으로 인하여 긴급하게 약관을 변경하는 때에는 변경된 약관을 전자적 장치에</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">최소 1개월 이상 게시하고 이용자에게 통지하여야 한다.</dt>
+						<dt style="margin-bottom:8px">③ 이용자는 제1항 및 제2항의 규정에 따라 약관의 변경내용이 게시되거나 통지된 후부터 변경되는 약관의 시행일 전의 영업일까지</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">전자금융거래계약을 해지할 수 있다.</dt>
+						<dt style="margin-bottom:8px">④ 예탁결제원은 제3항의 규정에 의한 기간 동안 이용자가 약관의 변경내용에 대하여 이의를 제기하지 아니하는 경우에는 약관의 변경을</dt>
+							<dt style="margin-bottom:8px;margin-left:18px">승인한 것으로 본다.</dt>
+						<dt style="margin-bottom:8px">⑤ 예탁결제원은 이용자가 약관의 교부를 요청하는 경우 이에 응하여야 하며, 제27조제1항에 따른 방법으로 교부한다.</dt>
+					
+				<p></p>
+								
+				<p class="dep1">제29조(약관적용의 우선순위 등) 
+					<a class="pt0" style="font-weight:normal">
+						① 예탁결제원과 이용자 간에 개별적으로 합의한 사항이 이 약관에서 정한 사항과 다를 때에는 그 합의사항을 이 약관에 우선하여 적용한다.
+					</a>
+				</p>
+				<dl>
+					<dt style="margin-bottom:8px">② 전자금융거래에 관해서는 이 약관을 우선 적용하며, 이 약관에서 정하지 않은 사항은 예탁결제원의 업무규정, 예탁결제원의</dt>
+						<dt style="margin-bottom:8px;margin-left:18px">‘전자적업무 처리를 위한 시스템 운영 등에 관한 지침’ 및 「전자금융거래법」등 관계법령이 정하는 바에 따른다.</dt>	
+				</dl>
+				
+				<br>
+				<center><p class="dep1">부 칙</p></center>
+				<br><br>
+				
+				<dl>
+					<dt style="margin-bottom:8px">① 이 약관은 2022년 6월 1일부터 시행한다.</dt>
+					<dt style="margin-bottom:8px">② (경과조치) 이 약관 시행일 이전에 처리된 사항은 이 약관에 의하여 처리된 것으로 본다.</dt>
+				</dl>
+				
+				<p class="dep1 pb12">&lt;별표&gt;(삭제2009.12.31.)</p>
+			</dl></div>
+			<div class="btn_wrap">
+				<a href="javascript:" class="btn_big gray">닫기</a>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- //[CE][CSR 2022-BCM-0010, 2022-BCM-0011] -->
+
+<!--//KSD 본·지원 안내 -->
+<!-- //[CSR 2025-BCM-0003 지원정보 현행화 -->
+<div class="pop_wrap" id="ksd">
+	<div class="pop">
+		<div class="tit_pop_wrap">
+			<h2>KSD 본·지원 안내</h2>
+			<a href="javascript:" class="btn_pop_close" title="닫기"></a>
+		</div>
+		<div class="pop_content type1" style="width: 420px">
+			<div class="info_box">
+				<p class="logo">KSD한국예탁결제원</p>
+				<div>
+					<p>고객상담센터</p>
+					<p>1577-6600</p>
+					<p>(평일 09:00~18:00 / 공휴일 휴무)</p>
+				</div>
+			</div>
+			<div class="branch">
+				<ul>
+					<li>
+						<p class="dep3">부산본사 : 051-519-1500</p>
+						<p>
+							부산광역시 남구 문현금융로 40<br>부산국제금융센터(BIFC)<br>54층 부산고객센터
+						</p>
+					</li>
+					<li class="li_even">
+						<p class="dep3">서울사옥 : 02-3774-3000</p>
+						<p>
+							서울특별시 영등포구<br>여의나루로4길
+						</p>
+					</li>
+					<li>
+						<p class="dep3">대전고객센터 : 042-525-1610</p>
+						<p>
+							대전시 서구 둔산중로 50<br>파이낸스타워 11층 1104호
+						</p>
+					</li>
+					<li class="li_even">
+						<p class="dep3">광주고객센터 : 062-369-4733</p>
+						<p>
+							광주광역시 서구 죽봉대로 52<br>교원공제회관 5
+						</p>
+					</li>
+					<li>
+						<p class="dep3">대구고객센터 : 053-751-5560</p>
+						<p>
+							대구광역시 수성구 달구벌대로<br>2397 KB손해보험빌딩 5층
+						</p>
+					</li>
+					<li class="li_even tar"><a href="javascript:goPage('phone','_blank')" class="btn_openPop" title="ksd 부서별 전화번호보기 화면으로 이동">부서별
+							전화번호 보기</a></li>
+				</ul>
+			</div>
+
+
+			<div class="btn_wrap">
+				<a href="javascript:" class="btn_big gray">닫기</a>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!--//KSD Smart 메신저 설치 -->
+<div class="pop_wrap" id="messenger">
+	<div class="pop">
+		<div class="tit_pop_wrap">
+			<h2>KSD Smart 메신저 설치</h2>
+			<a href="javascript:" class="btn_pop_close" title="닫기"></a>
+		</div>
+		<div class="pop_content type2" style="width: 448px">
+			<div class="info_box">
+				<p>
+					e-SAFE를 사용하면서 궁금한 사항을 메신저로 물어보세요.<br>추가 등록 없이, e-SAFE
+					아이디/비밀번호로 로그인이 가능합니다.
+				</p>
+				<p>
+					지금, <span class="txt_b">KSD Smart Messenger</span>를 설치해보세요.
+				</p>
+				<a href="javascript:goPage('mesenger','_blank')" class="btn_down" aria-label="KSD Smart Messenger 다운로드">KSD Smart Messenger</a>
+			</div>
+			<div class="solution">
+				<p>메신저 아이디/비밀번호 찾기</p>
+				<ul>
+					<li>
+						<dl>
+							<dt>
+								<p class="number">
+									방법<br>
+									<span>01</span>
+								</p>
+							</dt>
+							<dd>
+								<span>공동인증서를 통해 e-SAFE 접속하여 메신저 아이디/비밀번호 찾기
+								</span> <img src="/resource/images/content/img_messenger.png" style="width: 174px; height: 110px;" alt="e-SAFE 시스템에 접속한 후, 우측상단의 사용자정보를 클릭하여,개인정보변경 화면에서 처리하는 것을 알려주는 이미지">
+								<div class="dot_list">
+									<p class="dep2 fs13">개인정보변경에서 아이디확인 및 비밀번호 변경 가능</p>
+									<p class="dep2 fs13">
+										비밀번호는 변경 후, 다음 로그인시 변경하신<br>비밀번호로 입력
+									</p>
+								</div>
+							</dd>
+						</dl>
+					</li>
+					<li>
+						<dl>
+							<dt>
+								<p class="number">
+									방법<br>
+									<span>02</span>
+								</p>
+							</dt>
+							<dd>
+								<span>e-SAFE 접속페이지에서 찾기
+								</span>
+								<a href="javascript:goPage('cert2')" class="btn_common">아이디 찾기</a>
+								<a href="javascript:goPage('cert3')" class="btn_common">비밀번호 찾기</a>
+							</dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+
+
+			<div class="btn_wrap">
+				<a href="#" class="btn_big gray">닫기</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- //신용정보활용체제 -->
+    <!-- //공통팝업 -->
+
+
+
+
+
+</body></html>

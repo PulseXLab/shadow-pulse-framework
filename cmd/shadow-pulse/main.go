@@ -91,6 +91,7 @@ func main() {
 	outDir := flag.String("out", "", "Base directory for results (default: ~/shadowPulse_Result)")
 	live := flag.Bool("live", false, "Only run port scans on live web servers found by httpx.")
 	doctor := flag.Bool("doctor", false, "Run system diagnostics and prerequisite checks.")
+	fix := flag.Bool("fix", false, "Attempt to automatically install missing dependencies when running doctor mode.")
 	showVersion := flag.Bool("version", false, "Show version and build information.")
 	nmapOptions := flag.String("nmap-options", defaultNmapOptions, "Nmap options to use.")
 	useTor := flag.Bool("tor", false, "Enable to route traffic through Tor (proxychains4).")
@@ -124,7 +125,7 @@ func main() {
 
 	// Handle Doctor mode first
 	if *doctor {
-		setup.RunDoctor()
+		setup.RunDoctor(*fix)
 		os.Exit(0)
 	}
 

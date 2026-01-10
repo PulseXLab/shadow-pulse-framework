@@ -29,7 +29,7 @@ type Check struct {
 }
 
 // RunDoctor performs all system checks and prints a diagnostic report.
-func RunDoctor() {
+func RunDoctor(fix bool) {
 	utils.PrintInfo("Starting Shadow-Pulse System Diagnostic...")
 
 	osInfo := detectOS()
@@ -83,7 +83,24 @@ func RunDoctor() {
 				i++
 			}
 			fmt.Println("==================================================")
-			utils.PrintInfo("After running the commands, please run 'shadow-pulse --doctor' again to verify.")
+			
+			if fix {
+				utils.PrintInfo("Attempting to automatically install missing dependencies...")
+				for desc, step := range remediationSteps {
+					utils.PrintInfo(fmt.Sprintf("  -> Installing for '%s': %s", desc, step))
+					// Installation commands should not go through Tor
+					err := runner.RunCommand(step, false) 
+					if err != nil {
+						utils.PrintError(fmt.Sprintf("Failed to automatically install '%s'. Please try manually: %s", desc, step))
+					} else {
+						utils.PrintGood(fmt.Sprintf("  -> Successfully attempted installation for '%s'.", desc))
+					}
+				}
+				utils.PrintInfo("Automatic installation attempts finished. Please run 'shadow-pulse doctor' again to verify.")
+			} else {
+				utils.PrintInfo("After running the commands, please run 'shadow-pulse doctor' again to verify.")
+			}
+
 		} else {
 			utils.PrintError("One or more checks failed, but no automatic resolution is available.")
 		}
