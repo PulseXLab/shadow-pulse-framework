@@ -20,7 +20,9 @@ func LookPath(tool string) bool {
 // RunCommand executes an external command, shows a progress indicator, and captures output.
 func RunCommand(commandString string, useTor bool) error {
 	originalCommand := commandString
-	if useTor {
+	// Eyewitness is unstable with proxychains, so we exclude it from Tor routing
+	// and rely on its native SOCKS proxy support instead.
+	if useTor && !strings.Contains(originalCommand, "eyewitness") {
 		if LookPath("proxychains4") {
 			commandString = "proxychains4 " + commandString
 		} else {

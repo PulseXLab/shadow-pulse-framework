@@ -13,7 +13,7 @@ A comprehensive, stealth-oriented reconnaissance framework designed to automate 
 - **Automatic IP Rotation**: When using Tor, the framework automatically renews the Tor IP address at set intervals and after each host scan during the port scanning phase. IP changes are logged for traceability.
 - **Live Host Discovery**: Uses `httpx` to quickly identify which discovered subdomains are running live web servers.
 - **Automated Port Scanning**: Runs `nmap` on discovered hosts to find open ports and identify services.
-- **Visual Reconnaissance**: Automatically takes screenshots of live web services using `cutycapt`.
+- **Visual Reconnaissance**: Automatically takes screenshots of live web services using `eyewitness`.
 - **Dependency Scanning**: Scans and visualizes project dependencies using `go mod graph` and `go list`.
 - **Health Check (`doctor`)**: Comes with a `doctor` command to verify that all external tool dependencies are correctly installed and configured.
 - **Consolidated Reporting**: Generates a professional Excel (`.xlsx`) report summarizing all findings, including subdomains, IPs, open ports, and hyperlinks to local screenshots.
@@ -26,7 +26,7 @@ This framework is actively maintained. Here are some of the latest fixes and imp
 
 - **More Robust Tor IP Renewal**: The Tor IP renewal logic has been enhanced. It no longer relies on a specific authentication method, making it more compatible with various `torrc` configurations (including `CookieAuthentication 0` or null passwords).
 - **Improved Subdomain List Accuracy**: Fixed a bug where IP addresses could occasionally be included in the final subdomain list (`final_subdomains.txt`). The parsing logic is now more robust and correctly filters out non-domain entries.
-- **Reliable Screenshot Generation**: Corrected a data flow issue and updated the tool to `cutycapt`, ensuring visual reconnaissance is performed reliably on all discovered live web servers.
+- **Reliable Screenshot Generation**: Corrected a data flow issue and updated the tool to `eyewitness`, ensuring visual reconnaissance is performed reliably on all discovered live web servers, now with enhanced Tor support.
 
 ## 🛠️ Dependencies
 
@@ -43,8 +43,7 @@ The framework orchestrates several popular open-source tools. You must install t
 - **nmap**: `sudo apt install nmap`
 - **dnsrecon**: `pip3 install dnsrecon-python`
 - **dnsenum**: `sudo apt install dnsenum`
-- **cutycapt**: `sudo apt install cutycapt`
-- **xvfb**: `sudo apt install xvfb`
+- **eyewitness**: `sudo apt install eyewitness`
 - **proxychains4**: `sudo apt install proxychains4` (Required for `--tor`)
 
 ### Tor Setup
@@ -58,46 +57,59 @@ For the `--tor` and IP rotation features, you must have the Tor service running.
 
 ## 🚀 Usage
 
-The framework provides multiple commands. The primary command is `scan`, which runs the full reconnaissance workflow.
+First, build the binary:
+```bash
+go build -o shadow-pulse ./cmd/shadow-pulse
+```
+
+The framework uses a subcommand-based interface.
 
 ```
-go run ./cmd/shadow-pulse <command> [flags]
+./shadow-pulse <command> [options]
 ```
 
 ### Commands
 | Command | Description |
 |---|---|
-| `scan` | **(Default)** Run the full reconnaissance scan against a domain. |
+| `scan` | Run the full reconnaissance scan against a domain. |
 | `doctor`| Check if all required external dependencies are installed correctly. |
+| `version`| Show the version and build information for the framework. |
 
-### Options for `scan` command
+### Options for `scan`
 | Flag | Description |
 |---|---|
-| `-d`, `--domain` | **(Required)** The target domain to scan. |
-| `--nmap-options` | Custom Nmap options to use. Default: `"-sV -sC -O -T4 -A -Pn --top-ports 1000"` |
-| `--tor` | Enable to route all traffic through Tor. |
-| `--stealth` | Enable stealth mode for IDS/WAF evasion. Overrides some nmap options and disables noisy enumeration. |
-| `-h`, `--help` | Show the detailed help message. |
+| `-d` | **(Required)** The target domain to scan. |
+| `-out` | Base directory for results (default: `~/shadowPulse_Result`). |
+| `-live` | Only run port scans on live web servers found by `httpx`. |
+| `-nmap-options` | Custom Nmap options to use. Default: `"-sV -sC -O -T4 -A -Pn --top-ports 1000"` |
+| `-no-ports-scan`| Skip the port scanning phase. |
+| `-tor` | Enable to route all traffic through Tor. |
+| `-stealth` | Enable stealth mode for IDS/WAF evasion. |
+
+### Options for `doctor`
+| Flag | Description |
+|---|---|
+| `-fix` | Attempt to automatically install missing dependencies. |
+
 
 ### Examples
 - **Check Dependencies:**
   ```bash
-  go run ./cmd/shadow-pulse doctor
+  ./shadow-pulse doctor
+  ```
+- **Automatically Fix Dependencies:**
+  ```bash
+  ./shadow-pulse doctor --fix
   ```
 - **Standard Scan:**
   ```bash
-  go run ./cmd/shadow-pulse scan -d example.com
+  ./shadow-pulse scan -d example.com
   ```
-- **Scan through Tor with IP Rotation:**
+- **Scan through Tor with Stealth Screenshot IP Rotation:**
   ```bash
-  go run ./cmd/shadow-pulse scan -d example.com --tor
+  ./shadow-pulse scan -d example.com --tor --stealth
   ```
-- **Stealth Scan (Passive Enum, Evasive Nmap):**
+- **Full-Featured Scan with Custom Output and Nmap Options:**
   ```bash
-  go run ./cmd/shadow-pulse scan -d example.com --stealth
+  ./shadow-pulse scan -d example.com -out /tmp/results --nmap-options "-p- -T4" --tor
   ```
-- **Full-Featured Scan with Custom Nmap Options:**
-  ```bash
-  go run ./cmd/shadow-pulse scan -d example.com --nmap-options "-p- -T4" --tor
-  ```
-
