@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
+	"net"
 	"os"
 	"path/filepath"
 	"sort"
@@ -70,6 +71,19 @@ func RunSubdomainEnumeration(domain, outputDir string, useTor, stealth bool) []s
 	return combineAndCleanSubdomains(outputDir)
 }
 
+// isValidSubdomain checks if a string is a valid subdomain and not an IP address.
+func isValidSubdomain(s string) bool {
+	trimmed := strings.TrimSpace(s)
+	if trimmed == "" {
+		return false
+	}
+	// If it can be parsed as an IP, it's not a valid subdomain in this context.
+	if net.ParseIP(trimmed) != nil {
+		return false
+	}
+	return true
+}
+
 // combineAndCleanSubdomains reads all tool outputs and consolidates unique subdomains.
 func combineAndCleanSubdomains(outputDir string) []string {
 	utils.PrintInfo("Combining and cleaning subdomain lists...")
@@ -86,9 +100,9 @@ func combineAndCleanSubdomains(outputDir string) []string {
 		defer file.Close()
 		scanner := bufio.NewScanner(file)
 		for scanner.Scan() {
-			subdomain := strings.TrimSpace(scanner.Text())
-			if subdomain != "" {
-				subdomainSet[subdomain] = struct{}{}
+			subdomain := scanner.Text()
+			if isValidSubdomain(subdomain) {
+				subdomainSet[strings.TrimSpace(subdomain)] = struct{}{}
 			}
 		}
 	}
@@ -99,8 +113,8 @@ func combineAndCleanSubdomains(outputDir string) []string {
 		var entries []DnsreconEntry
 		if json.Unmarshal(data, &entries) == nil {
 			for _, entry := range entries {
-				if entry.Name != "" {
-					subdomainSet[entry.Name] = struct{}{}
+				if isValidSubdomain(entry.Name) {
+					subdomainSet[strings.TrimSpace(entry.Name)] = struct{}{}
 				}
 			}
 		}
@@ -114,8 +128,8 @@ func combineAndCleanSubdomains(outputDir string) []string {
 		}
 		if xml.Unmarshal(data, &result) == nil {
 			for _, host := range result.Hosts {
-				if host.Hostname != "" {
-					subdomainSet[host.Hostname] = struct{}{}
+				if isValidSubdomain(host.Hostname) {
+					subdomainSet[strings.TrimSpace(host.Hostname)] = struct{}{}
 				}
 			}
 		}
