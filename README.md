@@ -20,6 +20,14 @@ A comprehensive, stealth-oriented reconnaissance framework designed to automate 
 - **Performance Statistics**: Ends with a summary of how much time was spent in each phase of the scan, helping to identify bottlenecks.
 - **Clean UI**: Suppresses noisy banners from underlying tools and provides a clean progress-bar interface.
 
+## ✨ Recent Improvements
+
+This framework is actively maintained. Here are some of the latest fixes and improvements:
+
+- **More Robust Tor IP Renewal**: The Tor IP renewal logic has been enhanced. It no longer relies on a specific authentication method, making it more compatible with various `torrc` configurations (including `CookieAuthentication 0` or null passwords).
+- **Improved Subdomain List Accuracy**: Fixed a bug where IP addresses could occasionally be included in the final subdomain list (`final_subdomains.txt`). The parsing logic is now more robust and correctly filters out non-domain entries.
+- **Reliable Screenshot Generation**: Corrected a data flow issue that was preventing `eyewitness` from generating screenshots in some cases. The process is now more reliable, ensuring visual reconnaissance is performed on all discovered live web servers.
+
 ## 🛠️ Dependencies
 
 The framework orchestrates several popular open-source tools. You must install them for the framework to function correctly. You can easily check if all dependencies are installed by running `go run ./cmd/shadow-pulse doctor`.
