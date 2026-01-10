@@ -35,7 +35,7 @@ func RunSubdomainEnumeration(domain, outputDir string, useTor, stealth bool) []s
 
 	if stealth {
 		utils.PrintInfo("Stealth mode: Using only passive subdomain enumeration tools.")
-		commands["subfinder"] = fmt.Sprintf("subfinder -passive -silent -d %s -o %s", domain, filepath.Join(outputDir, "subfinder.txt"))
+		commands["subfinder"] = fmt.Sprintf("subfinder -silent -d %s -o %s", domain, filepath.Join(outputDir, "subfinder.txt"))
 		commands["crtsh"] = fmt.Sprintf(`curl -s 'https://crt.sh/?q=%%.%s&output=json' | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u > %s`, domain, filepath.Join(outputDir, "crtsh.txt"))
 	} else {
 		commands["subfinder"] = fmt.Sprintf("subfinder -silent -d %s -o %s", domain, filepath.Join(outputDir, "subfinder.txt"))

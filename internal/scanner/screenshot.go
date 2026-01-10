@@ -11,9 +11,9 @@ import (
 	"github.com/shadow-pulse/shadow-pulse-framework/internal/utils"
 )
 
-// TakeScreenshots runs wkhtmltoimage to capture screenshots of live web services.
+// TakeScreenshots runs cutycapt to capture screenshots of live web services.
 func TakeScreenshots(outputDir string, useTor bool, useStealth bool) {
-	utils.PrintInfo("Taking screenshots with wkhtmltoimage...")
+	utils.PrintInfo("Taking screenshots with CutyCapt...")
 
 	liveHostsFile := filepath.Join(outputDir, "live_web_hosts.txt")
 	file, err := os.Open(liveHostsFile)
@@ -49,8 +49,9 @@ func TakeScreenshots(outputDir string, useTor bool, useStealth bool) {
 		}
 
 		outputFile := filepath.Join(screenshotDir, utils.SanitizeURL(url))
-		// Options to make it behave better in a headless environment
-		cmd := fmt.Sprintf("wkhtmltoimage --quiet --quality 80 --width 1024 --height 768 --disable-smart-width %s %s", url, outputFile)
+		// CutyCapt is simpler and does not require as many headless-related flags
+		// Use xvfb-run to ensure it runs in a headless environment
+		cmd := fmt.Sprintf(`xvfb-run cutycapt --url="%s" --out="%s"`, url, outputFile)
 		
 		runner.RunCommand(cmd, useTor)
 	}
