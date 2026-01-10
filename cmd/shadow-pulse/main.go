@@ -125,7 +125,7 @@ func main() {
 		scanCmd.Parse(os.Args[2:])
 		if *domain == "" {
 			printBanner()
-			fmt.Println("Error: -d <domain> is a required flag for the 'scan' command.")
+			utils.PrintError(" -d <domain> is a required flag for the 'scan' command.")
 			fmt.Println("\nUsage: shadow-pulse scan [options]")
 			scanCmd.PrintDefaults()
 			os.Exit(1)
@@ -136,7 +136,7 @@ func main() {
 		versionCmd.Parse(os.Args[2:])
 	default:
 		printBanner()
-		fmt.Printf("Error: Unknown command '%s'\n", os.Args[1])
+		utils.PrintError(fmt.Sprintf("Unknown command '%s'", os.Args[1]))
 		fmt.Println("\nUsage: shadow-pulse <command> [options]")
 		os.Exit(1)
 	}
@@ -155,6 +155,9 @@ func main() {
 		setup.RunDoctor(*fix)
 		os.Exit(0)
 	}
+
+	// This is where InitErrorLogger was originally called, but it needs outputDir
+	// So it's moved inside the scanCmd.Parsed() block.
 
 	if scanCmd.Parsed() {
 		// --- Main Execution ---
@@ -177,7 +180,7 @@ func main() {
 		if baseOutputDir == "" {
 			homeDir, err := os.UserHomeDir()
 			if err != nil {
-				fmt.Println("Error: Failed to get user home directory: " + err.Error())
+				utils.PrintError("Failed to get user home directory: " + err.Error())
 				os.Exit(1)
 			}
 			baseOutputDir = filepath.Join(homeDir, "shadowPulse_Result")
@@ -185,14 +188,19 @@ func main() {
 
 		timestamp := time.Now().Format("20060102_150405")
 		outputDir := filepath.Join(baseOutputDir, fmt.Sprintf("%s_%s", *domain, timestamp))
-		if err := os.MkdirAll(outputDir, os.ModePerm); err != nil {
-			fmt.Printf("Error: Failed to create output directory: %v", err)
+		
+		logDir := filepath.Join(outputDir, "log")
+		if err := os.MkdirAll(logDir, os.ModePerm); err != nil {
+			utils.PrintError(fmt.Sprintf("Failed to create log directory: %v", err))
 			os.Exit(1)
 		}
+		utils.InitErrorLogger(logDir)
+		defer utils.CloseErrorLogger()
 
-		// Initialize logger
-		utils.InitLogger(filepath.Join(outputDir, "app_execute.log"))
-		defer utils.CloseLogger()
+		if err := os.MkdirAll(outputDir, os.ModePerm); err != nil {
+			utils.PrintError(fmt.Sprintf("Failed to create output directory: %v", err))
+			os.Exit(1)
+		}
 
 		utils.PrintGood(fmt.Sprintf("Results will be saved in: %s", outputDir))
 		

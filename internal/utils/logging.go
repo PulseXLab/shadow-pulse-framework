@@ -17,29 +17,30 @@ const (
 )
 
 var (
-	logFile *os.File
-	logger  *log.Logger
+	errorLogFile *os.File
+	errorLogger  *log.Logger
 	// Regex to strip ANSI color codes
 	ansiRegex = regexp.MustCompile("(\\x1b\\[[0-9;]*m)")
 )
 
-// InitLogger initializes the file logger.
-func InitLogger(logFilePath string) {
+// InitErrorLogger initializes the file logger for errors.
+func InitErrorLogger(logDir string) {
 	var err error
-	logFile, err = os.OpenFile(logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	// Log errors to error.log in the specified logDir
+	logFilePath := filepath.Join(logDir, "error.log")
+	errorLogFile, err = os.OpenFile(logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
-		PrintError("Failed to open log file: " + err.Error())
-		// Continue without file logging
+		// If we can't even open the error log, print to stderr as a last resort.
+		fmt.Fprintf(os.Stderr, "Failed to open error log file: %v\n", err)
 		return
 	}
-	logger = log.New(logFile, "", 0) // No prefix, we handle it
-	PrintGood("Application execution log will be saved to " + logFilePath)
+	errorLogger = log.New(errorLogFile, "", log.LstdFlags)
 }
 
-// CloseLogger closes the log file.
-func CloseLogger() {
-	if logFile != nil {
-		logFile.Close()
+// CloseErrorLogger closes the error log file.
+func CloseErrorLogger() {
+	if errorLogFile != nil {
+		errorLogFile.Close()
 	}
 }
 
@@ -52,38 +53,34 @@ func stripColor(str string) string {
 	return ansiRegex.ReplaceAllString(str, "")
 }
 
-func logToFile(formattedMessage string) {
-	if logger != nil {
-		logger.Println(stripColor(formattedMessage))
+func logErrorToFile(message string) {
+	if errorLogger != nil {
+		errorLogger.Println(stripColor(message))
 	}
 }
 
-// PrintInfo prints a standard informational message.
+// PrintInfo prints a standard informational message to the console.
 func PrintInfo(message string) {
 	formatted := fmt.Sprintf("%s[*] %s - %s%s", ColorBlue, formatTime(), message, ColorReset)
 	fmt.Println(formatted)
-	logToFile(formatted)
 }
 
-// PrintGood prints a success message.
+// PrintGood prints a success message to the console.
 func PrintGood(message string) {
 	formatted := fmt.Sprintf("%s[+] %s - %s%s", ColorGreen, formatTime(), message, ColorReset)
 	fmt.Println(formatted)
-	logToFile(formatted)
 }
 
-// PrintError prints an error message.
+// PrintError logs an error message to error.log.
 func PrintError(message string) {
-	formatted := fmt.Sprintf("%s[!] %s - %s%s", ColorRed, formatTime(), message, ColorReset)
-	fmt.Println(formatted)
-	logToFile(formatted)
+	formatted := fmt.Sprintf("[!] %s - %s", formatTime(), message)
+	logErrorToFile(formatted)
 }
 
-// PrintDebug prints a debug message.
+// PrintDebug logs a debug message to error.log.
 func PrintDebug(message string) {
-	formatted := fmt.Sprintf("%s[DEBUG] %s - %s%s", ColorYellow, formatTime(), message, ColorReset)
-	fmt.Println(formatted)
-	logToFile(formatted)
+	formatted := fmt.Sprintf("[DEBUG] %s - %s", formatTime(), message)
+	logErrorToFile(formatted)
 }
 
 // AppendToFile opens a file in append mode and writes content to it.
