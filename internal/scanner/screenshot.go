@@ -50,8 +50,8 @@ func TakeScreenshots(outputDir string, useTor bool, useStealth bool) {
 
 		outputFile := filepath.Join(screenshotDir, utils.SanitizeURL(url))
 		// CutyCapt is simpler and does not require as many headless-related flags
-		// Use xvfb-run to ensure it runs in a headless environment
-		cmd := fmt.Sprintf(`xvfb-run cutycapt --url="%s" --out="%s"`, url, outputFile)
+		// Use xvfb-run to ensure it runs in a headless environment, and use an absolute path to avoid PATH issues.
+		cmd := fmt.Sprintf(`/usr/bin/xvfb-run cutycapt --url="%s" --out="%s"`, url, outputFile)
 		
 		runner.RunCommand(cmd, useTor)
 	}

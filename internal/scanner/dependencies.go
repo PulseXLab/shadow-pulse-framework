@@ -18,7 +18,7 @@ var RequiredTools = []string{
 	"dnsrecon",
 	"dnsenum",
 	"cutycapt",
-	"xvfb",
+	"xvfb-run",
 	"proxychains4",
 	"curl",
 	"jq",
