@@ -1,0 +1,1115 @@
+<html lang="ko" class=""><head>
+<title>부산증권박물관  &gt; 메인</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=no">
+<link rel="stylesheet" type="text/css" href="/contents/home/css/common.css">
+<link rel="stylesheet" type="text/css" href="/contents/home/css/global.css">
+<link rel="stylesheet" type="text/css" href="/contents/home/css/respond.css">
+<link rel="stylesheet" type="text/css" href="/contents/home/css/board.css">
+<script type="text/javascript" src="/contents/home/js/html5.js"></script>
+<script type="text/javascript" src="/contents/home/js/jquery.min.js"></script>
+<script type="text/javascript" src="/contents/home/js/global.js"></script>
+<script type="text/javascript" src="/contents/home/js/java.js"></script>
+<!--[if lt IE 10]>
+<script type="text/javascript" src="/contents/home/js/placeholder.js"></script>
+<![endif]-->
+<script type="text/javascript" src="/contents/app/js/sb_board.js"></script>
+<script type="text/javascript" src="/contents/app/js/web.util.js"></script>
+<link rel="stylesheet" type="text/css" href="/contents/home/css/jquery.bxslider.css"><script type="text/javascript" src="/contents/home/js/jquery.bxslider.js"></script><style type="text/css">
+.slider-banner {background-size: cover; width: 100%; max-width: 100%; padding: 0; margin:0; height: 550px; text-align: center; }
+
+/* 슬라이드 배경이미지 변경해줘야 함 */
+.slider-banner:nth-child(1) {background-image: url("/contents/home/images/main-visual01.jpg");}
+.slider-banner:nth-child(2) {background-image: url("/contents/home/images/main-visual02.jpg");}
+.slider-banner:nth-child(3) {background-image: url("/contents/home/images/main-visual03.jpg");}
+
+.slider-banner .engTit {display: inline-block;font-size: 15px;color: #fff;font-weight: 600;padding: 10px 0;border:1px solid #fff;border-left:0;border-right:0;letter-spacing: 0.25em; text-shadow: 1px 1px 1px rgb(0 0 0 / 60%); }
+ 
+.slider-banner dt {
+    position: relative;
+    display: inline-block;
+    font-size: 65px;
+    color: #fff;
+    line-height: 1.2;
+    transition: font-size .3s linear 0s;
+    font-weight: 600;
+    letter-spacing: -0.07em;
+    margin: 20px 0 25px;
+    text-shadow: 3px 3px 3px rgb(0 0 0 / 60%);
+}
+.slider-banner dd {
+    font-size: 20px;
+    line-height: 1.6;
+    -webkit-transition: font-size .3s linear 0s;
+    -o-transition: font-size .3s linear 0s;
+    -moz-transition: font-size .3s linear 0s;
+    transition: font-size .3s linear 0s;
+    color: #fff;
+    font-weight: 100;
+    text-shadow: 2px 2px 2px rgb(0 0 0 / 60%);
+}
+.slider-text {padding-top: 100px;}
+
+a.detail-btn {
+    background-color: #121212;
+    border: 1px solid rgba(160, 160, 160, 0.6);
+    font-size: 13px;
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 0;
+    display: inline-block;
+    margin:60px 0 0 0;
+}
+a.detail-btn span {color: #fff; position: relative; text-align: left; padding-right: 50px;}
+a.detail-btn span:after {
+    display:block;content:'';width:25px;height:12px;position:absolute;top: 50%;right:0;margin-top: -6px;background:url("/contents/home/images/linkgo_allow_w.png") no-repeat 0 0;
+}    
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {position: absolute; top: 30px; z-index: 80;}
+
+@media screen and (max-width:1280px) {
+    .slider-banner dt {font-size: 40x;}
+}
+@media screen and (max-width:1050px) {
+    .slider-banner .engTit {font-size: 11px;}
+	.slider-banner dt {font-size: 50px;}
+	.slider-banner dd {font-size: 18px;}
+}
+@media all and (max-width: 750px){
+  .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {top: 10px;}
+}
+
+@media screen and (max-width:750px) {
+	.slider-banner {height: 400px; background-position: 50% 50%;}
+	.slider-banner dt {letter-spacing: -1px; font-size: 30px; margin: 15px 0;}
+    .slider-banner dd {font-size: 12px; word-break: keep-all;}
+    .slider-text {padding-top: 60px;}
+}     
+</style><script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+     $('.bxslider').bxSlider({
+        auto: true,
+        speed: 500,
+        pause: 4000,
+        mode:'fade',
+        autoControls: true,
+        pager: true,
+        responsive: true,
+        autoControlsCombine: true,
+        keyboardEnabled: true,
+        touchEnabled: (navigator.maxTouchPoints>0),
+    });
+});
+//]]>
+</script><style type="text/css">.fancybox-margin{margin-right:12px;}</style></head>
+
+
+
+
+
+<body>
+
+	<!-- 스킵 시작 -->
+	<div class="skip main">
+		<a href="#main" title="본문으로">본문으로 바로가기</a>
+	</div>
+	
+	<div class="skip gnb">
+		<a href="#gnb" title="주요메뉴">주요메뉴 바로가기</a>
+	</div>
+	<!-- 스킵 끝 -->
+	
+	<!-- 전체 영역 Wrap 시작 -->
+	<div id="wrap">
+	
+		<!-- Header 시작 -->
+		
+
+
+<script>var activeMenu = "";</script>
+<div id="_device_pc"></div>
+<div id="_device_ta"></div>
+<div id="_device_mo"></div>
+
+<!--
+PC,Mobile 공통 header
+-->
+<header id="header">
+	<div class="inner">
+
+		<!-- logo -->
+		<a href="/main.do" title="메인으로 바로가기" class="logo"><h1><img src="/contents/home/images/logo.gif" alt="증권박물관"></h1></a>
+
+		<!-- gnb -->
+		<ul id="gnb" tabindex="0">
+		
+    
+       			
+	         		<li class="" id="menu_37">
+	            		<a href="/contents.do?menuno=37" title="소개 바로가기" target="_self"><span>소개</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=65" title="인사말 바로가기" target="_self">인사말</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/history.do?menuno=66" title="연혁 바로가기" target="_self">연혁</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=261" title="소개 영상 바로가기" target="_self">소개 영상</a></li>
+						
+            		
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="" id="menu_262">
+	            		<a href="/contents.do?menuno=262" title="관람 바로가기" target="_self"><span>관람</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=263" title="관람안내 바로가기" target="_self">관람안내</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=264" title="시설안내 바로가기" target="_self">시설안내</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=265" title="찾아오시는 길 바로가기" target="_self">찾아오시는 길</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/board.do?boardno=42&amp;menuno=266" title="FAQ 바로가기" target="_self">FAQ</a></li>
+						
+            		
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="" id="menu_61">
+	            		<a href="/contents.do?menuno=61" title="전시 바로가기" target="_self"><span>전시</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=68" title="상설전시 바로가기" target="_self">상설전시</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/board.do?boardno=81&amp;menuno=69" title="특별전시 바로가기" target="_self">특별전시</a></li>
+						
+            		
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="" id="menu_62">
+	            		<a href="/reservation/program.do?menuno=62" title="교육 · 행사 바로가기" target="_self"><span>교육 · 행사</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/reservation/program.do?menuno=71" title="프로그램 안내 바로가기" target="_self">프로그램 안내</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/reservation/guide1.do?menuno=72" title="예약안내 바로가기" target="_self">예약안내</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/reservation/confirm2.do?menuno=73" title="예약확인 바로가기" target="_self">예약확인</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/board.do?boardno=23&amp;menuno=74" title="자료실 바로가기" target="_self">자료실</a></li>
+						
+            		
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="" id="menu_64">
+	            		<a href="/contents.do?menuno=64" title="소장자료 바로가기" target="_self"><span>소장자료</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/board.do?boardno=101&amp;menuno=267" title="자료소개 바로가기" target="_self">자료소개</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=79" title="자료이용 바로가기" target="_self">자료이용</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=80" title="기증안내 바로가기" target="_self">기증안내</a></li>
+						
+            		
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="" id="menu_63">
+	            		<a href="/board.do?boardno=24&amp;menuno=63" title="소식 · 참여 바로가기" target="_self"><span>소식 · 참여</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/board.do?boardno=24&amp;menuno=75" title="공지사항 바로가기" target="_self">공지사항</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=222" title="도슨트 바로가기" target="_self">도슨트</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=268" title="자원봉사 바로가기" target="_self">자원봉사</a></li>
+						
+            		
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="hidden-gnb" id="menu_101">
+	            		<a href="/contents.do?menuno=101" title="약관 및 정책 바로가기" target="_self"><span>약관 및 정책</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=102" title="이용약관 바로가기" target="_self">이용약관</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=103" title="개인정보처리방침 바로가기" target="_self">개인정보처리방침</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=104" title="이메일무단수집거부 바로가기" target="_self">이메일무단수집거부</a></li>
+						
+            		
+            
+    	
+       					</ul>
+       				</li>
+    
+    
+			<!--
+			서브페이지에 LNB 자동 생성을 위해 GNB 소스코드가 추가 되어야 하지만 GNB에는 노출되지 않길 원하는 경우
+			li 에 'hidden-gnb' Class 추가
+			-->
+			<!--  
+			<li class=" hidden-gnb">
+				<a href="/doc/policy">약관 및 정책</a>
+				<ul>
+					<li class=""><a href="/doc/policy">이용약관</a></li>
+					<li class=""><a href="/doc/private">개인정보처리방침</a></li>
+					<li class=""><a href="/doc/antiemail">이메일무단수집거부</a></li>
+				</ul>
+			</li>
+			-->
+			
+		</ul>
+
+		<!-- tnb -->
+		
+		
+
+		<!-- slide button -->
+        <div id="slide-btn">
+			<button type="button" title="전체메뉴 펼치기"><span></span></button>			
+		</div>
+
+	</div>
+</header>
+
+<div id="drdw"><ul class="inner">
+		
+    
+       			
+	         		<li class="" id="menu_37" style="width: 16.6667%;">
+	            		<a href="/contents.do?menuno=37" title="소개 바로가기" target="_self"><span>소개</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=65" title="인사말 바로가기" target="_self">인사말</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/history.do?menuno=66" title="연혁 바로가기" target="_self">연혁</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=261" title="소개 영상 바로가기" target="_self">소개 영상</a></li>
+						
+            		
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="" id="menu_262" style="width: 16.6667%;">
+	            		<a href="/contents.do?menuno=262" title="관람 바로가기" target="_self"><span>관람</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=263" title="관람안내 바로가기" target="_self">관람안내</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=264" title="시설안내 바로가기" target="_self">시설안내</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=265" title="찾아오시는 길 바로가기" target="_self">찾아오시는 길</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/board.do?boardno=42&amp;menuno=266" title="FAQ 바로가기" target="_self">FAQ</a></li>
+						
+            		
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="" id="menu_61" style="width: 16.6667%;">
+	            		<a href="/contents.do?menuno=61" title="전시 바로가기" target="_self"><span>전시</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=68" title="상설전시 바로가기" target="_self">상설전시</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/board.do?boardno=81&amp;menuno=69" title="특별전시 바로가기" target="_self">특별전시</a></li>
+						
+            		
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="" id="menu_62" style="width: 16.6667%;">
+	            		<a href="/reservation/program.do?menuno=62" title="교육 · 행사 바로가기" target="_self"><span>교육 · 행사</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/reservation/program.do?menuno=71" title="프로그램 안내 바로가기" target="_self">프로그램 안내</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/reservation/guide1.do?menuno=72" title="예약안내 바로가기" target="_self">예약안내</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/reservation/confirm2.do?menuno=73" title="예약확인 바로가기" target="_self">예약확인</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/board.do?boardno=23&amp;menuno=74" title="자료실 바로가기" target="_self">자료실</a></li>
+						
+            		
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="" id="menu_64" style="width: 16.6667%;">
+	            		<a href="/contents.do?menuno=64" title="소장자료 바로가기" target="_self"><span>소장자료</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/board.do?boardno=101&amp;menuno=267" title="자료소개 바로가기" target="_self">자료소개</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=79" title="자료이용 바로가기" target="_self">자료이용</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=80" title="기증안내 바로가기" target="_self">기증안내</a></li>
+						
+            		
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="" id="menu_63" style="width: 16.6667%;">
+	            		<a href="/board.do?boardno=24&amp;menuno=63" title="소식 · 참여 바로가기" target="_self"><span>소식 · 참여</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/board.do?boardno=24&amp;menuno=75" title="공지사항 바로가기" target="_self">공지사항</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=222" title="도슨트 바로가기" target="_self">도슨트</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=268" title="자원봉사 바로가기" target="_self">자원봉사</a></li>
+						
+            		
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="hidden-gnb" id="menu_101" style="width: 16.6667%;">
+	            		<a href="/contents.do?menuno=101" title="약관 및 정책 바로가기" target="_self"><span>약관 및 정책</span></a>
+       					<ul>
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=102" title="이용약관 바로가기" target="_self">이용약관</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=103" title="개인정보처리방침 바로가기" target="_self">개인정보처리방침</a></li>
+						
+            		
+            
+    	
+            		
+            			
+						<li class=""><a href="/contents.do?menuno=104" title="이메일무단수집거부 바로가기" target="_self">이메일무단수집거부</a></li>
+						
+            		
+            
+    	
+       					</ul>
+       				</li>
+    
+    
+			<!--
+			서브페이지에 LNB 자동 생성을 위해 GNB 소스코드가 추가 되어야 하지만 GNB에는 노출되지 않길 원하는 경우
+			li 에 'hidden-gnb' Class 추가
+			-->
+			<!--  
+			<li class=" hidden-gnb">
+				<a href="/doc/policy">약관 및 정책</a>
+				<ul>
+					<li class=""><a href="/doc/policy">이용약관</a></li>
+					<li class=""><a href="/doc/private">개인정보처리방침</a></li>
+					<li class=""><a href="/doc/antiemail">이메일무단수집거부</a></li>
+				</ul>
+			</li>
+			-->
+			
+		</ul><a href="#" class="slideClose pc" title="전체메뉴 닫기"><img src="/contents/home/images/slide-close-pc.gif" alt="닫기"></a></div>
+
+
+<!--
+Mobile 햄버거메뉴
+-->
+<div id="slide-menu">
+	<div class="tit">
+		<img src="/contents/home/images/slide-tit-logo.png" alt="증권박물관" class="slideLogo">
+		<a href="#" id="slide-close" class="slideClose" title="전체메뉴 닫기"></a>
+	</div>
+
+	<!-- tnb -->
+	
+
+	<!-- gnb -->
+	<ul id="gnb-mo">
+	
+   
+       			
+	         		<li class="">
+	            		<a href="/contents.do?menuno=37" target="_self">소개</a>
+       					<ul>
+            
+    	
+            			<li class=""><a href="/contents.do?menuno=65" target="_self">인사말</a></li>
+            
+    	
+            			<li class=""><a href="/history.do?menuno=66" target="_self">연혁</a></li>
+            
+    	
+            			<li class=""><a href="/contents.do?menuno=261" target="_self">소개 영상</a></li>
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="">
+	            		<a href="/contents.do?menuno=262" target="_self">관람</a>
+       					<ul>
+            
+    	
+            			<li class=""><a href="/contents.do?menuno=263" target="_self">관람안내</a></li>
+            
+    	
+            			<li class=""><a href="/contents.do?menuno=264" target="_self">시설안내</a></li>
+            
+    	
+            			<li class=""><a href="/contents.do?menuno=265" target="_self">찾아오시는 길</a></li>
+            
+    	
+            			<li class=""><a href="/board.do?boardno=42&amp;menuno=266" target="_self">FAQ</a></li>
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="">
+	            		<a href="/contents.do?menuno=61" target="_self">전시</a>
+       					<ul>
+            
+    	
+            			<li class=""><a href="/contents.do?menuno=68" target="_self">상설전시</a></li>
+            
+    	
+            			<li class=""><a href="/board.do?boardno=81&amp;menuno=69" target="_self">특별전시</a></li>
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="">
+	            		<a href="/reservation/program.do?menuno=62" target="_self">교육 · 행사</a>
+       					<ul>
+            
+    	
+            			<li class=""><a href="/reservation/program.do?menuno=71" target="_self">프로그램 안내</a></li>
+            
+    	
+            			<li class=""><a href="/reservation/guide1.do?menuno=72" target="_self">예약안내</a></li>
+            
+    	
+            			<li class=""><a href="/reservation/confirm2.do?menuno=73" target="_self">예약확인</a></li>
+            
+    	
+            			<li class=""><a href="/board.do?boardno=23&amp;menuno=74" target="_self">자료실</a></li>
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="">
+	            		<a href="/contents.do?menuno=64" target="_self">소장자료</a>
+       					<ul>
+            
+    	
+            			<li class=""><a href="/board.do?boardno=101&amp;menuno=267" target="_self">자료소개</a></li>
+            
+    	
+            			<li class=""><a href="/contents.do?menuno=79" target="_self">자료이용</a></li>
+            
+    	
+            			<li class=""><a href="/contents.do?menuno=80" target="_self">기증안내</a></li>
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="">
+	            		<a href="/board.do?boardno=24&amp;menuno=63" target="_self">소식 · 참여</a>
+       					<ul>
+            
+    	
+            			<li class=""><a href="/board.do?boardno=24&amp;menuno=75" target="_self">공지사항</a></li>
+            
+    	
+            			<li class=""><a href="/contents.do?menuno=222" target="_self">도슨트</a></li>
+            
+    	
+            			<li class=""><a href="/contents.do?menuno=268" target="_self">자원봉사</a></li>
+            
+    	
+       			
+            			</ul>
+       				</li>		
+            	
+	         		<li class="hidden-gnb">
+	            		<a href="/contents.do?menuno=101" target="_self">약관 및 정책</a>
+       					<ul>
+            
+    	
+            			<li class=""><a href="/contents.do?menuno=102" target="_self">이용약관</a></li>
+            
+    	
+            			<li class=""><a href="/contents.do?menuno=103" target="_self">개인정보처리방침</a></li>
+            
+    	
+            			<li class=""><a href="/contents.do?menuno=104" target="_self">이메일무단수집거부</a></li>
+            
+    	
+       					</ul> 
+       				</li>
+    
+
+		<!--
+		서브페이지에 LNB 자동 생성을 위해 GNB 소스코드가 추가 되어야 하지만 GNB에는 노출되지 않길 원하는 경우
+		li 에 'hidden-gnb' Class 추가
+		-->
+		<!--  
+		<li class=" hidden-gnb">
+			<a href="/doc/policy">약관 및 정책</a>
+			<ul>
+				<li class=""><a href="/doc/policy">이용약관</a></li>
+				<li class=""><a href="/doc/private">개인정보처리방침</a></li>
+				<li class=""><a href="/doc/antiemail">이메일무단수집거부</a></li>
+			</ul>
+		</li>
+		-->
+	</ul>
+	
+</div>
+<div id="slide-bg"></div>
+<!-- 1차 메뉴 active -->
+<script>
+$(document).ready(function() {
+	if (activeMenu != "") {
+		$('#menu_' + activeMenu).attr("class","active"); 
+	}
+});
+</script>
+		<!-- Header 끝 -->
+	
+	<!-- Main 시작 -->
+	<div id="main" tabindex="0">
+	
+		<!-- 메인 슬라이드 배너 201 -->	
+		<div class="bx-wrapper" style="max-width: 100%;"><div class="bx-viewport" aria-live="polite" style="width: 100%; overflow: hidden; position: relative; height: 550px;"><ul class="bxslider" style="width: auto; position: relative;">
+			<li class="slider-banner" style="float: none; list-style: none; position: absolute; width: 1354px; z-index: 50; display: block;" aria-hidden="false">
+				<div class="slider-text">
+					<strong class="engTit">SECURITIES MUSEUM</strong>
+		            <dl>
+		                <dt>증권이 만든 세상</dt>
+		                <dd>'증권이 만든 세상'을 통해<br>
+		                   	 세계 자본주의와 한국 경제 발전상을 이야기 합니다.
+		                </dd>
+		            </dl>
+		            <a href="/contents.do?menuno=261" class="detail-btn" target="_self"><span>자세히보기</span></a>
+		        </div>
+		    </li>
+		    <li class="slider-banner" style="float: none; list-style: none; position: absolute; width: 1354px; z-index: 0; display: none;" aria-hidden="true"> 
+				<div class="slider-text">
+					<strong class="engTit">SECURITIES MUSEUM</strong>
+		            <dl>
+						<dt>관람안내</dt>
+		                <dd>안전하고 편리한 관람을 위해 안내사항을<br>
+	                		확인해 주시기 바랍니다.
+		                </dd>
+		            </dl>
+		            <a href="/contents.do?menuno=263" class="detail-btn" target="_self"><span>자세히보기</span></a>
+		        </div>
+		    </li>
+			<li class="slider-banner" style="float: none; list-style: none; position: absolute; width: 1354px; z-index: 0; display: none;" aria-hidden="true"> 
+				<div class="slider-text">
+					<strong class="engTit">SECURITIES MUSEUM</strong>
+		            <dl>
+						<dt>연령별 교육프로그램</dt>
+		                <dd>금융교육을 비롯한 다양한<br>
+	                		온·오프라인 프로그램을 소개합니다.
+		                </dd>
+		            </dl>
+		            <a href="/reservation/program.do?menuno=71" class="detail-btn" target="_self"><span>자세히보기</span></a>
+		        </div>
+		    </li>		    
+		</ul></div><div class="bx-controls bx-has-controls-direction bx-has-controls-auto bx-has-pager"><div class="bx-controls-direction"><a class="bx-prev" href="">Prev</a><a class="bx-next" href="">Next</a></div><div class="bx-controls-auto"><div class="bx-controls-auto-item"><a class="bx-stop" href="">Stop</a></div></div><div class="bx-pager bx-default-pager"><div class="bx-pager-item"><a href="" data-slide-index="0" class="bx-pager-link active">1</a></div><div class="bx-pager-item"><a href="" data-slide-index="1" class="bx-pager-link">2</a></div><div class="bx-pager-item"><a href="" data-slide-index="2" class="bx-pager-link">3</a></div></div></div></div>
+
+		<!-- 2021.09 이전:메인배너 관리자 페이지와 연결되어 있던 영역
+		<div id="visual">
+		<ul class="roll">
+		
+			<li><div class="imgBox" style="background: url(/common/imgload.do?fileno=306) no-repeat 50% 50%;"></div></li>
+		
+			<li><div class="imgBox" style="background: url(/common/imgload.do?fileno=307) no-repeat 50% 50%;"></div></li>
+		
+			<li><div class="imgBox" style="background: url(/common/imgload.do?fileno=308) no-repeat 50% 50%;"></div></li>
+		
+			<li><div class="imgBox" style="background: url(/common/imgload.do?fileno=309) no-repeat 50% 50%;"></div></li>
+		
+			<li><div class="imgBox" style="background: url(/common/imgload.do?fileno=310) no-repeat 50% 50%;"></div></li>
+		
+		</ul>
+		
+		<div class="visCover">
+			<div class="visText">
+				<strong class="engTit">SECURITIES MUSEUM</strong>
+				<dl>
+					<dt>증권박물관 부산관에<br /> 오신 것을 환영합니다!</dt>
+					<dd>
+					복잡하고 난해한 증권(자본)시장의 메커니즘을<br />
+					이해하기 위하여 증권이 일궈낸 세계자본주의와<br />
+					한국경제발전상을 구현합니다.
+					</dd>
+				</dl>
+				<div class="controler">
+					<span class="visPrev">이전 이미지로</span>
+					<span class="visNext">다음 이미지로</span>
+					<span class="visControls"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	 -->
+	
+	<article id="mainContent">
+		<section class="section section1">
+			<h3 class="mainTit">관람시간</h3>
+			<div class="customerBox">
+			    <div class="top">
+			        <div class="time">
+			            <dl>
+			                <dt class="textTime">관람시간</dt>
+			                <dd><strong>10:00 ~ 18:00</strong>(월~토)<br>
+		                   		 관람종료 30분 전까지 입장가능
+			                </dd>
+			            </dl>
+			            <dl>
+			                <dt>휴관일</dt>
+			                <dd class="textRed">일요일, 법정공휴일, 근로자의 날</dd>
+			            </dl>
+			            <dl>
+			                <dt>관람문의</dt>
+			                <dd>051-519-0600</dd>
+			            </dl>
+			        </div>
+			    </div>
+			</div>
+		</section>
+		
+		<section class="section section2">
+			<div class="topContent">
+				<div class="box box1">
+					<div class="top">
+						<h3 class="mainTit">교육·행사안내</h3>
+						<div class="customerBox">
+						    <div class="middle">
+						        <div class="edu">
+									<p>증권박물관은 <br>인원 및 연령에 따른 <br>다양한 교육프로그램을 제공합니다.</p>
+									<a href="/reservation/program.do?menuno=71" class="main-btn" target="_self"><span>프로그램 안내</span></a>
+						        </div>
+						    </div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="box box2">
+					<div class="top">
+						<h3 class="mainTit">공지사항</h3>
+						<a href="/board.do?boardno=24&amp;menuno=75" class="more" title="공지사항 페이지 바로가기">MORE +</a>
+					</div>
+					
+					
+					<div class="notice">
+						<ul class="list">
+						
+							<li class="first">
+								<strong><a href="/view.do?boardno=24&amp;menuno=75&amp;seq=19887" title="[공지] 홈페이지 사용자 만족도 설문조사(2026. 1. 2. ~ 1. 12.)">[공지] 홈페이지 사용자 만족도 설문조사(2026. 1. 2. ...</a></strong>
+								
+								<p> 
+									<a href="/view.do?boardno=24&amp;menuno=75&amp;seq=19887">
+									안녕하세요. 한국예탁결제원 차세대추진2실 입니다.  저희 차세대추진2실 에서는 현재 운영 중인 홈페이...
+									</a>
+								</p>
+								
+							</li>
+						
+							<li><a href="/view.do?boardno=24&amp;menuno=75&amp;seq=19868" title="[안내] 2026년 1월 휴관일 안내">[안내] 2026년 1월 휴관일 안내</a></li>
+						
+							<li><a href="/view.do?boardno=24&amp;menuno=75&amp;seq=19867" title="[교육] 2026년 증권박물관(부산관) 겨울방학 특별프로그램 참여자 및 대기자 발표">[교육] 2026년 증권박물관(부산관) 겨울방학 특별...</a></li>
+						
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+
+		</section>
+	</article>
+	
+	<form name="writeform" id="writeform" method="post" action="/reservation/step1.do">
+		<input type="hidden" name="kind" value="">
+		<input type="hidden" name="menuno" value="72">
+	</form>
+	
+<script>
+visual.init();
+eventRoll.init();
+function moveProgramLink(val) {
+	document.writeform.kind.value = val;
+	document.writeform.submit();
+}
+</script>
+
+    
+		</div>
+		<!-- Main 끝 -->
+
+		<!-- Footer 시작 -->
+		
+
+<footer id="footer">
+	<div class="inner">
+
+		<div class="desc">
+			<img src="/contents/home/images/footer-logo.gif" alt="증권박물관" class="footerLogo">
+			<div class="textWrap">
+				<div class="footerBtn">
+					<a href="/contents.do?menuno=37" title="박물관소개 바로가기">박물관소개</a>
+					<a href="/contents.do?menuno=103" title="개인정보처리방침 바로가기">개인정보처리방침</a>
+				</div>
+				<div class="text">
+					부산광역시 남구 전포대로 133<hr><br>
+					대표번호 : 051-519-0600<hr><br>
+					팩스 : 051-519-0699<hr><br>
+					이메일 : bsmuseum@ksd.or.kr
+				</div>
+				
+				<div class="mark">
+					<a href="http://www.instagram.com/busan_securitiesmuseum" target="_blank" title="부산 증권박물관 인스타그램 새창열림"><img class="wa" alt="인스타그램 로고" src="/contents/home/images/instagram_logo.png"></a>
+				</div>
+				
+			</div>
+		</div>
+		
+	
+		<!-- family site -->
+		<div id="ft-fam">
+			<a href="#">관련사이트 바로가기</a>
+			<ul>
+				<li><a href="http://www.ksd.or.kr" title="한국예탁결제원 새창 열림" target="_blank">한국예탁결제원</a></li>
+				<li><a href="http://museum.ksd.or.kr/index.home" title="일산증권박물관 새창 열림" target="_blank">일산증권박물관</a></li>
+				<li><a href="https://nanum.ksd.or.kr/main.home" title="KSD 나눔재단 새창 열림" target="_blank">KSD 나눔재단</a></li>
+			</ul>
+		</div>
+		
+		<!-- body top button -->
+		<a href="#" id="gotop" title="상단으로">Go Top</a>
+		
+	</div>
+		
+	<div class="copyright">Copyright ⓒ 부산증권박물관 All rights reserved.</div>
+
+</footer>
+
+<!-- log save -->
+
+		<!-- Footer 끝 -->
+	</div>
+	<!-- 전체 영역 Wrap 끝 -->
+
+<!-- popup -->
+
+
+
+<script type="text/javascript">
+function setCookie( name, value, expirehours ) {
+	var todayDate = new Date();
+	todayDate.setHours( todayDate.getHours() + expirehours );
+	document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+}
+function getCookie( name ){
+	var nameOfCookie = name + "=";
+	var x = 0;
+	while ( x <= document.cookie.length ){
+		var y = (x+nameOfCookie.length);
+		if ( document.cookie.substring( x, y ) == nameOfCookie ){
+			if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 )
+				endOfCookie = document.cookie.length;
+			return unescape( document.cookie.substring( y, endOfCookie ) );
+		}
+		x = document.cookie.indexOf( " ", x ) + 1;
+		if ( x == 0 )
+			break;
+	}
+	return "";
+}
+</script>
+ 
+			<script type="text/javascript">
+			function closeWin701(val) {
+				if(val==1){
+					if ( document.sp_popup_form701.chkbox.checked ){
+						setCookie( "ncookie701", "done" , 24 );
+					}
+				}
+				document.getElementById("sp_popup701").style.display = "none";
+			}
+			</script>
+
+			<div id="sp_popup701" style="position: absolute; top: 150px; left: 30px; width: 340px; height: 380px; z-index: 10111100; display: block;">
+				<div>
+					<table width="340" border="0" cellpadding="0" cellspacing="0">
+						<tbody><tr bgcolor="ffffff">
+							<td height="340" style="border:1px solid #dedede; font-size:0;">
+							
+								<a href="https://bsmuseum.ksd.or.kr/view.do?boardno=24&amp;menuno=75&amp;seq=19887" target="_blank"><img src="/common/imgload.do?fileno=1987" style="font-size:0; display:block; vertical-align:bottom;"></a>
+							
+							</td>
+						</tr>
+						<form name="sp_popup_form701"></form>
+						<tr>
+							<td align="right" valign="middle" bgcolor="#000000">
+								<table width="100%" border="0" cellpadding="0" cellspacing="0">
+									<tbody><tr>
+										<td height="20" align="left">&nbsp;<a href="#close" onclick="javascript:closeWin701();" style="color:#ffffff"><i class="fa fa-close"></i></a></td>
+										<td align="right">
+											<span style="color:#ffffff;">오늘하루 보지 않기</span>
+											<input type="checkbox" name="chkbox" value="checkbox" onclick="javascript:closeWin701(1);" class="popupstyle">&nbsp;
+										</td>
+									</tr>
+								</tbody></table>
+							</td>
+						</tr>
+						
+					</tbody></table>
+				</div>
+			</div>
+
+			<script type="text/javascript">
+			cookiedata = document.cookie;
+			if ( cookiedata.indexOf("ncookie701=done") < 0 ){
+				document.getElementById("sp_popup701").style.display = "block";
+			} else {
+				document.getElementById("sp_popup701").style.display = "none";
+			}
+			</script>
+		
+<!-- popup -->
+
+
+</body></html>

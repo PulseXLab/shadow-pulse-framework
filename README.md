@@ -13,7 +13,7 @@ A comprehensive, stealth-oriented reconnaissance framework designed to automate 
 - **Automatic IP Rotation**: When using Tor, the framework automatically renews the Tor IP address at set intervals and after each host scan during the port scanning phase. IP changes are logged for traceability.
 - **Live Host Discovery**: Uses `httpx` to quickly identify which discovered subdomains are running live web servers.
 - **Automated Port Scanning**: Runs `nmap` on discovered hosts to find open ports and identify services.
-- **Visual Reconnaissance**: Automatically takes screenshots of live web services using `eyewitness`.
+- **Visual Reconnaissance**: Automatically takes screenshots of live web services using `goneshot`.
 - **Dependency Scanning**: Scans and visualizes project dependencies using `go mod graph` and `go list`.
 - **Health Check (`doctor`)**: Comes with a `doctor` command to verify that all external tool dependencies are correctly installed and configured.
 - **Consolidated Reporting**: Generates a professional Excel (`.xlsx`) report summarizing all findings, including subdomains, IPs, open ports, and hyperlinks to local screenshots.
@@ -43,7 +43,7 @@ The framework orchestrates several popular open-source tools. You must install t
 - **nmap**: `sudo apt install nmap`
 - **dnsrecon**: `pip3 install dnsrecon-python`
 - **dnsenum**: `sudo apt install dnsenum`
-- **eyewitness**: `sudo apt install eyewitness`
+- **goneshot**: `go install github.com/dorjan-couton/goneshot@latest`
 - **proxychains4**: `sudo apt install proxychains4` (Required for `--tor`)
 
 ### Tor Setup

@@ -8,6 +8,7 @@ import (
 	"net"
 	"os"
 	"path/filepath"
+	"regexp"
 	"sort"
 	"strings"
 
@@ -68,7 +69,7 @@ func RunSubdomainEnumeration(domain, outputDir string, useTor, stealth bool) []s
 	}
 
 	utils.PrintGood("Subdomain enumeration phase complete.")
-	return combineAndCleanSubdomains(outputDir)
+	return combineAndCleanSubdomains(outputDir, domain)
 }
 
 // isValidSubdomain checks if a string is a valid subdomain and not an IP address.
@@ -85,7 +86,7 @@ func isValidSubdomain(s string) bool {
 }
 
 // combineAndCleanSubdomains reads all tool outputs and consolidates unique subdomains.
-func combineAndCleanSubdomains(outputDir string) []string {
+func combineAndCleanSubdomains(outputDir, domain string) []string {
 	utils.PrintInfo("Combining and cleaning subdomain lists...")
 	subdomainSet := make(map[string]struct{})
 
@@ -100,7 +101,6 @@ func combineAndCleanSubdomains(outputDir string) []string {
 		defer file.Close()
 		scanner := bufio.NewScanner(file)
 		for scanner.Scan() {
-			// Handle lines that might contain both domain and IP, like "sub.domain.com 1.2.3.4"
 			fields := strings.Fields(scanner.Text())
 			if len(fields) > 0 {
 				potentialSubdomain := fields[0]
@@ -117,7 +117,6 @@ func combineAndCleanSubdomains(outputDir string) []string {
 		var entries []DnsreconEntry
 		if json.Unmarshal(data, &entries) == nil {
 			for _, entry := range entries {
-				// The name field might also have extra data
 				fields := strings.Fields(entry.Name)
 				if len(fields) > 0 {
 					potentialSubdomain := fields[0]
@@ -129,22 +128,16 @@ func combineAndCleanSubdomains(outputDir string) []string {
 		}
 	}
 
-	// --- Dnsenum XML ---
+	// --- Dnsenum XML (as text) ---
 	dnsenumFile := filepath.Join(outputDir, "dnsenum.xml")
 	if data, err := os.ReadFile(dnsenumFile); err == nil {
-		var result struct {
-			Hosts []DnsenumHost `xml:"host"`
-		}
-		if xml.Unmarshal(data, &result) == nil {
-			for _, host := range result.Hosts {
-				// The hostname field might also have extra data
-				fields := strings.Fields(host.Hostname)
-				if len(fields) > 0 {
-					potentialSubdomain := fields[0]
-					if isValidSubdomain(potentialSubdomain) {
-						subdomainSet[potentialSubdomain] = struct{}{}
-					}
-				}
+		// Treat as text and use regex because dnsenum's XML can be malformed
+		// This regex finds strings that look like hostnames ending in the target domain.
+		re := regexp.MustCompile(fmt.Sprintf(`[a-zA-Z0-9\.\-]+\.%s`, regexp.QuoteMeta(domain)))
+		matches := re.FindAllString(string(data), -1)
+		for _, match := range matches {
+			if isValidSubdomain(match) {
+				subdomainSet[match] = struct{}{}
 			}
 		}
 	}

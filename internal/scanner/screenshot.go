@@ -9,29 +9,26 @@ import (
 	"github.com/shadow-pulse/shadow-pulse-framework/internal/utils"
 )
 
-// TakeScreenshots runs eyewitness to capture screenshots of live web services.
+// TakeScreenshots runs goneshot to capture screenshots of live web services.
 func TakeScreenshots(outputDir string, useTor bool) {
-	utils.PrintInfo("Taking screenshots with eyewitness...")
+	utils.PrintInfo("Taking screenshots with goneshot...")
 	
 	liveHostsFile := filepath.Join(outputDir, "live_web_hosts.txt")
 	if _, err := os.Stat(liveHostsFile); err != nil {
-		utils.PrintInfo("live_web_hosts.txt not found (no live web servers discovered by httpx), skipping screenshots.")
+		utils.PrintInfo("live_web_hosts.txt not found, skipping screenshots.")
 		return
 	}
 
-	screenshotDir := filepath.Join(outputDir, "eyewitness_report")
-
-	// Use absolute path for eyewitness directory to avoid potential issues
-	absScreenshotDir, err := filepath.Abs(screenshotDir)
-	if err != nil {
-		utils.PrintError("Failed to get absolute path for screenshot directory: " + err.Error())
-		// Fallback to relative path
-		absScreenshotDir = screenshotDir
+	screenshotDir := filepath.Join(outputDir, "goneshot_report")
+	// Ensure the directory exists
+	if err := os.MkdirAll(screenshotDir, os.ModePerm); err != nil {
+		utils.PrintError("Failed to create screenshot directory: " + err.Error())
+		return
 	}
 
-	seleniumLogPath := filepath.Join(outputDir, "geckodriver.log")
-	cmd := fmt.Sprintf("eyewitness -f %s -d %s --web --no-prompt --selenium-log-path %s", liveHostsFile, absScreenshotDir, seleniumLogPath)
+	// goneshot is simpler and generally works well with proxychains
+	cmd := fmt.Sprintf("goneshot -i %s -o %s", liveHostsFile, screenshotDir)
 	runner.RunCommand(cmd, useTor)
-	
-	utils.PrintGood(fmt.Sprintf("Eyewitness report should be available in %s", absScreenshotDir))
+
+	utils.PrintGood(fmt.Sprintf("Goneshot report should be available in %s", screenshotDir))
 }
