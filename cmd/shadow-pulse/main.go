@@ -103,20 +103,31 @@ func main() {
 
 	// --- General Usage ---
 	if len(os.Args) < 2 {
-		fmt.Println("Usage: shadow-pulse <command> [options]")
-		fmt.Println("Commands: scan, doctor, version")
+		printBanner()
+		fmt.Println("A comprehensive, stealth-oriented reconnaissance framework.")
+		fmt.Println("\nUsage: shadow-pulse <command> [options]")
+		fmt.Println("\nAvailable Commands:")
+		fmt.Println("  scan          Run the full reconnaissance scan against a domain.")
+		fmt.Println("  doctor        Check dependencies and system configuration.")
+		fmt.Println("  version       Show version and build information.")
+		
+		fmt.Println("\nOptions for 'scan' command:")
+		scanCmd.PrintDefaults()
+		
+		fmt.Println("\nOptions for 'doctor' command:")
+		doctorCmd.PrintDefaults()
 		os.Exit(1)
 	}
-
-	printBanner()
 
 	// --- Subcommand Parsing ---
 	switch os.Args[1] {
 	case "scan":
 		scanCmd.Parse(os.Args[2:])
 		if *domain == "" {
+			printBanner()
 			fmt.Println("Error: -d <domain> is a required flag for the 'scan' command.")
-			scanCmd.Usage()
+			fmt.Println("\nUsage: shadow-pulse scan [options]")
+			scanCmd.PrintDefaults()
 			os.Exit(1)
 		}
 	case "doctor":
@@ -124,13 +135,15 @@ func main() {
 	case "version":
 		versionCmd.Parse(os.Args[2:])
 	default:
+		printBanner()
 		fmt.Printf("Error: Unknown command '%s'\n", os.Args[1])
-		fmt.Println("Usage: shadow-pulse <command> [options]")
-		fmt.Println("Commands: scan, doctor, version")
+		fmt.Println("\nUsage: shadow-pulse <command> [options]")
 		os.Exit(1)
 	}
 	
 	// --- Command Execution ---
+	printBanner() // Print banner for all valid commands
+
 	if versionCmd.Parsed() {
 		fmt.Printf("Shadow-Pulse Framework\n")
 		fmt.Printf(" Version:    %s\n", version)
