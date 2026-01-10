@@ -181,7 +181,7 @@ func GenerateExcelReport(outputDir, domain, timestamp, nmapXMLFile string) {
 }
 
 func findScreenshot(outputDir, hostname string) string {
-	screenshotDir := filepath.Join(outputDir, "screenshots")
+	screenshotDir := filepath.Join(outputDir, "eyewitness_report", "screens")
 	if _, err := os.Stat(screenshotDir); err != nil {
 		return ""
 	}

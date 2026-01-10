@@ -86,149 +86,159 @@ func extractHostsFromUrls(urls []string) []string {
 }
 
 func main() {
-	// --- Flag Parsing ---
-	domain := flag.String("d", "", "The target domain to scan. (Required)")
-	outDir := flag.String("out", "", "Base directory for results (default: ~/shadowPulse_Result)")
-	live := flag.Bool("live", false, "Only run port scans on live web servers found by httpx.")
-	doctor := flag.Bool("doctor", false, "Run system diagnostics and prerequisite checks.")
-	fix := flag.Bool("fix", false, "Attempt to automatically install missing dependencies when running doctor mode.")
-	showVersion := flag.Bool("version", false, "Show version and build information.")
-	nmapOptions := flag.String("nmap-options", defaultNmapOptions, "Nmap options to use.")
-	useTor := flag.Bool("tor", false, "Enable to route traffic through Tor (proxychains4).")
-	useStealth := flag.Bool("stealth", false, "Enable stealth mode for IDS/WAF evasion.")
-	noPortsScan := flag.Bool("no-ports-scan", false, "Skip the port scanning phase.")
+	// --- Subcommand Definition ---
+	scanCmd := flag.NewFlagSet("scan", flag.ExitOnError)
+	domain := scanCmd.String("d", "", "The target domain to scan. (Required)")
+	outDir := scanCmd.String("out", "", "Base directory for results (default: ~/shadowPulse_Result)")
+	live := scanCmd.Bool("live", false, "Only run port scans on live web servers found by httpx.")
+	nmapOptions := scanCmd.String("nmap-options", defaultNmapOptions, "Nmap options to use.")
+	useTor := scanCmd.Bool("tor", false, "Enable to route traffic through Tor.")
+	useStealth := scanCmd.Bool("stealth", false, "Enable stealth mode for IDS/WAF evasion.")
+	noPortsScan := scanCmd.Bool("no-ports-scan", false, "Skip the port scanning phase.")
+
+	doctorCmd := flag.NewFlagSet("doctor", flag.ExitOnError)
+	fix := doctorCmd.Bool("fix", false, "Attempt to automatically install missing dependencies.")
 	
-	// Custom usage message
-	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "Usage: %s -d <domain> [options]\n", os.Args[0])
-		fmt.Fprintf(os.Stderr, "Usage (Doctor Mode): %s --doctor\n\n", os.Args[0])
-		fmt.Fprintf(os.Stderr, "A comprehensive reconnaissance framework.\n\n")
-		fmt.Fprintf(os.Stderr, "Options:\n")
-		flag.PrintDefaults()
-		fmt.Fprintf(os.Stderr, "\nExamples:\n")
-		fmt.Fprintf(os.Stderr, "  %s -d example.com\n", os.Args[0])
-		fmt.Fprintf(os.Stderr, "  %s -d example.com -out /tmp/scan_results\n", os.Args[0])
-		fmt.Fprintf(os.Stderr, "  %s -d example.com --live --tor --stealth\n", os.Args[0])
-		fmt.Fprintf(os.Stderr, "  %s -d example.com --no-ports-scan\n", os.Args[0])
+	versionCmd := flag.NewFlagSet("version", flag.ExitOnError)
+
+	// --- General Usage ---
+	if len(os.Args) < 2 {
+		fmt.Println("Usage: shadow-pulse <command> [options]")
+		fmt.Println("Commands: scan, doctor, version")
+		os.Exit(1)
 	}
 
-	flag.Parse()
+	printBanner()
 
-	if *showVersion {
+	// --- Subcommand Parsing ---
+	switch os.Args[1] {
+	case "scan":
+		scanCmd.Parse(os.Args[2:])
+		if *domain == "" {
+			fmt.Println("Error: -d <domain> is a required flag for the 'scan' command.")
+			scanCmd.Usage()
+			os.Exit(1)
+		}
+	case "doctor":
+		doctorCmd.Parse(os.Args[2:])
+	case "version":
+		versionCmd.Parse(os.Args[2:])
+	default:
+		fmt.Printf("Error: Unknown command '%s'\n", os.Args[1])
+		fmt.Println("Usage: shadow-pulse <command> [options]")
+		fmt.Println("Commands: scan, doctor, version")
+		os.Exit(1)
+	}
+	
+	// --- Command Execution ---
+	if versionCmd.Parsed() {
 		fmt.Printf("Shadow-Pulse Framework\n")
 		fmt.Printf(" Version:    %s\n", version)
 		fmt.Printf(" Build Date: %s\n", buildDate)
 		os.Exit(0)
 	}
 
-	printBanner()
-
-	// Handle Doctor mode first
-	if *doctor {
+	if doctorCmd.Parsed() {
 		setup.RunDoctor(*fix)
 		os.Exit(0)
 	}
 
-	if *domain == "" {
-		flag.Usage()
-		os.Exit(1)
-	}
+	if scanCmd.Parsed() {
+		// --- Main Execution ---
+		timings := make(map[string]time.Duration)
+		var startTime time.Time
+		
+		if *useTor {
+			utils.PrintGood("Tor mode enabled.")
+			if !tor.CheckTorPrerequisites() {
+				utils.PrintError("Tor prerequisite check failed. Aborting. Run 'shadow-pulse doctor' for details.")
+				os.Exit(1)
+			}
+		}
+		if *useStealth {
+			utils.PrintGood("Stealth Mode enabled. Active, noisy scans will be disabled or modified.")
+		}
 
-	// --- Main Execution ---
-	timings := make(map[string]time.Duration)
-	var startTime time.Time
-	
-	if *useTor {
-		utils.PrintGood("Tor mode enabled.")
-		if !tor.CheckTorPrerequisites() {
-			utils.PrintError("Tor prerequisite check failed. Aborting. Run with --doctor for details.")
+		// --- Setup Output Directory ---
+		baseOutputDir := *outDir
+		if baseOutputDir == "" {
+			homeDir, err := os.UserHomeDir()
+			if err != nil {
+				fmt.Println("Error: Failed to get user home directory: " + err.Error())
+				os.Exit(1)
+			}
+			baseOutputDir = filepath.Join(homeDir, "shadowPulse_Result")
+		}
+
+		timestamp := time.Now().Format("20060102_150405")
+		outputDir := filepath.Join(baseOutputDir, fmt.Sprintf("%s_%s", *domain, timestamp))
+		if err := os.MkdirAll(outputDir, os.ModePerm); err != nil {
+			fmt.Printf("Error: Failed to create output directory: %v", err)
 			os.Exit(1)
 		}
-	}
-	if *useStealth {
-		utils.PrintGood("Stealth Mode enabled. Active, noisy scans will be disabled or modified.")
-	}
 
-	// --- Setup Output Directory ---
-	baseOutputDir := *outDir
-	if baseOutputDir == "" {
-		homeDir, err := os.UserHomeDir()
-		if err != nil {
-			// Cannot use PrintError yet as logger is not initialized.
-			fmt.Println("Error: Failed to get user home directory: " + err.Error())
-			os.Exit(1)
-		}
-		baseOutputDir = filepath.Join(homeDir, "shadowPulse_Result")
-	}
+		// Initialize logger
+		utils.InitLogger(filepath.Join(outputDir, "app_execute.log"))
+		defer utils.CloseLogger()
 
-	timestamp := time.Now().Format("20060102_150405")
-	outputDir := filepath.Join(baseOutputDir, fmt.Sprintf("%s_%s", *domain, timestamp))
-	if err := os.MkdirAll(outputDir, os.ModePerm); err != nil {
-		fmt.Printf("Error: Failed to create output directory: %v", err)
-		os.Exit(1)
-	}
+		utils.PrintGood(fmt.Sprintf("Results will be saved in: %s", outputDir))
+		
+		// --- Run Phases ---
+		startTime = time.Now()
+		scanner.CheckDependencies()
+		timings["Dependency Check"] = time.Since(startTime)
 
-	// Initialize logger
-	utils.InitLogger(filepath.Join(outputDir, "app_execute.log"))
-	defer utils.CloseLogger()
-
-	utils.PrintGood(fmt.Sprintf("Results will be saved in: %s", outputDir))
-	
-	// --- Run Phases ---
-	startTime = time.Now()
-	scanner.CheckDependencies()
-	timings["Dependency Check"] = time.Since(startTime)
-
-	if *useTor {
-		tor.RenewTorIP(outputDir)
-	}
-	startTime = time.Now()
-	allSubdomains := scanner.RunSubdomainEnumeration(*domain, outputDir, *useTor, *useStealth)
-	timings["Subdomain Enumeration"] = time.Since(startTime)
-
-	var nmapResultsFile string
-	if len(allSubdomains) > 0 {
 		if *useTor {
 			tor.RenewTorIP(outputDir)
 		}
 		startTime = time.Now()
-		liveWebServers := scanner.FindLiveWebServers(allSubdomains, outputDir, *useTor)
-		timings["Find Live Web Servers (httpx)"] = time.Since(startTime)
-		
-		if len(liveWebServers) > 0 {
+		allSubdomains := scanner.RunSubdomainEnumeration(*domain, outputDir, *useTor, *useStealth)
+		timings["Subdomain Enumeration"] = time.Since(startTime)
+
+		var nmapResultsFile string
+		if len(allSubdomains) > 0 {
 			if *useTor {
 				tor.RenewTorIP(outputDir)
 			}
 			startTime = time.Now()
-			scanner.TakeScreenshots(outputDir, *useTor, *useStealth)
-			timings["Take Screenshots"] = time.Since(startTime)
+			liveWebServers := scanner.FindLiveWebServers(allSubdomains, outputDir, *useTor)
+			timings["Find Live Web Servers (httpx)"] = time.Since(startTime)
+			
+			if len(liveWebServers) > 0 {
+				if *useTor && !*useStealth { // Only renew if not in stealth, as stealth renews per screenshot
+					tor.RenewTorIP(outputDir)
+				}
+				startTime = time.Now()
+				scanner.TakeScreenshots(outputDir, *useTor, *useStealth)
+				timings["Take Screenshots"] = time.Since(startTime)
+			}
+			
+			var hostsForPortScan []string
+			if *live {
+				utils.PrintInfo("Port scanning LIVE hosts only (--live flag is set).")
+				hostsForPortScan = extractHostsFromUrls(liveWebServers)
+			} else {
+				utils.PrintInfo("Port scanning ALL enumerated subdomains.")
+				hostsForPortScan = allSubdomains
+			}
+
+			if !*noPortsScan {
+				if *useTor {
+					tor.RenewTorIP(outputDir)
+				}
+				startTime = time.Now()
+				nmapResultsFile = scanner.RunPortScan(hostsForPortScan, outputDir, *nmapOptions, *useTor, *useStealth)
+				timings["Port Scanning"] = time.Since(startTime)
+			} else {
+				utils.PrintInfo("Skipping port scanning phase as requested.")
+			}
+
+			startTime = time.Now()
+			report.GenerateExcelReport(outputDir, *domain, timestamp, nmapResultsFile)
+			timings["Generate Excel Report"] = time.Since(startTime)
 		}
 		
-		var hostsForPortScan []string
-		if *live {
-			utils.PrintInfo("Port scanning LIVE hosts only (--live flag is set).")
-			hostsForPortScan = extractHostsFromUrls(liveWebServers)
-		} else {
-			utils.PrintInfo("Port scanning ALL enumerated subdomains.")
-			hostsForPortScan = allSubdomains
-		}
-
-		if !*noPortsScan {
-			if *useTor {
-				tor.RenewTorIP(outputDir)
-			}
-			startTime = time.Now()
-			nmapResultsFile = scanner.RunPortScan(hostsForPortScan, outputDir, *nmapOptions, *useTor, *useStealth)
-			timings["Port Scanning"] = time.Since(startTime)
-		} else {
-			utils.PrintInfo("Skipping port scanning phase as requested.")
-		}
-
-		startTime = time.Now()
-		report.GenerateExcelReport(outputDir, *domain, timestamp, nmapResultsFile)
-		timings["Generate Excel Report"] = time.Since(startTime)
+		printStatistics(timings)
+		utils.PrintGood("Reconnaissance scan complete!")
 	}
-	
-	printStatistics(timings)
-	utils.PrintGood("Reconnaissance scan complete!")
 }
