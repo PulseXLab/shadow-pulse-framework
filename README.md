@@ -49,14 +49,11 @@ The framework orchestrates several popular open-source tools. You must install t
 ### Tor Setup
 For the `--tor` and IP rotation features, you must have the Tor service running.
 1. `sudo apt install tor`
-2. Ensure your `/etc/tor/torrc` file has the `ControlPort` enabled:
+2. Ensure your `/etc/tor/torrc` file has the `ControlPort` enabled. The framework does not require cookie authentication for IP renewal.
    ```
    ControlPort 9051
-   CookieAuthentication 1
    ```
-3. Add your user to the `debian-tor` group to allow access to the cookie file:
-   `sudo usermod -a -G debian-tor <your-username>`
-4. Restart the Tor service: `sudo systemctl restart tor`
+3. Restart the Tor service: `sudo systemctl restart tor`
 
 ## 🚀 Usage
 
