@@ -28,9 +28,9 @@ func TakeScreenshots(outputDir string, useTor bool, useStealth bool) {
 		var cmd string
 		if useTor {
 			utils.PrintInfo("Routing eyewitness through Tor using its native SOCKS5 proxy support.")
-			cmd = fmt.Sprintf("eyewitness -f %s -d %s --web --no-prompt --proxy-type 'socks5' --proxy-ip '127.0.0.1' --proxy-port '9050'", liveHostsFile, screenshotDir)
+			cmd = fmt.Sprintf("eyewitness -f %s -d %s --web --timeout 60 --no-prompt --proxy-type 'socks5' --proxy-ip '127.0.0.1' --proxy-port '9050'", liveHostsFile, screenshotDir)
 		} else {
-			cmd = fmt.Sprintf("eyewitness -f %s -d %s --web --no-prompt", liveHostsFile, screenshotDir)
+			cmd = fmt.Sprintf("eyewitness -f %s -d %s --web --timeout 60 --no-prompt", liveHostsFile, screenshotDir)
 		}
 		// We pass useTor=false because we are NOT using proxychains. Eyewitness handles the proxy.
 		if err := runner.RunCommand(cmd, false); err != nil {
@@ -77,7 +77,7 @@ func TakeScreenshots(outputDir string, useTor bool, useStealth bool) {
 		}
 		
 		// Always use the proxy flags in stealth mode with Tor
-		cmd := fmt.Sprintf("eyewitness -f %s -d %s --web --no-prompt --proxy-type 'socks5' --proxy-ip '127.0.0.1' --proxy-port '9050'", singleURLFile, screenshotDir)
+		cmd := fmt.Sprintf("eyewitness -f %s -d %s --web --timeout 60 --no-prompt --proxy-type 'socks5' --proxy-ip '127.0.0.1' --proxy-port '9050'", singleURLFile, screenshotDir)
 		
 		// We pass useTor=false because we are NOT using proxychains.
 		if err := runner.RunCommand(cmd, false); err != nil {
