@@ -7,49 +7,44 @@ A comprehensive, stealth-oriented reconnaissance framework designed to automate 
 
 ## 🌟 Features
 
-- **Comprehensive Subdomain Enumeration**: Uses a combination of passive sources (`subfinder`, `crt.sh`) and active brute-forcing (`gobuster`, `dnsrecon`, `dnsenum`) to discover subdomains.
-- **Stealth Mode (`--stealth`)**: Evade IDS/WAF detection by using passive-only subdomain discovery and employing advanced, low-and-slow Nmap scanning techniques (`-sS -T2 -f -D RND:5`). When combined with `--tor`, it also requests a new Tor IP before *each* screenshot, further obscuring the origin of the scan.
-- **Tor Integration (`--tor`)**: Route all traffic through the Tor network for anonymity.
-- **Automatic IP Rotation**: When using Tor, the framework automatically renews the Tor IP address at set intervals and after each host scan during the port scanning phase. IP changes are logged for traceability.
-- **Live Host Discovery**: Uses `httpx` to quickly identify which discovered subdomains are running live web servers.
-- **Automated Port Scanning**: Runs `nmap` on discovered hosts to find open ports and identify services.
+- **Comprehensive Subdomain Enumeration**: Uses a combination of passive sources (`subfinder`) and active brute-forcing (`gobuster`, `dnsrecon`) to discover subdomains.
+- **Automated Web Vulnerability Scanning**: After identifying live web hosts, automatically runs `nikto`, `wpscan`, and `nuclei` to check for common vulnerabilities. This can be disabled with `--no-vuln-scan`.
+- **Automated Port Scanning**: Runs `nmap` on discovered hosts to find open ports and identify services. Can be scoped to live web hosts (`--live`) or skipped entirely (`--no-ports-scan`).
 - **Visual Reconnaissance**: Automatically takes screenshots of live web services using `eyewitness`.
-- **Dependency Scanning**: Scans and visualizes project dependencies using `go mod graph` and `go list`.
+- **Stealth Mode (`--stealth`)**: Evade IDS/WAF detection by using passive-only subdomain discovery and employing advanced, low-and-slow Nmap scanning techniques. When combined with `--tor`, it also requests a new Tor IP before *each* screenshot, further obscuring the origin of the scan.
+- **Tor Integration (`--tor`)**: Route all traffic through the Tor network for anonymity.
+- **Automatic IP Rotation**: When using Tor, the framework automatically renews the Tor IP address between major phases to enhance anonymity.
 - **Health Check (`doctor`)**: Comes with a `doctor` command to verify that all external tool dependencies are correctly installed and configured.
 - **Consolidated Reporting**: Generates a professional Excel (`.xlsx`) report summarizing all findings, including subdomains, IPs, open ports, and hyperlinks to local screenshots.
-- **Performance Statistics**: Ends with a summary of how much time was spent in each phase of the scan, helping to identify bottlenecks.
-- **Clean UI**: Suppresses noisy banners from underlying tools and provides a clean progress-bar interface.
-
-## ✨ Recent Improvements
-
-This framework is actively maintained. Here are some of the latest fixes and improvements:
-
-- **More Robust Tor IP Renewal**: The Tor IP renewal logic has been enhanced. It no longer relies on a specific authentication method, making it more compatible with various `torrc` configurations (including `CookieAuthentication 0` or null passwords).
-- **Improved Subdomain List Accuracy**: Fixed a bug where IP addresses could occasionally be included in the final subdomain list (`final_subdomains.txt`). The parsing logic is now more robust and correctly filters out non-domain entries.
-- **Reliable Screenshot Generation**: Corrected a data flow issue and updated the tool to `eyewitness`, ensuring visual reconnaissance is performed reliably on all discovered live web servers, now with enhanced Tor support.
+- **Performance Statistics**: Ends with a summary of how much time was spent in each phase of the scan.
+- **Clean UI**: Suppresses noisy banners from underlying tools and provides a clean progress interface.
 
 ## 🛠️ Dependencies
 
-The framework orchestrates several popular open-source tools. You must install them for the framework to function correctly. You can easily check if all dependencies are installed by running `go run ./cmd/shadow-pulse doctor`.
+The framework orchestrates several popular open-source tools. You must install them for the framework to function correctly. You can easily check if all dependencies are installed by running `go run ./cmd/shadow-pulse doctor --fix`.
 
 ### Core Framework
 - **Go**: Version 1.18 or higher.
+- **Ruby**: Required for `wpscan`.
 
 ### External Tools
 - **subfinder**: `go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest`
-- **findomain**: `cargo install findomain`
 - **httpx**: `go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest`
+- **nuclei**: `go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest`
 - **gobuster**: `go install github.com/OJ/gobuster/v3/cmd/gobuster@latest`
+- **findomain**: `cargo install findomain`
 - **nmap**: `sudo apt install nmap`
-- **dnsrecon**: `pip3 install dnsrecon-python`
+- **dnsrecon**: `sudo apt install dnsrecon`
 - **dnsenum**: `sudo apt install dnsenum`
+- **nikto**: `sudo apt install nikto`
 - **eyewitness**: `sudo apt install eyewitness`
+- **wpscan**: `sudo apt install ruby ruby-dev libcurl4-openssl-dev make && sudo gem install wpscan`
 - **proxychains4**: `sudo apt install proxychains4` (Required for `--tor`)
 
 ### Tor Setup
 For the `--tor` and IP rotation features, you must have the Tor service running.
 1. `sudo apt install tor`
-2. Ensure your `/etc/tor/torrc` file has the `ControlPort` enabled. The framework does not require cookie authentication for IP renewal.
+2. Ensure your `/etc/tor/torrc` file has the `ControlPort` enabled:
    ```
    ControlPort 9051
    ```
@@ -83,6 +78,7 @@ The framework uses a subcommand-based interface.
 | `-live` | Only run port scans on live web servers found by `httpx`. |
 | `-nmap-options` | Custom Nmap options to use. Default: `"-sV -sC -O -T4 -A -Pn --top-ports 1000"` |
 | `-no-ports-scan`| Skip the port scanning phase. |
+| `-no-vuln-scan` | Skip the web vulnerability scanning phase (`nikto`, `wpscan`, `nuclei`). |
 | `-tor` | Enable to route all traffic through Tor. |
 | `-stealth` | Enable stealth mode for IDS/WAF evasion. |
 
@@ -93,17 +89,17 @@ The framework uses a subcommand-based interface.
 
 
 ### Examples
-- **Check Dependencies:**
-  ```bash
-  ./shadow-pulse doctor
-  ```
-- **Automatically Fix Dependencies:**
+- **Check and Fix Dependencies:**
   ```bash
   ./shadow-pulse doctor --fix
   ```
 - **Standard Scan:**
   ```bash
   ./shadow-pulse scan -d example.com
+  ```
+- **Scan without Web Vulnerability Checks:**
+  ```bash
+  ./shadow-pulse scan -d example.com --no-vuln-scan
   ```
 - **Scan through Tor with Stealth Screenshot IP Rotation:**
   ```bash

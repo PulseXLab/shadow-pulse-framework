@@ -95,6 +95,7 @@ func main() {
 	useTor := scanCmd.Bool("tor", false, "Enable to route traffic through Tor.")
 	useStealth := scanCmd.Bool("stealth", false, "Enable stealth mode for IDS/WAF evasion.")
 	noPortsScan := scanCmd.Bool("no-ports-scan", false, "Skip the port scanning phase.")
+	noVulnScan := scanCmd.Bool("no-vuln-scan", false, "Skip the web vulnerability scanning phase.")
 
 	doctorCmd := flag.NewFlagSet("doctor", flag.ExitOnError)
 	fix := doctorCmd.Bool("fix", false, "Attempt to automatically install missing dependencies.")
@@ -226,6 +227,18 @@ func main() {
 			timings["Find Live Web Servers (httpx)"] = time.Since(startTime)
 			
 			if len(liveWebServers) > 0 {
+				// Conditional Vulnerability Scanning
+				if !*noVulnScan {
+					if *useTor {
+						tor.RenewTorIP(outputDir)
+					}
+					startTime = time.Now()
+					scanner.RunVulnerabilityScans(outputDir, *useTor)
+					timings["Vulnerability Scanning"] = time.Since(startTime)
+				} else {
+					utils.PrintInfo("Skipping web vulnerability scanning as requested.")
+				}
+
 				if *useTor && !*useStealth { // Only renew if not in stealth, as stealth renews per screenshot
 					tor.RenewTorIP(outputDir)
 				}

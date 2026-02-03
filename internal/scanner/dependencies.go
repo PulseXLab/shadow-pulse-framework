@@ -12,7 +12,8 @@ var RequiredTools = []string{
 	"go",
 	"cargo",
 	"subfinder",
-	"findomain",	"httpx",
+	"findomain",
+	"httpx",
 	"gobuster",
 	"nmap",
 	"dnsrecon",
@@ -22,6 +23,9 @@ var RequiredTools = []string{
 	"curl",
 	"jq",
 	"sed",
+	"nikto",
+	"wpscan",
+	"nuclei",
 }
 
 var ToolInstallCommands = map[string]string{
@@ -31,9 +35,13 @@ var ToolInstallCommands = map[string]string{
 	"findomain":  "cargo install findomain",
 	"gobuster":   "go install github.com/OJ/gobuster/v3/cmd/gobuster@latest",
 	"eyewitness": "sudo apt-get update && sudo apt-get install -y eyewitness",
-	"nmap":       "sudo apt-get update && sudo apt-get install -y nmap",	"dnsrecon":   "sudo apt-get update && sudo apt-get install -y dnsrecon",
+	"nmap":       "sudo apt-get update && sudo apt-get install -y nmap",
+	"dnsrecon":   "sudo apt-get update && sudo apt-get install -y dnsrecon",
 	"dnsenum":    "sudo apt-get update && sudo apt-get install -y dnsenum",
 	"proxychains4": "sudo apt-get update && sudo apt-get install -y proxychains4",
+	"nikto":      "sudo apt-get update && sudo apt-get install -y nikto",
+	"wpscan":     "sudo apt-get update && sudo apt-get install -y ruby ruby-dev libcurl4-openssl-dev make && sudo gem install wpscan",
+	"nuclei":     "go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest",
 }
 
 // CheckDependencies verifies that all required external tools are installed.
