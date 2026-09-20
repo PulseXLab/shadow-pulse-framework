@@ -85,7 +85,7 @@ The framework uses a subcommand-based interface.
 ### Options for `doctor`
 | Flag | Description |
 |---|---|
-| `-fix` | Attempt to automatically install missing dependencies. XXXXXXXXX |
+| `-fix` | Attempt to automatically install missing dependencies. |
 
 
 ### Examples
